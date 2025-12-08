@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, Info, FolderOpen, Users, Mail, Phone, Instagram, Facebook } from 'lucide-react';
+import { ArrowLeft, Sparkles } from 'lucide-react';
 
 const ThaneAngels = () => {
     const navigate = useNavigate();
@@ -15,154 +15,177 @@ const ThaneAngels = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-[#ECFCFF]">
-            <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Verdana:wght@400;700&display=swap');
-        body {
-          font-family: 'Verdana', sans-serif;
-        }
-      `}</style>
+        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 relative overflow-hidden">
+            {/* Animated Background Shapes */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300/20 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-300/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-200/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+            </div>
 
-            {/* Header */}
-            <header className="bg-[#5EDFFF] text-[#3E64FF] text-center py-8 px-4">
-                <img
-                    src="/images/WE-emblem.png"
-                    alt="Club Logo"
-                    className="w-32 h-auto mx-auto mb-4"
-                />
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">WE Club of Thane Angels</h1>
-                <p className="text-lg">Empowering Communities Through Service & Unity</p>
-            </header>
+            {/* Back Button */}
+            <div className="max-w-7xl mx-auto px-4 py-6">
+                <button
+                    onClick={() => navigate('/clubs')}
+                    className="flex items-center gap-2 text-purple-600 hover:text-pink-600 font-semibold transition-all hover:gap-3 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg"
+                >
+                    <ArrowLeft size={20} />
+                    <span>Back to Clubs</span>
+                </button>
+            </div>
 
-            {/* Navigation */}
-            <nav className="bg-[#B2FCFF] py-4">
-                <ul className="flex flex-wrap justify-center gap-6 px-4">
-                    <li>
-                        <button
-                            onClick={() => navigate('/')}
-                            className="flex items-center gap-2 text-[#3E64FF] hover:text-[#5EDFFF] font-semibold transition-colors"
-                        >
-                            <Home size={18} />
-                            Home
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => navigate('/about')}
-                            className="flex items-center gap-2 text-[#3E64FF] hover:text-[#5EDFFF] font-semibold transition-colors"
-                        >
-                            <Info size={18} />
-                            About
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => navigate('/projects')}
-                            className="flex items-center gap-2 text-[#3E64FF] hover:text-[#5EDFFF] font-semibold transition-colors"
-                        >
-                            <FolderOpen size={18} />
-                            Projects
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => navigate('/clubs')}
-                            className="flex items-center gap-2 text-[#3E64FF] hover:text-[#5EDFFF] font-semibold transition-colors"
-                        >
-                            <Users size={18} />
-                            Clubs
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            onClick={() => navigate('/contact')}
-                            className="flex items-center gap-2 text-[#3E64FF] hover:text-[#5EDFFF] font-semibold transition-colors"
-                        >
-                            <Mail size={18} />
-                            Contact Us
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-
-            {/* Club Info */}
-            <section className="py-8 px-4 my-8 max-w-4xl mx-auto">
-                <div className="bg-white rounded-xl shadow-lg p-8">
-                    <h2 className="text-3xl font-bold text-[#3E64FF] mb-6">About the Club</h2>
-
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">WE Club of Thane Angels</h3>
-                    <h4 className="text-lg text-gray-700 mb-1">Year of inception: 2010</h4>
-                    <h4 className="text-lg text-gray-700 mb-6">Registration no.: Expected to be completed by September 2025</h4>
-
-                    <div className="mb-6 italic">
-                        <p className="mb-4 leading-relaxed">
-                            Originally established as Lioness Club of Maliha Thane North in 2010. Subsequently we converted to WE Club of Maliha Thane in 2017 with WE Padma Naik as the Charter President. In 2019 this club was dissolved and senior members WE Ujwala Chinchole & WE Varsha Suryavanshi started the WE Club of Thane Angels from the same year. WE Hema Vhatkar was Charter President of WE Club of Thane Angels.
-                        </p>
-
-                        <p className="mb-4 leading-relaxed">
-                            It started with 12 members and have now grown to 40 members. Our club has carried out number of activities like Art and Craft workshop in to Anganwadi teachers, donated TV sets and water purifiers in rural areas. We have also donated bio-gas to old age home and benches to schools. We are also associated with Kshamata foundation for uplifting and empowering women who are victims of violence.
-                        </p>
-
-                        <p className="mb-4 leading-relaxed">
-                            We are continuously involved in philanthropic work involving the environment, working towards differently abled, food donation etc.
-                        </p>
-
-                        <p className="mb-6 leading-relaxed">
-                            A Walkathon for the first time was also was arranged by WE Club of Thane Angels in We District 323A2 which got a very good response.
-                        </p>
+            {/* Hero Header */}
+            <div className="relative">
+                <div className="max-w-6xl mx-auto px-4 py-16 text-center">
+                    <div className="inline-block mb-6 p-6 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
+                        <img
+                            src="/images/WE-emblem.png"
+                            alt="Club Logo"
+                            className="w-24 h-auto mx-auto"
+                        />
                     </div>
+                    <h1 className="text-5xl md:text-7xl font-black mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
+                        WE Club of Thane Angels
+                    </h1>
+                    <div className="flex items-center justify-center gap-2 text-purple-600">
+                        <Sparkles className="animate-pulse" size={20} />
+                        <p className="text-xl font-medium">Empowering Communities Through Service & Unity</p>
+                        <Sparkles className="animate-pulse" size={20} />
+                    </div>
+                </div>
+            </div>
 
-                    <div className="border-t pt-6 font-semibold">
-                        <p className="text-xl mb-4">📩 Connect With Us</p>
-                        <p className="mb-2 flex items-center gap-2">
-                            <Mail size={18} className="text-[#3E64FF]" />
-                            Email: wethaneangels@gmail.com
-                        </p>
-                        <p className="mb-4 flex items-center gap-2">
-                            <Phone size={18} className="text-[#3E64FF]" />
-                            Phone: Contact via email
-                        </p>
-                        <p className="italic text-gray-700 mt-6">
-                            💬 "We rise by lifting others — together, we create a more compassionate and empowered society."
-                        </p>
+            {/* Club Info Section */}
+            <section className="py-12 px-4 relative z-10">
+                <div className="max-w-4xl mx-auto">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 border border-purple-100 hover:shadow-purple-200/50 transition-all duration-300">
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="w-1 h-12 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></div>
+                            <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                                About the Club
+                            </h2>
+                        </div>
+
+                        <div className="space-y-6">
+                            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
+                                <h3 className="text-2xl font-bold text-gray-800 mb-3">WE Club of Thane Angels</h3>
+                                <div className="space-y-2 text-gray-700">
+                                    <p className="flex items-center gap-2">
+                                        <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                                        <span className="font-semibold">Year of inception:</span> 2010
+                                    </p>
+                                    <p className="flex items-center gap-2">
+                                        <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                                        <span className="font-semibold">Registration:</span> Expected to be completed by September 2025
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-white rounded-2xl p-6 border-l-4 border-purple-500 shadow-sm">
+                                <p className="mb-4 leading-relaxed text-gray-700">
+                                    Originally established as Lioness Club of Maliha Thane North in 2010. Subsequently we converted to WE Club of Maliha Thane in 2017 with WE Padma Naik as the Charter President. In 2019 this club was dissolved and senior members WE Ujwala Chinchole & WE Varsha Suryavanshi started the WE Club of Thane Angels from the same year. WE Hema Vhatkar was Charter President of WE Club of Thane Angels.
+                                </p>
+
+                                <p className="mb-4 leading-relaxed text-gray-700">
+                                    It started with 12 members and have now grown to 40 members. Our club has carried out number of activities like Art and Craft workshop in to Anganwadi teachers, donated TV sets and water purifiers in rural areas. We have also donated bio-gas to old age home and benches to schools. We are also associated with Kshamata foundation for uplifting and empowering women who are victims of violence.
+                                </p>
+
+                                <p className="mb-4 leading-relaxed text-gray-700">
+                                    We are continuously involved in philanthropic work involving the environment, working towards differently abled, food donation etc.
+                                </p>
+
+                                <p className="leading-relaxed text-gray-700">
+                                    A Walkathon for the first time was also was arranged by WE Club of Thane Angels in We District 323A2 which got a very good response.
+                                </p>
+
+                                <div className="mt-6 border-t pt-6">
+                                    <p className="font-semibold text-xl mb-4">📩 Connect With Us</p>
+                                    <div className="space-y-2 text-gray-700">
+                                        <p>📧 Email: wethaneangels@gmail.com</p>
+                                        <p>📱 Phone: Contact via email</p>
+                                    </div>
+                                    <p className="italic text-gray-700 mt-6">
+                                        💬 "We rise by lifting others — together, we create a more compassionate and empowered society."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* Gallery Section */}
-            <section className="py-8 px-4 max-w-5xl mx-auto">
-                <h2 className="text-3xl font-bold text-center text-[#3E64FF] mb-6">Gallery</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {galleryImages.map((img, index) => (
-                        <img
-                            key={index}
-                            src={img}
-                            alt={`Event ${index + 1}`}
-                            onClick={() => setEnlargedImage(img)}
-                            className="w-full h-full rounded-xl object-cover shadow-md cursor-pointer transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-                        />
-                    ))}
+            <section className="py-12 px-4 relative z-10">
+                <div className="max-w-6xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                            Gallery
+                        </h2>
+                        <p className="text-purple-600">Moments that matter</p>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {galleryImages.map((img, index) => (
+                            <div
+                                key={index}
+                                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                                onClick={() => setEnlargedImage(img)}
+                            >
+                                <img
+                                    src={img}
+                                    alt={`Event ${index + 1}`}
+                                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
             {/* Enlarged Preview */}
             {enlargedImage && (
                 <div
-                    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+                    className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn"
                     onClick={() => setEnlargedImage(null)}
                 >
-                    <img
-                        src={enlargedImage}
-                        alt="Preview"
-                        className="max-w-full max-h-[80vh] rounded-xl shadow-2xl"
-                    />
+                    <div className="relative">
+                        <img
+                            src={enlargedImage}
+                            alt="Preview"
+                            className="max-w-full max-h-[90vh] rounded-2xl shadow-2xl"
+                        />
+                        <button
+                            className="absolute top-4 right-4 bg-white/90 hover:bg-white text-gray-800 rounded-full p-2 transition-all"
+                            onClick={() => setEnlargedImage(null)}
+                        >
+                            ✕
+                        </button>
+                    </div>
                 </div>
             )}
 
             {/* Footer */}
-            <footer className="bg-[#5EDFFF] text-white text-center py-4 mt-12">
-                <p>&copy; 2025 WE Club | All rights reserved.</p>
+            <footer className="relative z-10 mt-20 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-center py-8">
+                <p className="text-sm font-medium">© 2025 WE Club | All rights reserved.</p>
             </footer>
+
+            <style jsx>{`
+                @keyframes gradient {
+                    0%, 100% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                }
+                .animate-gradient {
+                    background-size: 200% 200%;
+                    animation: gradient 3s ease infinite;
+                }
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                .animate-fadeIn {
+                    animation: fadeIn 0.3s ease-out;
+                }
+            `}</style>
         </div>
     );
 };
