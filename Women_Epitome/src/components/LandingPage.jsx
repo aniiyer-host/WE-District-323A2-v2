@@ -87,12 +87,12 @@ const LandingPage = () => {
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           {/* Logo Badge */}
           <div className="inline-flex items-center gap-3 mb-8 bg-white/90 backdrop-blur-sm px-8 py-4 rounded-full shadow-xl border border-purple-200">
-            <div className="w-50 h-50 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+            <div className="w-36 h-36 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
               <img src="/images/WE-emblem.png" />
             </div>
             <div className="text-left">
-              <p className="text-sm text-purple-800 font-bold">The Association of WE Clubs of India</p>
-              <p className="text-xs text-gray-600 font-semibold">WE District 323 A2</p>
+              <p className="text-2xl text-purple-800 font-bold">The Association of WE Clubs of India</p>
+              <p className="text-2xl text-gray-600 font-semibold">WE District 323 A2</p>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ const LandingPage = () => {
           <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto font-light">
             Empowering women, transforming communities
           </p>
-          
+
           <p className="text-2xl text-purple-700 mb-12 font-semibold">
             एकता में शक्ति • Stronger Together
           </p>
@@ -277,7 +277,7 @@ const LandingPage = () => {
           <div className="relative bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 rounded-3xl p-12 md:p-16 text-center overflow-hidden shadow-2xl">
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="absolute top-0 left-0 right-0 h-full animate-shimmer"></div>
-            
+
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-black text-white mb-6 playfair">
                 Ready to Make a Difference?
