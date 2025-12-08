@@ -87,12 +87,12 @@ const LandingPage = () => {
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           {/* Logo Badge */}
           <div className="inline-flex items-center gap-3 mb-8 bg-white/90 backdrop-blur-sm px-8 py-4 rounded-full shadow-xl border border-purple-200">
-            <div className="w-12 h-12 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">WE</span>
+            <div className="w-50 h-50 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+              <img src="/images/WE-emblem.png" />
             </div>
             <div className="text-left">
-              <p className="text-xs text-gray-600 font-semibold">District 323 A2</p>
-              <p className="text-sm text-purple-700 font-bold">Clubs of India</p>
+              <p className="text-sm text-purple-800 font-bold">The Association of WE Clubs of India</p>
+              <p className="text-xs text-gray-600 font-semibold">WE District 323 A2</p>
             </div>
           </div>
 

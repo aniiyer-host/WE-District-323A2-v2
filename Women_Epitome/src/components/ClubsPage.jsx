@@ -7,183 +7,183 @@ const ClubsPage = () => {
   const clubs = [
     {
       id: 1,
-      name: "WE Anushakti Royals",
+      name: "WE Club of Anushakti Royals",
       slug: "anushakti-royals",
       location: "Anushaktinagar, Mumbai",
-      established: "1989",
-      members: "40",
-      president: "WE Prabha Agarwal",
+      established: "2017",
+      members: "6",
+      president: "WE Devki Goklani",
       focus: "Community Service",
       image: "/images/club-pages-imgs/AnushaktiRoyals/1.png",
       achievements: ["Health Check-up Camps", "Cancer Care Support", "Women Empowerment"]
     },
     {
       id: 2,
-      name: "WE Belapur",
+      name: "WE Club of Belapur",
       slug: "belapur",
       location: "Belapur, Navi Mumbai",
-      established: "2010",
-      members: "35",
-      president: "TBD",
-      focus: "Education & Healthcare",
+      established: "2022",
+      members: "17",
+      president: "WE Geeta Singh",
+      focus: "Animal Welfare & Care for Elderly",
       image: "/images/club-pages-imgs/Belapur/1.jpg",
       achievements: ["Community Outreach", "Educational Support", "Health Initiatives"]
     },
     {
       id: 3,
-      name: "WE Chembur",
+      name: "WE Club of Chembur",
       slug: "chembur",
       location: "Chembur, Mumbai",
-      established: "2005",
-      members: "45",
-      president: "WE Priya Sharma",
-      focus: "Education & Healthcare",
+      established: "2017",
+      members: "29",
+      president: "WE Ramolla Karnani",
+      focus: "Education & Child Welfare",
       image: "/images/club-pages-imgs/Chembur/1.jpg",
-      achievements: ["5000+ lives impacted", "15+ active projects", "Award-winning initiatives"]
+      achievements: ["5000+ lives impacted", "Solar power initiatives"]
     },
     {
       id: 4,
-      name: "WE Chembur Galaxy",
+      name: "WE Club of Chembur Galaxy",
       slug: "chembur-galaxy",
       location: "Chembur, Mumbai",
-      established: "2012",
-      members: "38",
-      president: "TBD",
+      established: "2017",
+      members: "18",
+      president: "WE Kiran Sahetia",
       focus: "Women Empowerment",
       image: "/images/club-pages-imgs/ChemburGalaxy/1.jpg",
-      achievements: ["Community Development", "Skill Building", "Social Welfare"]
+      achievements: ["Skill Building", "Social Welfare"]
     },
     {
       id: 5,
-      name: "WE Dronagiri",
+      name: "WE Club of Dronagiri",
       slug: "dronagiri",
       location: "Dronagiri, Navi Mumbai",
-      established: "2015",
-      members: "30",
-      president: "TBD",
+      established: "2023",
+      members: "19",
+      president: "WE Surekha Bhoir",
       focus: "Health & Wellness",
       image: "/images/club-pages-imgs/Dronagiri/1.jpg",
       achievements: ["Health Camps", "Community Service", "Women Support"]
     },
     {
       id: 6,
-      name: "WE Girls in Pearls",
+      name: "WE Club of Girls in Pearls",
       slug: "girls-in-pearls",
       location: "Mumbai Region",
-      established: "2014",
-      members: "32",
-      president: "TBD",
-      focus: "Youth Development",
+      established: "2022",
+      members: "28",
+      president: "WE Neha Shende",
+      focus: "Youth Development & Environment",
       image: "/images/club-pages-imgs/GirlsinPearls/1.jpg",
       achievements: ["Youth Programs", "Leadership Training", "Community Projects"]
     },
     {
       id: 7,
-      name: "WE New Panvel Steel Town",
+      name: "WE Club of New Panvel Steel Town",
       slug: "new-panvel-steel-town",
       location: "New Panvel, Navi Mumbai",
-      established: "2010",
-      members: "35",
-      president: "TBD",
+      established: "2017",
+      members: "38",
+      president: "WE Megha Jain",
       focus: "Community Development",
       image: "/images/club-pages-imgs/NPST/1.jpg",
       achievements: ["Social Initiatives", "Community Welfare", "Educational Support"]
     },
     {
       id: 8,
-      name: "WE Shining Star",
+      name: "WE Club of Shining Star",
       slug: "shining-star",
-      location: "Mumbai Region",
-      established: "2016",
-      members: "28",
-      president: "TBD",
-      focus: "Women Empowerment",
+      location: "Vashi, Navi Mumbai",
+      established: "2024",
+      members: "12",
+      president: "WE Dr. Vijaya Gosavi",
+      focus: "Environment & Care for Elderly",
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
-      achievements: ["Empowerment Programs", "Skill Development", "Community Service"]
+      achievements: ["Environment Programs", "Community Service"]
     },
     {
       id: 9,
-      name: "WE Thane Angels",
+      name: "WE Club of Thane Angels",
       slug: "thane-angels",
       location: "Thane, Maharashtra",
-      established: "2008",
-      members: "42",
-      president: "WE Kavita Desai",
+      established: "2019",
+      members: "38",
+      president: "WE Priyadarshini Sane",
       focus: "Community Development",
       image: "/images/club-pages-imgs/Angels/1.jpg",
-      achievements: ["4000+ lives touched", "20+ projects", "Excellence award winner"]
+      achievements: ["4000+ lives touched", "30+ projects", "Excellence award winner"]
     },
     {
       id: 10,
-      name: "WE Thane Lake City",
+      name: "WE Club of Thane Lake City",
       slug: "thane-lake-city",
       location: "Thane, Maharashtra",
-      established: "2013",
-      members: "36",
-      president: "TBD",
+      established: "2017",
+      members: "32",
+      president: "WE Sarala Bhot",
       focus: "Health & Education",
       image: "/images/club-pages-imgs/LakeCity/1.jpg",
-      achievements: ["Healthcare Initiatives", "Educational Programs", "Social Welfare"]
+      achievements: ["Rural Developments", "Educational Programs", "Social Welfare"]
     },
     {
       id: 11,
-      name: "WE Thane Stars City",
+      name: "WE Club of Thane Stars City",
       slug: "thane-stars-city",
       location: "Thane, Maharashtra",
-      established: "2011",
-      members: "40",
-      president: "TBD",
+      established: "2024",
+      members: "12",
+      president: "WE Rohini Thakur",
       focus: "Education & Literacy",
       image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80",
       achievements: ["Literacy Programs", "Education Support", "Community Projects"]
     },
     {
       id: 12,
-      name: "WE Uran",
+      name: "WE Club of Uran",
       slug: "uran",
       location: "Uran, Navi Mumbai",
-      established: "2018",
-      members: "25",
-      president: "TBD",
-      focus: "Rural Development",
+      established: "2017",
+      members: "22",
+      president: "WE Shilpa Gade",
+      focus: "Rural Development & Health",
       image: "/images/club-pages-imgs/Uran/1.jpg",
       achievements: ["Rural Outreach", "Community Service", "Women Empowerment"]
     },
     {
       id: 13,
-      name: "WE Vasant Vihar",
+      name: "WE Club of Vasant Vihar",
       slug: "vasant-vihar",
       location: "Vasant Vihar, Mumbai",
-      established: "2009",
-      members: "38",
-      president: "TBD",
-      focus: "Healthcare & Wellness",
+      established: "2017",
+      members: "59",
+      president: "WE Hiral Sanghvi",
+      focus: "Education & Child Welfare",
       image: "/images/club-pages-imgs/VasantVihar/1.jpg",
-      achievements: ["Health Programs", "Wellness Initiatives", "Community Care"]
+      achievements: ["Educative Initiatives", "1000+ lives touched"]
     },
     {
       id: 14,
-      name: "WE Vashi Navi Mumbai",
+      name: "WE Club of Vashi Navi Mumbai",
       slug: "vashi-navi-mumbai",
       location: "Vashi, Navi Mumbai",
-      established: "2012",
+      established: "2017",
       members: "35",
-      president: "WE Sneha Patel",
-      focus: "Youth Development",
+      president: "WE Namita Sinha",
+      focus: "Community Welfare",
       image: "/images/club-pages-imgs/VashiNaviMumbai/1.jpg",
-      achievements: ["2500+ youth trained", "10+ skill programs", "Innovation hub"]
+      achievements: ["Rural Development", "Care for Elderly"]
     },
     {
       id: 15,
-      name: "WE Vile Parle",
+      name: "WE Club of Vile Parle",
       slug: "vile-parle",
       location: "Vile Parle, Mumbai",
-      established: "2007",
-      members: "40",
-      president: "WE Radha Iyer",
+      established: "2018",
+      members: "32",
+      president: "WE Neena Pethe",
       focus: "Education & Literacy",
       image: "/images/club-pages-imgs/VileParle/1.jpg",
-      achievements: ["6000+ students helped", "25+ schools supported", "Education champion"]
+      achievements: ["500+ students helped", "5+ schools supported", "Education champion"]
     }
   ];
 
@@ -191,8 +191,8 @@ const ClubsPage = () => {
     name: "District 323 A2",
     totalClubs: clubs.length,
     totalMembers: clubs.reduce((sum, club) => sum + parseInt(club.members), 0),
-    established: "2000",
-    area: "Mumbai & Thane Region"
+    established: "2017",
+    area: "Mumbai, Navi Mumbai & Thane Region"
   };
 
   return (
@@ -311,13 +311,6 @@ const ClubsPage = () => {
                         <MapPin size={14} className="text-purple-600" />
                         <span>{club.location}</span>
                       </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                      <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                      <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                      <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                      <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
                     </div>
                   </div>
 
