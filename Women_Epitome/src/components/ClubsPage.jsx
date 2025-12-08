@@ -1,73 +1,188 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Users, MapPin, Calendar, Award, Mail, Phone, ArrowRight, Star, Heart } from 'lucide-react';
 
 const ClubsPage = () => {
   const clubs = [
     {
       id: 1,
+      name: "WE Anushakti Royals",
+      slug: "anushakti-royals",
+      location: "Anushaktinagar, Mumbai",
+      established: "1989",
+      members: "40",
+      president: "WE Prabha Agarwal",
+      focus: "Community Service",
+      image: "/images/club-pages-imgs/AnushaktiRoyals/1.png",
+      achievements: ["Health Check-up Camps", "Cancer Care Support", "Women Empowerment"]
+    },
+    {
+      id: 2,
+      name: "WE Belapur",
+      slug: "belapur",
+      location: "Belapur, Navi Mumbai",
+      established: "2010",
+      members: "35",
+      president: "TBD",
+      focus: "Education & Healthcare",
+      image: "/images/club-pages-imgs/Belapur/1.jpg",
+      achievements: ["Community Outreach", "Educational Support", "Health Initiatives"]
+    },
+    {
+      id: 3,
       name: "WE Chembur",
+      slug: "chembur",
       location: "Chembur, Mumbai",
       established: "2005",
       members: "45",
       president: "WE Priya Sharma",
       focus: "Education & Healthcare",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80",
+      image: "/images/club-pages-imgs/Chembur/1.jpg",
       achievements: ["5000+ lives impacted", "15+ active projects", "Award-winning initiatives"]
     },
     {
-      id: 2,
-      name: "WE Powai",
-      location: "Powai, Mumbai",
-      established: "2010",
+      id: 4,
+      name: "WE Chembur Galaxy",
+      slug: "chembur-galaxy",
+      location: "Chembur, Mumbai",
+      established: "2012",
       members: "38",
-      president: "WE Anjali Mehta",
+      president: "TBD",
       focus: "Women Empowerment",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
-      achievements: ["3000+ beneficiaries", "12+ workshops conducted", "Community leader"]
+      image: "/images/club-pages-imgs/ChemburGalaxy/1.jpg",
+      achievements: ["Community Development", "Skill Building", "Social Welfare"]
     },
     {
-      id: 3,
-      name: "WE Thane",
+      id: 5,
+      name: "WE Dronagiri",
+      slug: "dronagiri",
+      location: "Dronagiri, Navi Mumbai",
+      established: "2015",
+      members: "30",
+      president: "TBD",
+      focus: "Health & Wellness",
+      image: "/images/club-pages-imgs/Dronagiri/1.jpg",
+      achievements: ["Health Camps", "Community Service", "Women Support"]
+    },
+    {
+      id: 6,
+      name: "WE Girls in Pearls",
+      slug: "girls-in-pearls",
+      location: "Mumbai Region",
+      established: "2014",
+      members: "32",
+      president: "TBD",
+      focus: "Youth Development",
+      image: "/images/club-pages-imgs/GirlsinPearls/1.jpg",
+      achievements: ["Youth Programs", "Leadership Training", "Community Projects"]
+    },
+    {
+      id: 7,
+      name: "WE New Panvel Steel Town",
+      slug: "new-panvel-steel-town",
+      location: "New Panvel, Navi Mumbai",
+      established: "2010",
+      members: "35",
+      president: "TBD",
+      focus: "Community Development",
+      image: "/images/club-pages-imgs/NPST/1.jpg",
+      achievements: ["Social Initiatives", "Community Welfare", "Educational Support"]
+    },
+    {
+      id: 8,
+      name: "WE Shining Star",
+      slug: "shining-star",
+      location: "Mumbai Region",
+      established: "2016",
+      members: "28",
+      president: "TBD",
+      focus: "Women Empowerment",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
+      achievements: ["Empowerment Programs", "Skill Development", "Community Service"]
+    },
+    {
+      id: 9,
+      name: "WE Thane Angels",
+      slug: "thane-angels",
       location: "Thane, Maharashtra",
       established: "2008",
       members: "42",
       president: "WE Kavita Desai",
       focus: "Community Development",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80",
+      image: "/images/club-pages-imgs/Angels/1.jpg",
       achievements: ["4000+ lives touched", "20+ projects", "Excellence award winner"]
     },
     {
-      id: 4,
-      name: "WE Navi Mumbai",
-      location: "Navi Mumbai",
+      id: 10,
+      name: "WE Thane Lake City",
+      slug: "thane-lake-city",
+      location: "Thane, Maharashtra",
+      established: "2013",
+      members: "36",
+      president: "TBD",
+      focus: "Health & Education",
+      image: "/images/club-pages-imgs/LakeCity/1.jpg",
+      achievements: ["Healthcare Initiatives", "Educational Programs", "Social Welfare"]
+    },
+    {
+      id: 11,
+      name: "WE Thane Stars City",
+      slug: "thane-stars-city",
+      location: "Thane, Maharashtra",
+      established: "2011",
+      members: "40",
+      president: "TBD",
+      focus: "Education & Literacy",
+      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80",
+      achievements: ["Literacy Programs", "Education Support", "Community Projects"]
+    },
+    {
+      id: 12,
+      name: "WE Uran",
+      slug: "uran",
+      location: "Uran, Navi Mumbai",
+      established: "2018",
+      members: "25",
+      president: "TBD",
+      focus: "Rural Development",
+      image: "/images/club-pages-imgs/Uran/1.jpg",
+      achievements: ["Rural Outreach", "Community Service", "Women Empowerment"]
+    },
+    {
+      id: 13,
+      name: "WE Vasant Vihar",
+      slug: "vasant-vihar",
+      location: "Vasant Vihar, Mumbai",
+      established: "2009",
+      members: "38",
+      president: "TBD",
+      focus: "Healthcare & Wellness",
+      image: "/images/club-pages-imgs/VasantVihar/1.jpg",
+      achievements: ["Health Programs", "Wellness Initiatives", "Community Care"]
+    },
+    {
+      id: 14,
+      name: "WE Vashi Navi Mumbai",
+      slug: "vashi-navi-mumbai",
+      location: "Vashi, Navi Mumbai",
       established: "2012",
       members: "35",
       president: "WE Sneha Patel",
       focus: "Youth Development",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80",
+      image: "/images/club-pages-imgs/VashiNaviMumbai/1.jpg",
       achievements: ["2500+ youth trained", "10+ skill programs", "Innovation hub"]
     },
     {
-      id: 5,
-      name: "WE Kalyan",
-      location: "Kalyan, Maharashtra",
-      established: "2015",
-      members: "30",
-      president: "WE Meera Joshi",
-      focus: "Health & Wellness",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80",
-      achievements: ["2000+ health camps", "8+ medical initiatives", "Community health leader"]
-    },
-    {
-      id: 6,
-      name: "WE Kurla",
-      location: "Kurla, Mumbai",
+      id: 15,
+      name: "WE Vile Parle",
+      slug: "vile-parle",
+      location: "Vile Parle, Mumbai",
       established: "2007",
       members: "40",
       president: "WE Radha Iyer",
       focus: "Education & Literacy",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80",
+      image: "/images/club-pages-imgs/VileParle/1.jpg",
       achievements: ["6000+ students helped", "25+ schools supported", "Education champion"]
     }
   ];
@@ -235,10 +350,13 @@ const ClubsPage = () => {
                     </div>
                   </div>
 
-                  <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                  <Link
+                    to={`/clubs/${club.slug}`}
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                  >
                     Learn More
                     <ArrowRight size={16} />
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
