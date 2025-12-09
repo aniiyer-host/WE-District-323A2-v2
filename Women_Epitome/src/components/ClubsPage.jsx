@@ -1,10 +1,50 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, MapPin, Calendar, Award, Mail, Phone, ArrowRight, Star, Heart } from 'lucide-react';
+import api from '../utils/api';
 
 const ClubsPage = () => {
-  const clubs = [
+  const [clubs, setClubs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  // Fetch clubs from API
+  useEffect(() => {
+    const fetchClubs = async () => {
+      try {
+        // Try to fetch from API (will work if user is logged in)
+        const response = await api.get('/clubs');
+
+        // Map API data to match the format expected by the UI
+        const clubsData = response.data.data.clubs.map(club => ({
+          id: club._id,
+          name: club.name,
+          slug: club.clubId,
+          location: club.description.split('in ').pop() || 'Mumbai Region', // Extract location from description
+          established: club.established ? new Date(club.established).getFullYear().toString() : '2017',
+          members: club.members?.length.toString() || '0',
+          president: club.president?.name || 'To be updated',
+          focus: club.description.split('focused on ')[1]?.split('.')[0] || club.description.split('Focus on ')[1]?.split('.')[0] || 'Community Service',
+          image: club.coverImage || club.images?.[0] || `https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80`,
+          achievements: club.description.split(',').slice(0, 3) || ['Community Service']
+        }));
+
+        setClubs(clubsData);
+      } catch (error) {
+        console.log('API not accessible, using fallback data');
+        // Fallback: If API fails (user not logged in), use static data
+        setClubs(getFallbackClubs());
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchClubs();
+  }, []);
+
+  // Fallback static data (same as before)
+  const getFallbackClubs = () => [
     {
       id: 1,
       name: "WE Club of Anushakti Royals",
@@ -190,10 +230,21 @@ const ClubsPage = () => {
   const districtInfo = {
     name: "District 323 A2",
     totalClubs: clubs.length,
-    totalMembers: clubs.reduce((sum, club) => sum + parseInt(club.members), 0),
+    totalMembers: clubs.reduce((sum, club) => sum + parseInt(club.members || '0'), 0),
     established: "2017",
     area: "Mumbai, Navi Mumbai & Thane Region"
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-xl text-gray-600">Loading clubs...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100">

@@ -1,11 +1,18 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext.jsx'
 import LandingPage from './components/LandingPage.jsx'
 import AboutPage from './components/AboutPage.jsx'
 import ProjectsPage from './components/ProjectsPage.jsx'
 import ClubsPage from './components/ClubsPage.jsx'
 import ContactPage from './components/ContactPage.jsx'
 import Navigation from './components/Navigation.jsx'
+import LoginPage from './components/LoginPage.jsx'
+import AdminDashboard from './components/AdminDashboard.jsx'
+import ClubDashboard from './components/ClubDashboard.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+import ClubEditForm from './components/ClubEditForm.jsx'
+import ClubCreateForm from './components/ClubCreateForm.jsx'
 
 // Import all club pages
 import AnushaktiRoyals from './components/clubs/AnushaktiRoyals.jsx'
@@ -26,35 +33,83 @@ import VileParle from './components/clubs/VileParle.jsx'
 
 const App = () => {
   return (
-    <Router>
-      <div>
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/clubs" element={<ClubsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+    <AuthProvider>
+      <Router>
+        <div>
+          <Navigation />
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/clubs" element={<ClubsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/login" element={<LoginPage />} />
 
-          {/* Club Routes */}
-          <Route path="/clubs/anushakti-royals" element={<AnushaktiRoyals />} />
-          <Route path="/clubs/belapur" element={<Belapur />} />
-          <Route path="/clubs/chembur" element={<Chembur />} />
-          <Route path="/clubs/chembur-galaxy" element={<ChemburGalaxy />} />
-          <Route path="/clubs/dronagiri" element={<Dronagiri />} />
-          <Route path="/clubs/girls-in-pearls" element={<GirlsInPearls />} />
-          <Route path="/clubs/new-panvel-steel-town" element={<NewPanvelSteelTown />} />
-          <Route path="/clubs/shining-star" element={<ShiningStar />} />
-          <Route path="/clubs/thane-angels" element={<ThaneAngels />} />
-          <Route path="/clubs/thane-lake-city" element={<ThaneLakeCity />} />
-          <Route path="/clubs/thane-stars-city" element={<ThaneStarsCity />} />
-          <Route path="/clubs/uran" element={<Uran />} />
-          <Route path="/clubs/vasant-vihar" element={<VasantVihar />} />
-          <Route path="/clubs/vashi-navi-mumbai" element={<VashiNaviMumbai />} />
-          <Route path="/clubs/vile-parle" element={<VileParle />} />
-        </Routes>
-      </div>
-    </Router>
+            {/* Protected Dashboard Routes */}
+            <Route
+              path="/admin-dashboard"
+              element={
+                <ProtectedRoute requireRole="admin">
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/club-dashboard"
+              element={
+                <ProtectedRoute requireRole="club">
+                  <ClubDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Club Edit/Create Routes */}
+            <Route
+              path="/admin-dashboard/create-club"
+              element={
+                <ProtectedRoute requireRole="admin">
+                  <ClubCreateForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin-dashboard/edit-club/:clubId"
+              element={
+                <ProtectedRoute requireRole="admin">
+                  <ClubEditForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/club-dashboard/edit/:clubId"
+              element={
+                <ProtectedRoute requireRole="club">
+                  <ClubEditForm />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Club Routes */}
+            <Route path="/clubs/anushakti-royals" element={<AnushaktiRoyals />} />
+            <Route path="/clubs/belapur" element={<Belapur />} />
+            <Route path="/clubs/chembur" element={<Chembur />} />
+            <Route path="/clubs/chembur-galaxy" element={<ChemburGalaxy />} />
+            <Route path="/clubs/dronagiri" element={<Dronagiri />} />
+            <Route path="/clubs/girls-in-pearls" element={<GirlsInPearls />} />
+            <Route path="/clubs/new-panvel-steel-town" element={<NewPanvelSteelTown />} />
+            <Route path="/clubs/shining-star" element={<ShiningStar />} />
+            <Route path="/clubs/thane-angels" element={<ThaneAngels />} />
+            <Route path="/clubs/thane-lake-city" element={<ThaneLakeCity />} />
+            <Route path="/clubs/thane-stars-city" element={<ThaneStarsCity />} />
+            <Route path="/clubs/uran" element={<Uran />} />
+            <Route path="/clubs/vasant-vihar" element={<VasantVihar />} />
+            <Route path="/clubs/vashi-navi-mumbai" element={<VashiNaviMumbai />} />
+            <Route path="/clubs/vile-parle" element={<VileParle />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   )
 }
 
