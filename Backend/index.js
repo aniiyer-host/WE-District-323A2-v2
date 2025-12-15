@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import connectDB from './models/db.js';
 import authRoutes from './routes/authRoutes.js';
 import clubRoutes from './routes/clubRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/clubs', clubRoutes);
+app.use('/api/uploads', uploadRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

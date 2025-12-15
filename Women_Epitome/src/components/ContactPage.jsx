@@ -61,7 +61,7 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100">
+    <div className="min-h-screen bg-linear-to-br from-pink-50 via-purple-50 to-pink-100">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap');
         
@@ -86,7 +86,7 @@ const ContactPage = () => {
             GET IN TOUCH
           </span>
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent playfair">
+            <span className="bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent playfair">
               Contact
             </span>
             <br />
@@ -104,7 +104,7 @@ const ContactPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
               <div key={index} className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-purple-100 text-center">
-                <div className={`w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4`}>
+                <div className={`w-16 h-16 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4`}>
                   <info.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-800 mb-3 playfair">{info.title}</h3>
@@ -226,7 +226,7 @@ const ContactPage = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+                  className="w-full bg-linear-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
                 >
                   Send Message
                   <Send size={20} />
@@ -238,7 +238,7 @@ const ContactPage = () => {
             <div className="space-y-8">
               {/* Map */}
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-purple-100">
-                <div className="h-64 bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+                <div className="h-64 bg-linear-to-br from-purple-600 to-pink-600 flex items-center justify-center">
                   <div className="text-center text-white">
                     <MapPin className="w-16 h-16 mx-auto mb-4" />
                     <p className="text-lg font-semibold">District Office</p>
@@ -250,7 +250,7 @@ const ContactPage = () => {
                   <p className="text-gray-600 mb-4">
                     Visit us at our district office in Chembur, Mumbai. We're always happy to welcome visitors and discuss how you can be part of our mission.
                   </p>
-                  <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                  <button className="w-full bg-linear-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
                     Get Directions
                     <ArrowRight size={16} />
                   </button>
@@ -281,7 +281,7 @@ const ContactPage = () => {
               </div>
 
               {/* Quick Contact */}
-              <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl p-8 text-white shadow-xl">
+              <div className="bg-linear-to-br from-purple-600 to-pink-600 rounded-2xl p-8 text-white shadow-xl">
                 <h3 className="text-2xl font-bold mb-4 playfair">Need Immediate Help?</h3>
                 <p className="mb-6 opacity-90">
                   For urgent matters, please call us directly or send an email. We're here to help!
@@ -303,7 +303,7 @@ const ContactPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 px-4 bg-gradient-to-b from-transparent to-purple-50">
+      <section className="py-24 px-4 bg-linear-to-b from-transparent to-purple-50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block bg-purple-100 text-purple-700 px-6 py-2 rounded-full font-bold text-sm mb-4">
@@ -345,7 +345,7 @@ const ContactPage = () => {
       {/* CTA Section */}
       <section className="py-24 px-4">
         <div className="max-w-5xl mx-auto">
-          <div className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-3xl p-12 md:p-16 text-center overflow-hidden shadow-2xl">
+          <div className="relative bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 rounded-3xl p-12 md:p-16 text-center overflow-hidden shadow-2xl">
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-black text-white mb-6 playfair">
@@ -367,7 +367,7 @@ const ContactPage = () => {
       <footer className="bg-gray-900 text-white py-12 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold">WE</span>
             </div>
             <div>

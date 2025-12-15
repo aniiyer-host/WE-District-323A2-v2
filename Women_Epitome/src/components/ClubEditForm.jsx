@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
-import { Save, X, Plus, Trash2, ArrowLeft } from 'lucide-react';
+import { Save, X, Plus, Trash2, ArrowLeft, Upload, Image as ImageIcon } from 'lucide-react';
+import { uploadImageToImageKit } from '../utils/api';
 
 const ClubEditForm = () => {
     const { clubId } = useParams();
@@ -52,7 +53,15 @@ const ClubEditForm = () => {
                 description: club.description || '',
                 president: club.president || { name: '', photo: '', bio: '', email: '', phone: '' },
                 members: club.members || [],
-                events: club.events || [],
+                events: (club.events || []).map((event) => ({
+                    title: event.title || '',
+                    description: event.description || '',
+                    date: event.date ? event.date.split('T')[0] : '',
+                    location: event.location || '',
+                    coverImage: event.coverImage || '',
+                    images: event.images || [''],
+                    isFeatured: true
+                })),
                 images: club.images || [],
                 coverImage: club.coverImage || '',
                 logo: club.logo || '',
@@ -111,7 +120,15 @@ const ClubEditForm = () => {
     const handleAddEvent = () => {
         setFormData(prev => ({
             ...prev,
-            events: [...prev.events, { title: '', description: '', date: '', location: '', images: [] }]
+            events: [...prev.events, {
+                title: '',
+                description: '',
+                date: '',
+                location: '',
+                coverImage: '',
+                images: [''],
+                isFeatured: true
+            }]
         }));
     };
 
@@ -128,6 +145,45 @@ const ClubEditForm = () => {
         setFormData(prev => ({
             ...prev,
             events: prev.events.filter((_, i) => i !== index)
+        }));
+    };
+
+    const handleAddEventImage = (eventIndex) => {
+        setFormData(prev => ({
+            ...prev,
+            events: prev.events.map((event, i) =>
+                i === eventIndex
+                    ? { ...event, images: [...(event.images || []), ''] }
+                    : event
+            )
+        }));
+    };
+
+    const handleEventImageChange = (eventIndex, imageIndex, value) => {
+        setFormData(prev => ({
+            ...prev,
+            events: prev.events.map((event, i) =>
+                i === eventIndex
+                    ? {
+                        ...event,
+                        images: (event.images || []).map((img, imgIdx) => imgIdx === imageIndex ? value : img)
+                    }
+                    : event
+            )
+        }));
+    };
+
+    const handleRemoveEventImage = (eventIndex, imageIndex) => {
+        setFormData(prev => ({
+            ...prev,
+            events: prev.events.map((event, i) =>
+                i === eventIndex
+                    ? {
+                        ...event,
+                        images: (event.images || []).filter((_, imgIdx) => imgIdx !== imageIndex)
+                    }
+                    : event
+            )
         }));
     };
 
@@ -378,6 +434,51 @@ const ClubEditForm = () => {
                                     </div>
 
                                     <div className="space-y-3">
+                                        {/* Event Cover Image */}
+                                        <div>
+                                            <label className="text-sm font-semibold text-gray-700 mb-2 block">Event Cover Image</label>
+                                            <div className="flex items-center gap-2">
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={async (e) => {
+                                                        const file = e.target.files?.[0];
+                                                        if (!file) return;
+                                                        try {
+                                                            const url = await uploadImageToImageKit(file, `/clubs/${clubId}/events`);
+                                                            handleEventChange(index, 'coverImage', url);
+                                                        } catch (err) {
+                                                            setError(err.message || 'Cover upload failed');
+                                                        }
+                                                    }}
+                                                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
+                                                />
+                                                {event.coverImage && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleEventChange(index, 'coverImage', '')}
+                                                        className="p-2 text-red-500 hover:text-red-700"
+                                                    >
+                                                        <Trash2 size={18} />
+                                                    </button>
+                                                )}
+                                            </div>
+                                            {event.coverImage && (
+                                                <div className="mt-2">
+                                                    <img 
+                                                        src={event.coverImage} 
+                                                        alt="Cover" 
+                                                        className="w-32 h-20 object-cover rounded-lg border"
+                                                        onError={(e) => {
+                                                            console.error('Failed to load cover image:', event.coverImage);
+                                                            e.target.style.display = 'none';
+                                                        }}
+                                                        onLoad={() => console.log('Cover image loaded successfully:', event.coverImage)}
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
+
                                         <input
                                             type="text"
                                             placeholder="Event Title"
@@ -407,6 +508,56 @@ const ClubEditForm = () => {
                                             rows="2"
                                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
                                         />
+
+                                        <div className="space-y-2">
+                                            <div className="flex items-center justify-between">
+                                                <label className="text-sm font-semibold text-gray-700">Event Images</label>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleAddEventImage(index)}
+                                                    className="flex items-center gap-2 px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
+                                                >
+                                                    <Plus size={16} />
+                                                    Add Image
+                                                </button>
+                                            </div>
+
+                                            {(event.images && event.images.length ? event.images : ['']).map((image, imageIndex) => (
+                                                <div key={imageIndex} className="space-y-2">
+                                                    <div className="flex items-center gap-2">
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={async (e) => {
+                                                                const file = e.target.files?.[0];
+                                                                if (!file) return;
+                                                                try {
+                                                                    const url = await uploadImageToImageKit(file, `/clubs/${clubId}/events`);
+                                                                    handleEventImageChange(index, imageIndex, url);
+                                                                } catch (err) {
+                                                                    setError(err.message || 'Image upload failed');
+                                                                }
+                                                            }}
+                                                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleRemoveEventImage(index, imageIndex)}
+                                                            className="p-2 text-red-500 hover:text-red-700"
+                                                            aria-label="Remove image"
+                                                        >
+                                                            <Trash2 size={18} />
+                                                        </button>
+                                                    </div>
+                                                    {image && (
+                                                        <div className="flex items-center gap-3">
+                                                            <img src={image} alt={`Event ${index + 1} image ${imageIndex + 1}`} className="w-24 h-24 object-cover rounded-lg border" />
+                                                            <span className="text-xs text-gray-500 break-all">{image}</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             ))}

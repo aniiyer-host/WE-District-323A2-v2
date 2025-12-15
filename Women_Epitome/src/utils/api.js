@@ -37,3 +37,46 @@ api.interceptors.response.use(
 );
 
 export default api;
+
+// ImageKit upload helper: obtains auth and uploads a file, returns URL
+export async function uploadImageToImageKit(file, folder = '/clubs/events') {
+    if (!file) throw new Error('No file provided');
+    // 1) Get auth from backend
+    const authRes = await api.get('/uploads/imagekit/auth');
+    const { signature, token, expire, publicKey, urlEndpoint } = authRes.data.data;
+
+    // 2) Build form data for ImageKit
+    const form = new FormData();
+    form.append('file', file);
+    form.append('fileName', file.name || `upload_${Date.now()}`);
+    form.append('folder', folder);
+    form.append('publicKey', publicKey);
+    form.append('signature', signature);
+    form.append('token', token);
+    form.append('expire', String(expire));
+
+    const uploadEndpoint = 'https://upload.imagekit.io/api/v1/files/upload';
+    const resp = await fetch(uploadEndpoint, {
+        method: 'POST',
+        body: form,
+    });
+
+    if (!resp.ok) {
+        const txt = await resp.text();
+        throw new Error(`ImageKit upload failed: ${txt}`);
+    }
+    const json = await resp.json();
+    console.log('ImageKit upload response:', json);
+    
+    // ImageKit returns the URL directly as 'url' property
+    if (json.url) {
+        return json.url;
+    }
+    
+    // Fallback: construct URL from filePath
+    if (json.filePath) {
+        return `${urlEndpoint}${json.filePath}`;
+    }
+    
+    throw new Error('No URL returned from ImageKit upload');
+}

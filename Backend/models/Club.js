@@ -36,9 +36,17 @@ const eventSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    coverImage: {
+        type: String,
+        default: ''
+    },
     images: [{
         type: String
-    }]
+    }],
+    isFeatured: {
+        type: Boolean,
+        default: false
+    }
 }, { _id: true });
 
 const presidentSchema = new mongoose.Schema({

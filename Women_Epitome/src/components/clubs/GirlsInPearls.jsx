@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Sparkles } from 'lucide-react';
+import { ArrowLeft, Sparkles, MapPin, Calendar, Star } from 'lucide-react';
+import api from '../../utils/api';
 
 const GirlsInPearls = () => {
     const navigate = useNavigate();
     const [enlargedImage, setEnlargedImage] = useState(null);
+    const [events, setEvents] = useState([]);
+    const [eventsLoading, setEventsLoading] = useState(true);
 
     const galleryImages = [
         '/images/club-pages-imgs/GirlsinPearls/1.jpg',
@@ -13,8 +16,52 @@ const GirlsInPearls = () => {
         '/images/club-pages-imgs/GirlsinPearls/3.jpg',
     ];
 
+    const fallbackEvents = [
+        {
+            title: 'Community Service Initiative',
+            description: 'Details coming soon.',
+            date: '',
+            location: 'Mumbai',
+            coverImage: '/images/club-pages-imgs/GirlsinPearls/1.jpg',
+            images: ['/images/club-pages-imgs/GirlsinPearls/1.jpg'],
+            isFeatured: false
+        }
+    ];
+
+    const formatDate = (dateString) => {
+        if (!dateString) return 'Date TBA';
+        const dt = new Date(dateString);
+        if (Number.isNaN(dt.getTime())) return 'Date TBA';
+        return dt.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    };
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const res = await api.get('/clubs/girls-in-pearls');
+                const club = res?.data?.data?.club;
+                const normalized = (club?.events || []).map((event) => ({
+                    title: event.title || 'Untitled Event',
+                    description: event.description || 'Details coming soon.',
+                    date: event.date || '',
+                    location: event.location || 'Location TBA',
+                    coverImage: event.coverImage || '',
+                    images: event.images && event.images.length ? event.images : [],
+                    isFeatured: Boolean(event.isFeatured)
+                }));
+                setEvents(normalized);
+            } catch (err) {
+                setEvents(fallbackEvents);
+            } finally {
+                setEventsLoading(false);
+            }
+        };
+
+        fetchEvents();
+    }, []);
+
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 relative overflow-hidden">
+        <div className="min-h-screen bg-linear-to-br from-pink-50 via-purple-50 to-pink-100 relative overflow-hidden">
             {/* Animated Background Shapes */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300/20 rounded-full blur-3xl animate-pulse"></div>
@@ -43,7 +90,7 @@ const GirlsInPearls = () => {
                             className="w-24 h-auto mx-auto"
                         />
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-black mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
+                    <h1 className="text-5xl md:text-7xl font-black mb-4 bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent animate-linear">
                         WE Club of Girls in Pearls
                     </h1>
                     <div className="flex items-center justify-center gap-2 text-purple-600">
@@ -59,14 +106,14 @@ const GirlsInPearls = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 border border-purple-100 hover:shadow-purple-200/50 transition-all duration-300">
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-1 h-12 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></div>
-                            <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                            <div className="w-1 h-12 bg-linear-to-b from-purple-500 to-pink-500 rounded-full"></div>
+                            <h2 className="text-4xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                                 About the Club
                             </h2>
                         </div>
 
                         <div className="space-y-6">
-                            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
+                            <div className="bg-linear-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
                                 <h3 className="text-2xl font-bold text-gray-800 mb-3">WE Club of Girls in Pearls</h3>
                                 <div className="space-y-2 text-gray-700">
                                     <p className="flex items-center gap-2">
@@ -94,11 +141,89 @@ const GirlsInPearls = () => {
                 </div>
             </section>
 
+            {/* Events Section */}
+            <section className="py-12 px-4 relative z-10">
+                <div className="max-w-6xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                            Events & Highlights
+                        </h2>
+                        <p className="text-purple-600">Latest initiatives from Girls in Pearls</p>
+                    </div>
+
+                    {eventsLoading ? (
+                        <div className="text-center text-gray-600">Loading events...</div>
+                    ) : events.length === 0 ? (
+                        <div className="text-center text-gray-500">Events will appear here soon.</div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {events.map((event, idx) => (
+                                <div
+                                    key={`${event.title}-${idx}`}
+                                    className="group bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-purple-100 hover:shadow-2xl transition-all duration-300"
+                                >
+                                    {event.coverImage || (event.images && event.images[0]) ? (
+                                        <div className="relative h-56 overflow-hidden">
+                                            <img
+                                                src={event.coverImage || event.images[0]}
+                                                alt={event.title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                onError={(e) => { e.target.style.display = 'none'; }}
+                                            />
+                                            <div className="absolute inset-0 bg-linear-to-t from-purple-900/40 to-transparent" />
+                                            {event.isFeatured && (
+                                                <span className="absolute top-4 left-4 inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full shadow">
+                                                    <Star size={14} /> Featured
+                                                </span>
+                                            )}
+                                        </div>
+                                    ) : null}
+
+                                    <div className="p-5 space-y-3">
+                                        <div className="flex items-center justify-between gap-3">
+                                            <h3 className="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors">
+                                                {event.title}
+                                            </h3>
+                                            <span className="flex items-center gap-1 text-sm text-gray-600">
+                                                <Calendar size={16} className="text-purple-600" />
+                                                {formatDate(event.date)}
+                                            </span>
+                                        </div>
+
+                                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                                            <MapPin size={16} className="text-pink-600" />
+                                            <span>{event.location}</span>
+                                        </div>
+
+                                        <p className="text-gray-700 text-sm leading-relaxed">
+                                            {event.description}
+                                        </p>
+
+                                        {event.images && event.images.length > 1 && (
+                                            <div className="flex gap-2 pt-2 overflow-x-auto">
+                                                {event.images.slice(1).map((img, imgIdx) => (
+                                                    <img
+                                                        key={imgIdx}
+                                                        src={img}
+                                                        alt={`${event.title} ${imgIdx + 2}`}
+                                                        className="w-20 h-20 object-cover rounded-lg border border-purple-100"
+                                                    />
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
+
             {/* Gallery Section */}
             <section className="py-12 px-4 relative z-10">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-12">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                        <h2 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
                             Gallery
                         </h2>
                         <p className="text-purple-600">Moments that matter</p>
@@ -115,7 +240,7 @@ const GirlsInPearls = () => {
                                     alt={`Event ${index + 1}`}
                                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="absolute inset-0 bg-linear-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                         ))}
                     </div>
@@ -145,18 +270,18 @@ const GirlsInPearls = () => {
             )}
 
             {/* Footer */}
-            <footer className="relative z-10 mt-20 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-center py-8">
+            <footer className="relative z-10 mt-20 bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-center py-8">
                 <p className="text-sm font-medium">© 2025 WE Club | All rights reserved.</p>
             </footer>
 
             <style jsx>{`
-                @keyframes gradient {
+                @keyframes linear {
                     0%, 100% { background-position: 0% 50%; }
                     50% { background-position: 100% 50%; }
                 }
-                .animate-gradient {
+                .animate-linear {
                     background-size: 200% 200%;
-                    animation: gradient 3s ease infinite;
+                    animation: linear 3s ease infinite;
                 }
                 @keyframes fadeIn {
                     from { opacity: 0; }
