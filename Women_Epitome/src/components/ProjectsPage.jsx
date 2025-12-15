@@ -6,66 +6,134 @@ const ProjectsPage = () => {
   const projects = [
     {
       id: 1,
-      title: "Education for All",
-      category: "Education",
-      icon: BookOpen,
-      description: "Providing quality education and learning resources to underprivileged children across our district.",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80",
-      stats: { beneficiaries: "5000+", duration: "Ongoing", locations: "25+" }
+      title: "Anaaj Daan Relieve the Hunger",
+      category: "Food & Nutrition",
+      icon: Heart,
+      description: "Donating food is considered as the highest form of giving.",
+      link: "/projects/AnaajDaan",
+      image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
+      stats: { beneficiaries: "8000+", duration: "Ongoing", locations: "40+" }
     },
     {
       id: 2,
-      title: "Health & Wellness Drive",
-      category: "Healthcare",
-      icon: Stethoscope,
-      description: "Organizing health camps, awareness programs, and medical assistance for communities in need.",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80",
-      stats: { beneficiaries: "3000+", duration: "Ongoing", locations: "15+" }
+      title: "Senior Citizen",
+      category: "Senior Care",
+      icon: Users,
+      description: "We aim to improve their quality of life and ensure their well-being.",
+      link: "/projects/SeniorCitizen",
+      image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80",
+      stats: { beneficiaries: "2500+", duration: "Ongoing", locations: "30+" }
     },
     {
       id: 3,
-      title: "Women Empowerment Workshops",
-      category: "Empowerment",
-      icon: Users,
-      description: "Skill development, leadership training, and entrepreneurship programs for women.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
-      stats: { beneficiaries: "2000+", duration: "Ongoing", locations: "20+" }
+      title: "Health",
+      category: "Healthcare",
+      icon: Stethoscope,
+      description: "Environment - Heal the Earth, Water Conservation, Solar Energy; Healthcare - Heal the Ailed; Cancer Care - Heal the Cancer patients.",
+      link: "/projects/Health",
+      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80",
+      stats: { beneficiaries: "5000+", duration: "Ongoing", locations: "35+" }
     },
     {
       id: 4,
-      title: "Housing Initiative",
-      category: "Community",
-      icon: Home,
-      description: "Building homes and providing shelter for families in need across our communities.",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-      stats: { beneficiaries: "500+", duration: "2023-2025", locations: "10+" }
+      title: "Education",
+      category: "Education",
+      icon: GraduationCap,
+      description: "It encompasses a broad range of assistance including adult education, awareness programs, skill development, vocational training and youth counseling.",
+      link: "/projects/Education",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80",
+      stats: { beneficiaries: "6000+", duration: "Ongoing", locations: "45+" }
     },
     {
       id: 5,
-      title: "Scholarship Program",
-      category: "Education",
-      icon: GraduationCap,
-      description: "Supporting meritorious students with scholarships to pursue higher education.",
-      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
-      stats: { beneficiaries: "1000+", duration: "Annual", locations: "All Districts" }
+      title: "Permanent Projects",
+      category: "Infrastructure",
+      icon: Home,
+      description: "Building or repairing infrastructure such as water system, toilet blocks, classrooms and providing necessary soft goods like fans, lights, projector and others",
+      link: "/projects/PermanentProjects",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+      stats: { beneficiaries: "3000+", duration: "2023-2026", locations: "25+" }
     },
     {
       id: 6,
-      title: "Community Care",
-      category: "Healthcare",
+      title: "Rural Development",
+      category: "Rural Empowerment",
+      icon: Users,
+      description: "Aimed at improving the health, education, economic status, and promoting empowerment through vocational training and financial assistance.",
+      link: "/projects/RuralDevelopment",
+      image: "https://images.unsplash.com/photo-1516962126636-27ad087061cc?w=800&q=80",
+      stats: { beneficiaries: "4500+", duration: "Ongoing", locations: "50+" }
+    },
+    {
+      id: 7,
+      title: "Animal Welfare",
+      category: "Animal Care",
       icon: Heart,
-      description: "Providing care packages, medical supplies, and support to elderly and vulnerable populations.",
-      image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80",
-      stats: { beneficiaries: "1500+", duration: "Ongoing", locations: "18+" }
+      description: "It's about the quality of life an animal experiences and includes aspects like nutrition, housing, and freedom from pain, fear, and distress.",
+      link: "/projects/AnimalWelfare",
+      image: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80",
+      stats: { beneficiaries: "1500+", duration: "Ongoing", locations: "20+" }
+    },
+    {
+      id: 8,
+      title: "Enable the Specially Abled",
+      category: "Empowerment",
+      icon: Users,
+      description: "Involves taking actions that support and empower individuals with disabilities to participate fully in society.",
+      link: "/projects/SpeciallyAbled",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
+      stats: { beneficiaries: "1800+", duration: "Ongoing", locations: "28+" }
+    },
+    {
+      id: 9,
+      title: "Help the Needy",
+      category: "Community Support",
+      icon: Heart,
+      description: "Aims at providing financial aid, food, shelter, medical care, education, or other forms of support to help individuals or groups who are in a state of need or hardship, often due to poverty, lack of resources, or other difficulties.",
+      link: "/projects/Needy",
+      image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
+      stats: { beneficiaries: "7000+", duration: "Ongoing", locations: "55+" }
+    },
+    {
+      id: 10,
+      title: "Child Welfare",
+      category: "Child Care",
+      icon: BookOpen,
+      description: "Focuses on providing for children's physical needs, such as food, shelter, and healthcare. Ensuring children have access to opportunities for education, play, and positive social interactions, also includes transforming a girl child for the betterment of society.",
+      link: "/projects/ChildWelfare",
+      image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80",
+      stats: { beneficiaries: "5500+", duration: "Ongoing", locations: "42+" }
+    },
+    {
+      id: 11,
+      title: "Women Welfare",
+      category: "Women Empowerment",
+      icon: Users,
+      description: "Aimed at improving the health, education, economic status, and promoting empowerment through vocational training and financial assistance, also includes maternal and infant health.",
+      link: "/projects/WomenWelfare",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
+      stats: { beneficiaries: "4000+", duration: "Ongoing", locations: "38+" }
+    },
+    {
+      id: 12,
+      title: "Image Building",
+      category: "Public Relations",
+      icon: Target,
+      description: "Crafting and maintaining a positive public perception of our association.",
+      link: "/projects/ImageBuilding",
+      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
+      stats: { beneficiaries: "All", duration: "Ongoing", locations: "Nationwide" }
     }
   ];
 
   const categories = [
     { name: "All Projects", count: projects.length, color: "purple" },
-    { name: "Education", count: 2, color: "blue" },
     { name: "Healthcare", count: 2, color: "pink" },
-    { name: "Empowerment", count: 1, color: "purple" },
-    { name: "Community", count: 1, color: "yellow" }
+    { name: "Education", count: 2, color: "blue" },
+    { name: "Empowerment", count: 3, color: "purple" },
+    { name: "Community", count: 2, color: "yellow" },
+    { name: "Infrastructure", count: 1, color: "orange" },
+    { name: "Animal Care", count: 1, color: "green" }
   ];
 
   return (
@@ -112,12 +180,12 @@ const ProjectsPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-xl text-center border border-purple-100">
               <Target className="w-8 h-8 text-purple-600 mb-3 mx-auto" />
-              <p className="text-3xl font-bold text-gray-800 mb-1">50+</p>
+              <p className="text-3xl font-bold text-gray-800 mb-1">12</p>
               <p className="text-sm text-gray-600 font-semibold">Active Projects</p>
             </div>
             <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-xl text-center border border-purple-100">
               <Users className="w-8 h-8 text-pink-600 mb-3 mx-auto" />
-              <p className="text-3xl font-bold text-gray-800 mb-1">13K+</p>
+              <p className="text-3xl font-bold text-gray-800 mb-1">48K+</p>
               <p className="text-sm text-gray-600 font-semibold">Lives Impacted</p>
             </div>
             <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-xl text-center border border-purple-100">
@@ -141,11 +209,10 @@ const ProjectsPage = () => {
             {categories.map((category, index) => (
               <button
                 key={index}
-                className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 ${
-                  index === 0
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-purple-50 border border-purple-100'
-                }`}
+                className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 ${index === 0
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-purple-50 border border-purple-100'
+                  }`}
               >
                 {category.name} ({category.count})
               </button>
@@ -192,7 +259,7 @@ const ProjectsPage = () => {
                     </h3>
                   </div>
                   <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-                  
+
                   <div className="grid grid-cols-3 gap-2 mb-4 text-xs">
                     <div className="bg-purple-50 p-2 rounded-lg text-center">
                       <p className="font-bold text-purple-700">{project.stats.beneficiaries}</p>
@@ -208,10 +275,10 @@ const ProjectsPage = () => {
                     </div>
                   </div>
 
-                  <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                  <a href={project.link} className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
                     Learn More
                     <ArrowRight size={16} />
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}
