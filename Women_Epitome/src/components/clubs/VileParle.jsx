@@ -173,7 +173,7 @@ const VileParle = () => {
             <section className="py-12 px-4 relative z-10">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-12">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                        <h2 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
                             Events & Highlights
                         </h2>
                         <p className="text-purple-600">Latest initiatives from Vile Parle</p>
@@ -198,7 +198,7 @@ const VileParle = () => {
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 onError={(e) => { e.target.style.display = 'none'; }}
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent" />
+                                            <div className="absolute inset-0 bg-linear-to-t from-purple-900/40 to-transparent" />
                                             {event.isFeatured && (
                                                 <span className="absolute top-4 left-4 inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full shadow">
                                                     <Star size={14} /> Featured

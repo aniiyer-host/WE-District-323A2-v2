@@ -209,14 +209,14 @@ const ClubEditForm = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 flex items-center justify-center">
+            <div className="min-h-screen bg-linear-to-br from-purple-600 via-pink-500 to-orange-400 flex items-center justify-center">
                 <div className="text-white text-2xl">Loading...</div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 p-6">
+        <div className="min-h-screen bg-linear-to-br from-purple-600 via-pink-500 to-orange-400 p-6">
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
                 <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 mb-6">
@@ -451,7 +451,7 @@ const ClubEditForm = () => {
                                                             setError(err.message || 'Cover upload failed');
                                                         }
                                                     }}
-                                                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
+                                                    className="flex-1 px-3 py-2 border-2 border-gray-300 rounded-lg bg-white hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-50 file:text-purple-700 file:font-semibold hover:file:bg-purple-100 file:cursor-pointer"
                                                 />
                                                 {event.coverImage && (
                                                     <button
@@ -538,7 +538,7 @@ const ClubEditForm = () => {
                                                                     setError(err.message || 'Image upload failed');
                                                                 }
                                                             }}
-                                                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg"
+                                                            className="flex-1 px-3 py-2 border-2 border-gray-300 rounded-lg bg-white hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-50 file:text-purple-700 file:font-semibold hover:file:bg-purple-100 file:cursor-pointer"
                                                         />
                                                         <button
                                                             type="button"
@@ -582,7 +582,7 @@ const ClubEditForm = () => {
                             <button
                                 type="submit"
                                 disabled={saving}
-                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {saving ? (
                                     <>

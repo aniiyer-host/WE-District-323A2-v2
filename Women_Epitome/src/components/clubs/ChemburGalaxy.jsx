@@ -62,7 +62,7 @@ const ChemburGalaxy = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 relative overflow-hidden">
+        <div className="min-h-screen bg-linear-to-br from-pink-50 via-purple-50 to-pink-100 relative overflow-hidden">
             {/* Animated Background Shapes */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-purple-300/20 rounded-full blur-3xl animate-pulse"></div>
@@ -91,7 +91,7 @@ const ChemburGalaxy = () => {
                             className="w-24 h-auto mx-auto"
                         />
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-black mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
+                    <h1 className="text-5xl md:text-7xl font-black mb-4 bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent animate-linear">
                         WE Club of Chembur Galaxy
                     </h1>
                     <div className="flex items-center justify-center gap-2 text-purple-600">
@@ -107,14 +107,14 @@ const ChemburGalaxy = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 border border-purple-100 hover:shadow-purple-200/50 transition-all duration-300">
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-1 h-12 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></div>
-                            <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                            <div className="w-1 h-12 bg-linear-to-b from-purple-500 to-pink-500 rounded-full"></div>
+                            <h2 className="text-4xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                                 About the Club
                             </h2>
                         </div>
 
                         <div className="space-y-6">
-                            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
+                            <div className="bg-linear-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
                                 <h3 className="text-2xl font-bold text-gray-800 mb-3">WE Club of Chembur Galaxy</h3>
                                 <div className="space-y-2 text-gray-700">
                                     <p className="flex items-center gap-2">
@@ -149,14 +149,14 @@ const ChemburGalaxy = () => {
                                     We have setup an entire ward for eye care in Hospital, given Cabinets, constructed Cow Shed, donated Microscope, fitted Iron Gate at municipal school, Baby Feeding Cabin at railway station & lots more...
                                 </p>
 
-                                <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-4 mt-4">
+                                <div className="bg-linear-to-r from-purple-100 to-pink-100 rounded-xl p-4 mt-4">
                                     <p className="font-semibold text-purple-800 mb-2">🌟 Signature & Continuous Projects since 2007:</p>
                                     <p className="text-gray-700 leading-relaxed">
                                         Spending Quality time With Seniors Citizens at All Saints Home, Mazgaon & Providing them with daily necessities like groceries, fruits, nighties, blankets and more. Celebration of Birthdays of Special Children Every Month at Municipal school for special children, Chembur
                                     </p>
                                 </div>
 
-                                <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-4 mt-4">
+                                <div className="bg-linear-to-r from-purple-100 to-pink-100 rounded-xl p-4 mt-4">
                                     <p className="font-semibold text-purple-800 mb-2">🌟 BABY FEEDING ROOM</p>
                                     <p className="text-gray-700 leading-relaxed">
                                         named AANCHAL specially for ladies to feed their little ones in privacy...at Lokmanya Tilak Terminas...Kurla station. The room has Tubelight, Fan, Exhaust Fan, Window and sitting arrangement on both sides in the room
@@ -172,7 +172,7 @@ const ChemburGalaxy = () => {
             <section className="py-12 px-4 relative z-10">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-12">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                        <h2 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
                             Events & Highlights
                         </h2>
                         <p className="text-purple-600">Latest initiatives from Chembur Galaxy</p>
@@ -197,7 +197,7 @@ const ChemburGalaxy = () => {
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 onError={(e) => { e.target.style.display = 'none'; }}
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent" />
+                                            <div className="absolute inset-0 bg-linear-to-t from-purple-900/40 to-transparent" />
                                             {event.isFeatured && (
                                                 <span className="absolute top-4 left-4 inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full shadow">
                                                     <Star size={14} /> Featured
@@ -250,7 +250,7 @@ const ChemburGalaxy = () => {
             <section className="py-12 px-4 relative z-10">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-12">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                        <h2 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
                             Gallery
                         </h2>
                         <p className="text-purple-600">Moments that matter</p>
@@ -267,7 +267,7 @@ const ChemburGalaxy = () => {
                                     alt={`Event ${index + 1}`}
                                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="absolute inset-0 bg-linear-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                         ))}
                     </div>
@@ -297,18 +297,18 @@ const ChemburGalaxy = () => {
             )}
 
             {/* Footer */}
-            <footer className="relative z-10 mt-20 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-center py-8">
+            <footer className="relative z-10 mt-20 bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-center py-8">
                 <p className="text-sm font-medium">© 2025 WE Club | All rights reserved.</p>
             </footer>
 
             <style jsx>{`
-                @keyframes gradient {
+                @keyframes linear {
                     0%, 100% { background-position: 0% 50%; }
                     50% { background-position: 100% 50%; }
                 }
-                .animate-gradient {
+                .animate-linear {
                     background-size: 200% 200%;
-                    animation: gradient 3s ease infinite;
+                    animation: linear 3s ease infinite;
                 }
                 @keyframes fadeIn {
                     from { opacity: 0; }
