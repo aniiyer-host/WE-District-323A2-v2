@@ -3,18 +3,18 @@ export const projectsData = {
         "title": "Anaaj Daan Relieve the Hunger",
         "subtitle": "Donating food is considered as the highest form of giving.",
         "items": [
-            {
-                "clubLink": "/clubs/vile-parle",
-                "description": "Feed the hunger",
-                "imageUrl": "/images/projects-page-imgs/1.jpg",
-                "title": "Donated grains"
-            },
-            {
-                "clubLink": "/clubs/vile-parle",
-                "description": "feed the hunger",
-                "imageUrl": "/images/projects-page-imgs/2.jpg",
-                "title": "Donated wheat"
-            }
+            // {
+            //     "clubLink": "/clubs/vile-parle",
+            //     "description": "Feed the hunger",
+            //     "imageUrl": "/images/projects-page-imgs/1.jpg",
+            //     "title": "Donated grains"
+            // },
+            // {
+            //     "clubLink": "/clubs/vile-parle",
+            //     "description": "feed the hunger",
+            //     "imageUrl": "/images/projects-page-imgs/2.jpg",
+            //     "title": "Donated wheat"
+            // }
         ]
     },
     "animal-welfare": {

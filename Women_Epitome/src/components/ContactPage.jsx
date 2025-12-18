@@ -236,7 +236,7 @@ const ContactPage = () => {
 
             {/* Map & Additional Info */}
             <div className="space-y-8">
-              {/* Map */}
+              {/* Map 
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-purple-100">
                 <div className="h-64 bg-linear-to-br from-purple-600 to-pink-600 flex items-center justify-center">
                   <div className="text-center text-white">
@@ -255,7 +255,7 @@ const ContactPage = () => {
                     <ArrowRight size={16} />
                   </button>
                 </div>
-              </div>
+              </div>*/}
 
               {/* Social Media */}
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-purple-100">
