@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Heart, Users, Award, ArrowRight, Calendar, MapPin, Zap, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 import { projectsData } from '../data/projectsData';
 
 const LandingPage = () => {
@@ -148,9 +149,9 @@ const LandingPage = () => {
               Join Our Movement
               <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
             </button>
-            <button className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-purple-200">
+            <Link to="/projects" className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-purple-200">
               Explore Projects
-            </button>
+            </Link>
           </div>
 
           {/* Stats Bar */}
@@ -366,22 +367,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-              <img src="/images/WE-emblem.png" />
-            </div>
-            <div>
-              <p className="font-bold text-lg">WE Clubs of India</p>
-              <p className="text-sm text-gray-400">District 323 A2</p>
-            </div>
-          </div>
-          <p className="text-gray-400 mb-4">Women - Epitome of Service</p>
-          <p className="text-sm text-gray-500">© 2025 WE - Women Epitome of Service. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
