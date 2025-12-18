@@ -368,7 +368,7 @@ const ContactPage = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">WE</span>
+              <img src="/images/WE-emblem.png" />
             </div>
             <div>
               <p className="font-bold text-lg">WE Clubs of India</p>

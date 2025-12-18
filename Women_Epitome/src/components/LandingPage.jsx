@@ -29,9 +29,9 @@ const LandingPage = () => {
       }
     });
 
-    // Shuffle and pick 3 random projects
+    // Shuffle and pick 5 random projects
     const shuffled = allProjects.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
+    return shuffled.slice(0, 5);
   };
 
   useEffect(() => {
@@ -371,15 +371,15 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">WE</span>
+              <img src="/images/WE-emblem.png" />
             </div>
             <div>
               <p className="font-bold text-lg">WE Clubs of India</p>
               <p className="text-sm text-gray-400">District 323 A2</p>
             </div>
           </div>
-          <p className="text-gray-400 mb-4">Woman - Epitome of Service</p>
-          <p className="text-sm text-gray-500">© 2025 WE - Woman Epitome of Service. All rights reserved.</p>
+          <p className="text-gray-400 mb-4">Women - Epitome of Service</p>
+          <p className="text-sm text-gray-500">© 2025 WE - Women Epitome of Service. All rights reserved.</p>
         </div>
       </footer>
     </div>
