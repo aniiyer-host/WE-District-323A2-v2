@@ -163,7 +163,7 @@ const LandingPage = () => {
               <div className="relative h-96 md:h-auto bg-linear-to-br from-purple-600 to-pink-600 p-8">
                 <div className="absolute inset-8 bg-white/10 backdrop-blur-sm rounded-2xl border-4 border-white/30"></div>
                 <img
-                  src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80"
+                  src="images/index-page-imgs/pfp.jpg"
                   alt="WE Varsha Vora"
                   className="relative z-10 w-full h-full object-cover rounded-2xl shadow-2xl"
                 />
