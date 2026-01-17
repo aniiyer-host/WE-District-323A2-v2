@@ -288,6 +288,37 @@ const ClubEditForm = () => {
                         </div>
                     </div>
 
+                    {/* Action Buttons */}
+                    <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6">
+                        <div className="flex gap-4">
+                            <button
+                                type="button"
+                                onClick={() => navigate(-1)}
+                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-colors"
+                            >
+                                <X size={20} />
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                disabled={saving}
+                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {saving ? (
+                                    <>
+                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                        Saving...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Save size={20} />
+                                        Save Changes
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+
                     {/* Events Section */}
                     <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6">
                         <div className="flex items-center justify-between mb-6">
@@ -596,36 +627,7 @@ const ClubEditForm = () => {
                         </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6">
-                        <div className="flex gap-4">
-                            <button
-                                type="button"
-                                onClick={() => navigate(-1)}
-                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-colors"
-                            >
-                                <X size={20} />
-                                Cancel
-                            </button>
-                            <button
-                                type="submit"
-                                disabled={saving}
-                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                {saving ? (
-                                    <>
-                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                        Saving...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Save size={20} />
-                                        Save Changes
-                                    </>
-                                )}
-                            </button>
-                        </div>
-                    </div>
+
                 </form>
             </div>
         </div>

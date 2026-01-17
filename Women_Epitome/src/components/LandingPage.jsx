@@ -297,7 +297,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="inline-block bg-purple-100 text-purple-700 px-6 py-2 rounded-full font-bold text-sm mb-4">
-              LEADERSHIP 2024-25
+              LEADERSHIP 2025-2026
             </span>
             <h2 className="text-5xl md:text-6xl font-black text-gray-800 mb-4 playfair">
               Meet Our District President

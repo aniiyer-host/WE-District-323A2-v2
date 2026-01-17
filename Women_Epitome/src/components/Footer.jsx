@@ -9,12 +9,12 @@ const Footer = () => {
                         <img src="/images/WE-emblem.png" alt="WE Emblem" />
                     </div>
                     <div>
-                        <p className="font-bold text-lg">WE Clubs of India</p>
-                        <p className="text-sm text-gray-400">District 323 A2</p>
+                        <p className="font-bold text-lg">The Association of WE Clubs of India</p>
+                        <p className="text-sm text-gray-400">WE District 323 A2</p>
                     </div>
                 </div>
-                <p className="text-gray-400 mb-4">Women - Epitome of Service</p>
-                <p className="text-sm text-gray-500">© 2025 WE - Women Epitome of Service. All rights reserved.</p>
+                <p className="text-gray-400 mb-4">Woman - Epitome of Service</p>
+                <p className="text-sm text-gray-500">© 2025 WE - Woman Epitome of Service. All rights reserved.</p>
             </div>
         </footer>
     );
