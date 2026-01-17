@@ -1,15 +1,26 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Heart, Users, Award, ArrowRight, Calendar, MapPin, Zap, Target } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Sparkles, Heart, Users, Award, ArrowRight, Calendar, MapPin, Zap, Target, LogIn } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import { projectsData } from '../data/projectsData';
+import { useAuth } from '../context/AuthContext';
 
 const LandingPage = () => {
+  const { user, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0);
   const [randomProjects, setRandomProjects] = useState([]);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleDashboardClick = () => {
+    if (user?.role === 'admin') {
+      navigate('/admin-dashboard');
+    } else {
+      navigate('/club-dashboard');
+    }
+  };
 
   // Function to get random projects
   const getRandomProjects = () => {
@@ -145,10 +156,25 @@ const LandingPage = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center mb-16">
-            <button className="group bg-linear-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-2">
-              Join Our Movement
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-            </button>
+            {isAuthenticated ? (
+              <button
+                onClick={handleDashboardClick}
+                className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              >
+                <LogIn size={20} />
+                Go to Dashboard
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              >
+                <LogIn size={20} />
+                Login
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+              </Link>
+            )}
             <Link to="/projects" className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-purple-200">
               Explore Projects
             </Link>

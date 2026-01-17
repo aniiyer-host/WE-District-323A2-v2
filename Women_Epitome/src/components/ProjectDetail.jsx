@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Sparkles, Heart, Search } from 'lucide-react';
 import { projectsData } from '../data/projectsData';
+import api from '../utils/api';
 
 const ProjectDetail = () => {
     const { projectId } = useParams();
     const navigate = useNavigate();
     const [project, setProject] = useState(null);
     const [enlargedImage, setEnlargedImage] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // Helper to normalize and find project key
     const getProjectData = (id) => {
@@ -37,17 +39,63 @@ const ProjectDetail = () => {
     };
 
     useEffect(() => {
-        if (projectId) {
-            const data = getProjectData(projectId);
-            setProject(data);
-        }
+        const fetchProjectEvents = async () => {
+            if (!projectId) return;
+
+            setLoading(true);
+            const staticData = getProjectData(projectId);
+
+            // Normalize projectId to match backend category format
+            let categoryKey = projectId.toLowerCase().replace('.html', '');
+            const mapping = {
+                "animalwelfare": "animal-welfare",
+                "childwelfare": "child-welfare",
+                "imagebuilding": "image-building",
+                "permanentprojects": "permanent-projects",
+                "ruraldevelopment": "rural-development",
+                "seniorcitizen": "senior-citizen",
+                "speciallyabled": "specially-abled",
+                "womenwelfare": "women-welfare"
+            };
+            categoryKey = mapping[categoryKey] || categoryKey;
+
+            try {
+                // Fetch live events from backend
+                const response = await api.get(`/clubs/events/${categoryKey}`);
+                const liveEvents = response.data.data.events || [];
+
+                // Transform API events to match the expected format
+                const transformedEvents = liveEvents.map(event => ({
+                    clubLink: event.clubLink,
+                    description: `${event.clubName}: ${event.description || event.title}`,
+                    imageUrl: event.coverImage || (event.images && event.images[0]) || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80',
+                    title: event.title,
+                    date: event.date
+                }));
+
+                // Combine static data with live events
+                setProject({
+                    title: staticData?.title || 'Project',
+                    subtitle: staticData?.subtitle || '',
+                    items: [...transformedEvents, ...(staticData?.items || [])]
+                });
+            } catch (error) {
+                console.error('Error fetching events:', error);
+                // Fallback to static data
+                setProject(staticData);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProjectEvents();
     }, [projectId]);
 
-    if (!project) {
+    if (loading || !project) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 flex items-center justify-center">
                 <div className="text-center">
-                    <p className="text-xl text-gray-600">Project not found or loading...</p>
+                    <p className="text-xl text-gray-600">{loading ? 'Loading project events...' : 'Project not found'}</p>
                     <button
                         onClick={() => navigate('/projects')}
                         className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all"

@@ -1,130 +1,191 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Heart, BookOpen, Stethoscope, GraduationCap, Home, Users, ArrowRight, Calendar, MapPin, Target } from 'lucide-react';
+import api from '../utils/api';
 
 const ProjectsPage = () => {
-  const projects = [
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [eventsByCategory, setEventsByCategory] = useState({});
+
+  // Project category definitions with metadata
+  const projectCategories = [
     {
       id: 1,
       title: "Anaaj Daan Relieve the Hunger",
+      categoryKey: "anaajdaan",
       category: "Food & Nutrition",
       icon: Heart,
       description: "Donating food is considered as the highest form of giving.",
       link: "/projects/AnaajDaan",
-      image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
-      stats: { beneficiaries: "8000+", duration: "Ongoing", locations: "40+" }
+      defaultImage: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
     },
     {
       id: 2,
       title: "Senior Citizen",
+      categoryKey: "senior-citizen",
       category: "Senior Care",
       icon: Users,
       description: "We aim to improve their quality of life and ensure their well-being.",
       link: "/projects/SeniorCitizen",
-      image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80",
-      stats: { beneficiaries: "2500+", duration: "Ongoing", locations: "30+" }
+      defaultImage: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80"
     },
     {
       id: 3,
       title: "Health",
+      categoryKey: "health",
       category: "Healthcare",
       icon: Stethoscope,
       description: "Environment - Heal the Earth, Water Conservation, Solar Energy; Healthcare - Heal the Ailed; Cancer Care - Heal the Cancer patients.",
       link: "/projects/Health",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80",
-      stats: { beneficiaries: "5000+", duration: "Ongoing", locations: "35+" }
+      defaultImage: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80"
     },
     {
       id: 4,
       title: "Education",
+      categoryKey: "education",
       category: "Education",
       icon: GraduationCap,
       description: "It encompasses a broad range of assistance including adult education, awareness programs, skill development, vocational training and youth counseling.",
       link: "/projects/Education",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80",
-      stats: { beneficiaries: "6000+", duration: "Ongoing", locations: "45+" }
+      defaultImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80"
     },
     {
       id: 5,
       title: "Permanent Projects",
+      categoryKey: "permanent-projects",
       category: "Infrastructure",
       icon: Home,
       description: "Building or repairing infrastructure such as water system, toilet blocks, classrooms and providing necessary soft goods like fans, lights, projector and others",
       link: "/projects/PermanentProjects",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-      stats: { beneficiaries: "3000+", duration: "2023-2026", locations: "25+" }
+      defaultImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"
     },
     {
       id: 6,
       title: "Rural Development",
+      categoryKey: "rural-development",
       category: "Rural Empowerment",
       icon: Users,
       description: "Aimed at improving the health, education, economic status, and promoting empowerment through vocational training and financial assistance.",
       link: "/projects/RuralDevelopment",
-      image: "https://images.unsplash.com/photo-1516962126636-27ad087061cc?w=800&q=80",
-      stats: { beneficiaries: "4500+", duration: "Ongoing", locations: "50+" }
+      defaultImage: "https://images.unsplash.com/photo-1516962126636-27ad087061cc?w=800&q=80"
     },
     {
       id: 7,
       title: "Animal Welfare",
+      categoryKey: "animal-welfare",
       category: "Animal Care",
       icon: Heart,
       description: "It's about the quality of life an animal experiences and includes aspects like nutrition, housing, and freedom from pain, fear, and distress.",
       link: "/projects/AnimalWelfare",
-      image: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80",
-      stats: { beneficiaries: "1500+", duration: "Ongoing", locations: "20+" }
+      defaultImage: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80"
     },
     {
       id: 8,
       title: "Enable the Specially Abled",
+      categoryKey: "specially-abled",
       category: "Empowerment",
       icon: Users,
       description: "Involves taking actions that support and empower individuals with disabilities to participate fully in society.",
       link: "/projects/SpeciallyAbled",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
-      stats: { beneficiaries: "1800+", duration: "Ongoing", locations: "28+" }
+      defaultImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
     },
     {
       id: 9,
       title: "Help the Needy",
+      categoryKey: "needy",
       category: "Community Support",
       icon: Heart,
       description: "Aims at providing financial aid, food, shelter, medical care, education, or other forms of support to help individuals or groups who are in a state of need or hardship, often due to poverty, lack of resources, or other difficulties.",
       link: "/projects/Needy",
-      image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80",
-      stats: { beneficiaries: "7000+", duration: "Ongoing", locations: "55+" }
+      defaultImage: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80"
     },
     {
       id: 10,
       title: "Child Welfare",
+      categoryKey: "child-welfare",
       category: "Child Care",
       icon: BookOpen,
       description: "Focuses on providing for children's physical needs, such as food, shelter, and healthcare. Ensuring children have access to opportunities for education, play, and positive social interactions, also includes transforming a girl child for the betterment of society.",
       link: "/projects/ChildWelfare",
-      image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80",
-      stats: { beneficiaries: "5500+", duration: "Ongoing", locations: "42+" }
+      defaultImage: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
     },
     {
       id: 11,
       title: "Women Welfare",
+      categoryKey: "women-welfare",
       category: "Women Empowerment",
       icon: Users,
       description: "Aimed at improving the health, education, economic status, and promoting empowerment through vocational training and financial assistance, also includes maternal and infant health.",
       link: "/projects/WomenWelfare",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
-      stats: { beneficiaries: "4000+", duration: "Ongoing", locations: "38+" }
+      defaultImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
     },
     {
       id: 12,
       title: "Image Building",
+      categoryKey: "image-building",
       category: "Public Relations",
       icon: Target,
       description: "Crafting and maintaining a positive public perception of our association.",
       link: "/projects/ImageBuilding",
-      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80",
-      stats: { beneficiaries: "All", duration: "Ongoing", locations: "Nationwide" }
+      defaultImage: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
     }
   ];
+
+  // Fetch events for all categories
+  useEffect(() => {
+    const fetchAllEvents = async () => {
+      try {
+        setLoading(true);
+        setError('');
+
+        // Fetch events for each category
+        const eventsData = {};
+        await Promise.all(
+          projectCategories.map(async (project) => {
+            try {
+              const response = await api.get(`/clubs/events/${project.categoryKey}`);
+              eventsData[project.categoryKey] = response.data.data.events || [];
+            } catch (err) {
+              console.error(`Error fetching events for ${project.categoryKey}:`, err);
+              eventsData[project.categoryKey] = [];
+            }
+          })
+        );
+
+        setEventsByCategory(eventsData);
+      } catch (err) {
+        console.error('Error fetching events:', err);
+        setError('Failed to load events. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllEvents();
+  }, []);
+
+  // Create projects array with event counts and actual data
+  const projects = projectCategories.map(project => {
+    const events = eventsByCategory[project.categoryKey] || [];
+    const eventCount = events.length;
+
+    // Get the first event's image or use default
+    const image = events.length > 0 && events[0].coverImage
+      ? events[0].coverImage
+      : project.defaultImage;
+
+    return {
+      ...project,
+      image,
+      events,
+      stats: {
+        beneficiaries: eventCount > 0 ? `${eventCount} Event${eventCount !== 1 ? 's' : ''}` : 'No Events',
+        duration: "Ongoing",
+        locations: events.length > 0 ? `${events.length} Club${events.length !== 1 ? 's' : ''}` : 'N/A'
+      }
+    };
+  });
 
   const categories = [
     { name: "All Projects", count: projects.length, color: "purple" },
@@ -135,6 +196,18 @@ const ProjectsPage = () => {
     { name: "Infrastructure", count: 1, color: "orange" },
     { name: "Animal Care", count: 1, color: "green" }
   ];
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-xl text-gray-700 font-semibold">Loading events...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100">
@@ -149,6 +222,13 @@ const ProjectsPage = () => {
           font-family: 'Playfair Display', serif;
         }
       `}</style>
+
+      {/* Error Message */}
+      {error && (
+        <div className="fixed top-4 right-4 z-50 bg-red-50 border border-red-200 rounded-xl p-4 shadow-lg max-w-md">
+          <p className="text-red-700 font-semibold">{error}</p>
+        </div>
+      )}
 
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-24 px-4">
