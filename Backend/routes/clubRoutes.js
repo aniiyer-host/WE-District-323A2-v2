@@ -5,7 +5,8 @@ import {
     createClub,
     updateClub,
     deleteClub,
-    permanentDeleteClub
+    permanentDeleteClub,
+    getEventsByCategory
 } from '../controllers/clubController.js';
 import { authenticate, requireAdmin, requireClubAccess } from '../middlewares/authMiddleware.js';
 
@@ -13,6 +14,7 @@ const router = express.Router();
 
 // Public routes - anyone can view clubs
 router.get('/', getAllClubs);
+router.get('/events/:category', getEventsByCategory);
 router.get('/:clubId', getClubById);
 
 // Protected routes - require authentication

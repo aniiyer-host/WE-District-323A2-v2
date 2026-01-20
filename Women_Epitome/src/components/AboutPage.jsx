@@ -97,7 +97,7 @@ const AboutPage = () => {
               About
             </span>
             <br />
-            <span className="text-gray-800 playfair">Woman Epitome</span>
+            <span className="text-black-800 playfair">Woman Epitome of Service</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto font-light">
             Empowering women, transforming communities, one act of service at a time
@@ -118,10 +118,10 @@ const AboutPage = () => {
               </h2>
               <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
                 <p>
-                  WE (Woman Epitome) Clubs of India is a dynamic network of women dedicated to creating positive change in our communities. We believe that empowered women are the cornerstone of a thriving society.
+                  WE (Woman Epitome of Service) Clubs of India is a dynamic network of women dedicated to creating positive change in our communities. We believe that empowered women are the cornerstone of a thriving society.
                 </p>
                 <p>
-                  Through our diverse initiatives, we focus on education, healthcare, women's empowerment, and community development, touching thousands of lives across District 323 A2 and beyond.
+                  Through our diverse initiatives, we focus on education, healthcare, women empowerment, and community development, touching thousands of lives across District 323 A2 and beyond.
                 </p>
                 <p className="font-semibold text-purple-700">
                   Together, we are stronger. Together, we make a difference.
@@ -134,7 +134,7 @@ const AboutPage = () => {
                   <Globe className="w-20 h-20 text-white mb-6 mx-auto" />
                   <h3 className="text-3xl font-bold text-white mb-4 text-center playfair">Our Vision</h3>
                   <p className="text-white/90 text-center text-lg leading-relaxed">
-                    To be the leading force in women's empowerment and community service, creating a ripple effect of positive change that transforms lives and builds stronger, more inclusive communities.
+                    To be the leading force in women empowerment and community service, creating a ripple effect of positive change that transforms lives and builds stronger, more inclusive communities.
                   </p>
                 </div>
               </div>
@@ -268,7 +268,7 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">WE</span>
+              <img src="/images/WE-emblem.png" />
             </div>
             <div>
               <p className="font-bold text-lg">WE Clubs of India</p>

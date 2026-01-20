@@ -1,9 +1,50 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Heart, Users, Award, ArrowRight, Calendar, MapPin, Zap, Target } from 'lucide-react';
+import { Sparkles, Heart, Users, Award, ArrowRight, Calendar, MapPin, Zap, Target, LogIn } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import Footer from './Footer';
+import { projectsData } from '../data/projectsData';
+import { useAuth } from '../context/AuthContext';
 
 const LandingPage = () => {
+  const { user, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0);
+  const [randomProjects, setRandomProjects] = useState([]);
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleDashboardClick = () => {
+    if (user?.role === 'admin') {
+      navigate('/admin-dashboard');
+    } else {
+      navigate('/club-dashboard');
+    }
+  };
+
+  // Function to get random projects
+  const getRandomProjects = () => {
+    // Collect all projects with items
+    const allProjects = [];
+    Object.entries(projectsData).forEach(([key, project]) => {
+      if (project.items && project.items.length > 0) {
+        project.items.forEach(item => {
+          allProjects.push({
+            id: `${key}-${item.title || item.description}`,
+            category: project.title,
+            title: item.title || item.description,
+            description: item.description,
+            image: item.imageUrl,
+            clubLink: item.clubLink
+          });
+        });
+      }
+    });
+
+    // Shuffle and pick 5 random projects
+    const shuffled = allProjects.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 5);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -11,32 +52,27 @@ const LandingPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const events = [
-    {
-      id: 1,
-      title: "Annual Gala Celebration",
-      date: "December 15, 2024",
-      location: "Mumbai Convention Center",
-      image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80",
-      category: "Event"
-    },
-    {
-      id: 2,
-      title: "Community Health Drive",
-      date: "January 10, 2025",
-      location: "Chembur District",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80",
-      category: "Outreach"
-    },
-    {
-      id: 3,
-      title: "Leadership Workshop",
-      date: "January 25, 2025",
-      location: "WE District Office",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
-      category: "Workshop"
-    }
-  ];
+  // Set random projects on component mount
+  useEffect(() => {
+    setRandomProjects(getRandomProjects());
+  }, []);
+
+  // Auto-rotate carousel
+  useEffect(() => {
+    if (randomProjects.length === 0 || isHovered) return;
+
+    const interval = setInterval(() => {
+      setCurrentProjectIndex((prevIndex) =>
+        (prevIndex + 1) % randomProjects.length
+      );
+    }, 4000); // Rotate every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [randomProjects.length, isHovered]);
+
+  const goToProject = (index) => {
+    setCurrentProjectIndex(index);
+  };
 
   const stats = [
     { icon: Users, value: "500+", label: "Active Members" },
@@ -66,6 +102,11 @@ const LandingPage = () => {
         @keyframes shimmer {
           0% { background-position: -1000px 0; }
           100% { background-position: 1000px 0; }
+        }
+        
+        @keyframes progress {
+          0% { width: 0%; }
+          100% { width: 100%; }
         }
         
         .animate-shimmer {
@@ -115,13 +156,28 @@ const LandingPage = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center mb-16">
-            <button className="group bg-linear-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-2">
-              Join Our Movement
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-            </button>
-            <button className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-purple-200">
+            {isAuthenticated ? (
+              <button
+                onClick={handleDashboardClick}
+                className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              >
+                <LogIn size={20} />
+                Go to Dashboard
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="group bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              >
+                <LogIn size={20} />
+                Login
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+              </Link>
+            )}
+            <Link to="/projects" className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 border-purple-200">
               Explore Projects
-            </button>
+            </Link>
           </div>
 
           {/* Stats Bar */}
@@ -136,10 +192,102 @@ const LandingPage = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-purple-400 rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-purple-600 rounded-full"></div>
+      </section>
+
+      {/* Projects Carousel Section */}
+      <section className="py-24 px-4 bg-linear-to-b from-transparent to-purple-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-6xl font-black text-gray-800 mb-4 playfair">
+              Our Projects
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Discover our ongoing initiatives making a positive impact
+            </p>
+          </div>
+
+          {/* Carousel Container */}
+          <div
+            className="relative max-w-2xl mx-auto"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {/* Carousel Items */}
+            <div className="relative h-[450px] overflow-hidden rounded-3xl">
+              {randomProjects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === currentProjectIndex
+                    ? 'opacity-100 translate-x-0 scale-100'
+                    : index < currentProjectIndex
+                      ? 'opacity-0 -translate-x-full scale-95'
+                      : 'opacity-0 translate-x-full scale-95'
+                    }`}
+                >
+                  <div className="h-full bg-white rounded-3xl shadow-2xl overflow-hidden">
+                    {/* Image Section */}
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.category}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+
+                      {/* Category Badge */}
+                      <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
+                        <span className="text-purple-700 font-bold text-xs">{project.category}</span>
+                      </div>
+
+                      {/* Title Overlay */}
+                      <div className="absolute bottom-4 left-6 right-6">
+                        <h3 className="text-3xl font-black text-white mb-2 playfair drop-shadow-lg">
+                          {project.category}
+                        </h3>
+                      </div>
+                    </div>
+
+                    {/* Content Section */}
+                    <div className="p-5">
+                      <p className="text-base text-gray-700 leading-relaxed mb-4 line-clamp-3">
+                        {project.description}
+                      </p>
+                      <Link to={project.clubLink} className="group bg-linear-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2 w-max">
+                        About the Club
+                        <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation Dots */}
+            <div className="flex justify-center gap-3 mt-8">
+              {randomProjects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToProject(index)}
+                  className={`transition-all duration-300 rounded-full ${index === currentProjectIndex
+                    ? 'w-12 h-3 bg-linear-to-r from-purple-600 to-pink-600'
+                    : 'w-3 h-3 bg-gray-300 hover:bg-gray-400'
+                    }`}
+                  aria-label={`Go to project ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Progress Indicator */}
+            {!isHovered && (
+              <div className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden max-w-xs mx-auto">
+                <div
+                  className="h-full bg-linear-to-r from-purple-600 to-pink-600 transition-all duration-100"
+                  style={{
+                    animation: 'progress 4s linear infinite',
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -149,7 +297,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="inline-block bg-purple-100 text-purple-700 px-6 py-2 rounded-full font-bold text-sm mb-4">
-              LEADERSHIP 2024-25
+              LEADERSHIP 2025-2026
             </span>
             <h2 className="text-5xl md:text-6xl font-black text-gray-800 mb-4 playfair">
               Meet Our District President
@@ -218,59 +366,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Events Section */}
-      <section className="py-24 px-4 bg-linear-to-b from-transparent to-purple-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block bg-pink-100 text-pink-700 px-6 py-2 rounded-full font-bold text-sm mb-4">
-              UPCOMING
-            </span>
-            <h2 className="text-5xl md:text-6xl font-black text-gray-800 mb-4 playfair">
-              Events & Initiatives
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Join us in making a difference in our community
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {events.map((event) => (
-              <div key={event.id} className="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <span className="text-purple-700 font-bold text-xs">{event.category}</span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors">
-                    {event.title}
-                  </h3>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} className="text-purple-600" />
-                      <span>{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin size={16} className="text-pink-600" />
-                      <span>{event.location}</span>
-                    </div>
-                  </div>
-                  <button className="mt-4 w-full bg-linear-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
-                    Learn More
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-24 px-4">
         <div className="max-w-5xl mx-auto">
@@ -298,22 +393,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">WE</span>
-            </div>
-            <div>
-              <p className="font-bold text-lg">WE Clubs of India</p>
-              <p className="text-sm text-gray-400">District 323 A2</p>
-            </div>
-          </div>
-          <p className="text-gray-400 mb-4">Woman - Epitome of Service</p>
-          <p className="text-sm text-gray-500">© 2025 WE - Woman Epitome of Service. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

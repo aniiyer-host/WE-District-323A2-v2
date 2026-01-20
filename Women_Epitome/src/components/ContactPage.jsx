@@ -40,12 +40,6 @@ const ContactPage = () => {
       color: "pink"
     },
     {
-      icon: MapPin,
-      title: "Visit Us",
-      details: ["District Office, Chembur", "Mumbai, Maharashtra 400071"],
-      color: "purple"
-    },
-    {
       icon: Clock,
       title: "Office Hours",
       details: ["Monday - Friday: 9 AM - 6 PM", "Saturday: 10 AM - 4 PM"],
@@ -101,7 +95,7 @@ const ContactPage = () => {
       {/* Contact Info Cards */}
       <section className="py-16 px-4 -mt-20 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {contactInfo.map((info, index) => (
               <div key={index} className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-purple-100 text-center">
                 <div className={`w-16 h-16 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4`}>
@@ -236,7 +230,7 @@ const ContactPage = () => {
 
             {/* Map & Additional Info */}
             <div className="space-y-8">
-              {/* Map */}
+              {/* Map 
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-purple-100">
                 <div className="h-64 bg-linear-to-br from-purple-600 to-pink-600 flex items-center justify-center">
                   <div className="text-center text-white">
@@ -255,7 +249,7 @@ const ContactPage = () => {
                     <ArrowRight size={16} />
                   </button>
                 </div>
-              </div>
+              </div>*/}
 
               {/* Social Media */}
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-purple-100">
@@ -368,17 +362,19 @@ const ContactPage = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">WE</span>
+              <img src="/images/WE-emblem.png" />
             </div>
             <div>
               <p className="font-bold text-lg">WE Clubs of India</p>
               <p className="text-sm text-gray-400">District 323 A2</p>
             </div>
           </div>
-          <p className="text-gray-400 mb-4">Woman - Epitome of Service</p>
-          <p className="text-sm text-gray-500">© 2025 WE - Woman Epitome of Service. All rights reserved.</p>
+          <p className="text-gray-400 mb-4">Women - Epitome of Service</p>
+          <p className="text-sm text-gray-500">© 2025 WE - Women Epitome of Service. All rights reserved.</p>
         </div>
       </footer>
+
+
     </div>
   );
 };

@@ -58,6 +58,7 @@ const ClubEditForm = () => {
                     description: event.description || '',
                     date: event.date ? event.date.split('T')[0] : '',
                     location: event.location || '',
+                    category: event.category || '',
                     coverImage: event.coverImage || '',
                     images: event.images || [''],
                     isFeatured: true
@@ -125,6 +126,7 @@ const ClubEditForm = () => {
                 description: '',
                 date: '',
                 location: '',
+                category: '',
                 coverImage: '',
                 images: [''],
                 isFeatured: true
@@ -286,6 +288,226 @@ const ClubEditForm = () => {
                         </div>
                     </div>
 
+                    {/* Action Buttons */}
+                    <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6">
+                        <div className="flex gap-4">
+                            <button
+                                type="button"
+                                onClick={() => navigate(-1)}
+                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-colors"
+                            >
+                                <X size={20} />
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                disabled={saving}
+                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {saving ? (
+                                    <>
+                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                        Saving...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Save size={20} />
+                                        Save Changes
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Events Section */}
+                    <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6">
+                        <div className="flex items-center justify-between mb-6">
+                            <h2 className="text-2xl font-bold text-gray-800">Events</h2>
+                            <button
+                                type="button"
+                                onClick={handleAddEvent}
+                                className="flex items-center gap-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
+                            >
+                                <Plus size={20} />
+                                Add Event
+                            </button>
+                        </div>
+
+                        <div className="space-y-4">
+                            {formData.events.map((event, index) => (
+                                <div key={index} className="p-4 border-2 border-gray-200 rounded-xl">
+                                    <div className="flex justify-between items-start mb-4">
+                                        <span className="font-semibold text-gray-700">Event {index + 1}</span>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleRemoveEvent(index)}
+                                            className="text-red-500 hover:text-red-700"
+                                        >
+                                            <Trash2 size={20} />
+                                        </button>
+                                    </div>
+
+                                    <div className="space-y-3">
+                                        {/* Event Title */}
+                                        <input
+                                            type="text"
+                                            placeholder="Event Title"
+                                            value={event.title}
+                                            onChange={(e) => handleEventChange(index, 'title', e.target.value)}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
+                                        />
+
+                                        {/* Project Category */}
+                                        <div>
+                                            <label className="text-sm font-semibold text-gray-700 mb-2 block">Project Category</label>
+                                            <select
+                                                value={event.category || ''}
+                                                onChange={(e) => handleEventChange(index, 'category', e.target.value)}
+                                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
+                                            >
+                                                <option value="">Select Category</option>
+                                                <option value="anaajdaan">Anaaj Daan Relieve the Hunger</option>
+                                                <option value="senior-citizen">Senior Citizen</option>
+                                                <option value="health">Health</option>
+                                                <option value="education">Education</option>
+                                                <option value="permanent-projects">Permanent Projects</option>
+                                                <option value="rural-development">Rural Development</option>
+                                                <option value="animal-welfare">Animal Welfare</option>
+                                                <option value="specially-abled">Enable the Specially Abled</option>
+                                                <option value="needy">Help the Needy</option>
+                                                <option value="child-welfare">Child Welfare</option>
+                                                <option value="women-welfare">Women Welfare</option>
+                                                <option value="image-building">Image Building</option>
+                                            </select>
+                                        </div>
+
+                                        {/* Event Cover Image */}
+                                        <div>
+                                            <label className="text-sm font-semibold text-gray-700 mb-2 block">Event Cover Image</label>
+                                            <div className="flex items-center gap-2">
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={async (e) => {
+                                                        const file = e.target.files?.[0];
+                                                        if (!file) return;
+                                                        try {
+                                                            const url = await uploadImageToImageKit(file, `/clubs/${clubId}/events`);
+                                                            handleEventChange(index, 'coverImage', url);
+                                                        } catch (err) {
+                                                            setError(err.message || 'Cover upload failed');
+                                                        }
+                                                    }}
+                                                    className="flex-1 px-3 py-2 border-2 border-gray-300 rounded-lg bg-white hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-50 file:text-purple-700 file:font-semibold hover:file:bg-purple-100 file:cursor-pointer"
+                                                />
+                                                {event.coverImage && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleEventChange(index, 'coverImage', '')}
+                                                        className="p-2 text-red-500 hover:text-red-700"
+                                                    >
+                                                        <Trash2 size={18} />
+                                                    </button>
+                                                )}
+                                            </div>
+                                            {event.coverImage && (
+                                                <div className="mt-2">
+                                                    <img
+                                                        src={event.coverImage}
+                                                        alt="Cover"
+                                                        className="w-32 h-20 object-cover rounded-lg border"
+                                                        onError={(e) => {
+                                                            console.error('Failed to load cover image:', event.coverImage);
+                                                            e.target.style.display = 'none';
+                                                        }}
+                                                        onLoad={() => console.log('Cover image loaded successfully:', event.coverImage)}
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            <input
+                                                type="date"
+                                                value={event.date ? event.date.split('T')[0] : ''}
+                                                onChange={(e) => handleEventChange(index, 'date', e.target.value)}
+                                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
+                                            />
+                                            <input
+                                                type="text"
+                                                placeholder="Location"
+                                                value={event.location}
+                                                onChange={(e) => handleEventChange(index, 'location', e.target.value)}
+                                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
+                                            />
+                                        </div>
+                                        <textarea
+                                            placeholder="Description"
+                                            value={event.description}
+                                            onChange={(e) => handleEventChange(index, 'description', e.target.value)}
+                                            rows="2"
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
+                                        />
+
+                                        <div className="space-y-2">
+                                            <div className="flex items-center justify-between">
+                                                <label className="text-sm font-semibold text-gray-700">Event Images</label>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleAddEventImage(index)}
+                                                    className="flex items-center gap-2 px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
+                                                >
+                                                    <Plus size={16} />
+                                                    Add Image
+                                                </button>
+                                            </div>
+
+                                            {(event.images && event.images.length ? event.images : ['']).map((image, imageIndex) => (
+                                                <div key={imageIndex} className="space-y-2">
+                                                    <div className="flex items-center gap-2">
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={async (e) => {
+                                                                const file = e.target.files?.[0];
+                                                                if (!file) return;
+                                                                try {
+                                                                    const url = await uploadImageToImageKit(file, `/clubs/${clubId}/events`);
+                                                                    handleEventImageChange(index, imageIndex, url);
+                                                                } catch (err) {
+                                                                    setError(err.message || 'Image upload failed');
+                                                                }
+                                                            }}
+                                                            className="flex-1 px-3 py-2 border-2 border-gray-300 rounded-lg bg-white hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-50 file:text-purple-700 file:font-semibold hover:file:bg-purple-100 file:cursor-pointer"
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleRemoveEventImage(index, imageIndex)}
+                                                            className="p-2 text-red-500 hover:text-red-700"
+                                                            aria-label="Remove image"
+                                                        >
+                                                            <Trash2 size={18} />
+                                                        </button>
+                                                    </div>
+                                                    {image && (
+                                                        <div className="flex items-center gap-3">
+                                                            <img src={image} alt={`Event ${index + 1} image ${imageIndex + 1}`} className="w-24 h-24 object-cover rounded-lg border" />
+                                                            <span className="text-xs text-gray-500 break-all">{image}</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+
+                            {formData.events.length === 0 && (
+                                <p className="text-center text-gray-500 py-4">No events added yet</p>
+                            )}
+                        </div>
+                    </div>
+
                     {/* President Info */}
                     <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6">
                         <h2 className="text-2xl font-bold text-gray-800 mb-6">President Information</h2>
@@ -405,199 +627,7 @@ const ClubEditForm = () => {
                         </div>
                     </div>
 
-                    {/* Events Section */}
-                    <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6">
-                        <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-2xl font-bold text-gray-800">Events</h2>
-                            <button
-                                type="button"
-                                onClick={handleAddEvent}
-                                className="flex items-center gap-2 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors"
-                            >
-                                <Plus size={20} />
-                                Add Event
-                            </button>
-                        </div>
 
-                        <div className="space-y-4">
-                            {formData.events.map((event, index) => (
-                                <div key={index} className="p-4 border-2 border-gray-200 rounded-xl">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <span className="font-semibold text-gray-700">Event {index + 1}</span>
-                                        <button
-                                            type="button"
-                                            onClick={() => handleRemoveEvent(index)}
-                                            className="text-red-500 hover:text-red-700"
-                                        >
-                                            <Trash2 size={20} />
-                                        </button>
-                                    </div>
-
-                                    <div className="space-y-3">
-                                        {/* Event Cover Image */}
-                                        <div>
-                                            <label className="text-sm font-semibold text-gray-700 mb-2 block">Event Cover Image</label>
-                                            <div className="flex items-center gap-2">
-                                                <input
-                                                    type="file"
-                                                    accept="image/*"
-                                                    onChange={async (e) => {
-                                                        const file = e.target.files?.[0];
-                                                        if (!file) return;
-                                                        try {
-                                                            const url = await uploadImageToImageKit(file, `/clubs/${clubId}/events`);
-                                                            handleEventChange(index, 'coverImage', url);
-                                                        } catch (err) {
-                                                            setError(err.message || 'Cover upload failed');
-                                                        }
-                                                    }}
-                                                    className="flex-1 px-3 py-2 border-2 border-gray-300 rounded-lg bg-white hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-50 file:text-purple-700 file:font-semibold hover:file:bg-purple-100 file:cursor-pointer"
-                                                />
-                                                {event.coverImage && (
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => handleEventChange(index, 'coverImage', '')}
-                                                        className="p-2 text-red-500 hover:text-red-700"
-                                                    >
-                                                        <Trash2 size={18} />
-                                                    </button>
-                                                )}
-                                            </div>
-                                            {event.coverImage && (
-                                                <div className="mt-2">
-                                                    <img 
-                                                        src={event.coverImage} 
-                                                        alt="Cover" 
-                                                        className="w-32 h-20 object-cover rounded-lg border"
-                                                        onError={(e) => {
-                                                            console.error('Failed to load cover image:', event.coverImage);
-                                                            e.target.style.display = 'none';
-                                                        }}
-                                                        onLoad={() => console.log('Cover image loaded successfully:', event.coverImage)}
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <input
-                                            type="text"
-                                            placeholder="Event Title"
-                                            value={event.title}
-                                            onChange={(e) => handleEventChange(index, 'title', e.target.value)}
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
-                                        />
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                            <input
-                                                type="date"
-                                                value={event.date ? event.date.split('T')[0] : ''}
-                                                onChange={(e) => handleEventChange(index, 'date', e.target.value)}
-                                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
-                                            />
-                                            <input
-                                                type="text"
-                                                placeholder="Location"
-                                                value={event.location}
-                                                onChange={(e) => handleEventChange(index, 'location', e.target.value)}
-                                                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
-                                            />
-                                        </div>
-                                        <textarea
-                                            placeholder="Description"
-                                            value={event.description}
-                                            onChange={(e) => handleEventChange(index, 'description', e.target.value)}
-                                            rows="2"
-                                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
-                                        />
-
-                                        <div className="space-y-2">
-                                            <div className="flex items-center justify-between">
-                                                <label className="text-sm font-semibold text-gray-700">Event Images</label>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => handleAddEventImage(index)}
-                                                    className="flex items-center gap-2 px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
-                                                >
-                                                    <Plus size={16} />
-                                                    Add Image
-                                                </button>
-                                            </div>
-
-                                            {(event.images && event.images.length ? event.images : ['']).map((image, imageIndex) => (
-                                                <div key={imageIndex} className="space-y-2">
-                                                    <div className="flex items-center gap-2">
-                                                        <input
-                                                            type="file"
-                                                            accept="image/*"
-                                                            onChange={async (e) => {
-                                                                const file = e.target.files?.[0];
-                                                                if (!file) return;
-                                                                try {
-                                                                    const url = await uploadImageToImageKit(file, `/clubs/${clubId}/events`);
-                                                                    handleEventImageChange(index, imageIndex, url);
-                                                                } catch (err) {
-                                                                    setError(err.message || 'Image upload failed');
-                                                                }
-                                                            }}
-                                                            className="flex-1 px-3 py-2 border-2 border-gray-300 rounded-lg bg-white hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-50 file:text-purple-700 file:font-semibold hover:file:bg-purple-100 file:cursor-pointer"
-                                                        />
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => handleRemoveEventImage(index, imageIndex)}
-                                                            className="p-2 text-red-500 hover:text-red-700"
-                                                            aria-label="Remove image"
-                                                        >
-                                                            <Trash2 size={18} />
-                                                        </button>
-                                                    </div>
-                                                    {image && (
-                                                        <div className="flex items-center gap-3">
-                                                            <img src={image} alt={`Event ${index + 1} image ${imageIndex + 1}`} className="w-24 h-24 object-cover rounded-lg border" />
-                                                            <span className="text-xs text-gray-500 break-all">{image}</span>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-
-                            {formData.events.length === 0 && (
-                                <p className="text-center text-gray-500 py-4">No events added yet</p>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6">
-                        <div className="flex gap-4">
-                            <button
-                                type="button"
-                                onClick={() => navigate(-1)}
-                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-colors"
-                            >
-                                <X size={20} />
-                                Cancel
-                            </button>
-                            <button
-                                type="submit"
-                                disabled={saving}
-                                className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                {saving ? (
-                                    <>
-                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                        Saving...
-                                    </>
-                                ) : (
-                                    <>
-                                        <Save size={20} />
-                                        Save Changes
-                                    </>
-                                )}
-                            </button>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>

@@ -36,6 +36,13 @@ const eventSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    category: {
+        type: String,
+        default: '',
+        enum: ['', 'anaajdaan', 'senior-citizen', 'health', 'education', 'permanent-projects',
+            'rural-development', 'animal-welfare', 'specially-abled', 'needy',
+            'child-welfare', 'women-welfare', 'image-building']
+    },
     coverImage: {
         type: String,
         default: ''

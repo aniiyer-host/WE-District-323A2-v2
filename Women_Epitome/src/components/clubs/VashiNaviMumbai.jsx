@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Sparkles, MapPin, Calendar, Star } from 'lucide-react';
 import api from '../../utils/api';
+import Footer from '../Footer';
 
 const VashiNaviMumbai = () => {
     const navigate = useNavigate();
@@ -296,10 +297,9 @@ const VashiNaviMumbai = () => {
                 </div>
             )}
 
-            {/* Footer */}
-            <footer className="relative z-10 mt-20 bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 text-white text-center py-8">
-                <p className="text-sm font-medium">© 2025 WE Club | All rights reserved.</p>
-            </footer>
+
+
+            <Footer />
 
             <style jsx>{`
                 @keyframes linear {

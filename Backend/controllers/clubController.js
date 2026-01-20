@@ -205,3 +205,46 @@ export const permanentDeleteClub = async (req, res) => {
         });
     }
 };
+
+// @desc    Get events by category
+// @route   GET /api/clubs/events/:category
+// @access  Public
+export const getEventsByCategory = async (req, res) => {
+    try {
+        const { category } = req.params;
+
+        // Find all clubs and extract events matching the category
+        const clubs = await Club.find({ isActive: true });
+
+        const events = [];
+        clubs.forEach(club => {
+            if (club.events && club.events.length > 0) {
+                club.events.forEach(event => {
+                    if (event.category === category) {
+                        events.push({
+                            ...event.toObject(),
+                            clubId: club.clubId,
+                            clubName: club.name,
+                            clubLink: `/clubs/${club.clubId}`
+                        });
+                    }
+                });
+            }
+        });
+
+        res.status(200).json({
+            success: true,
+            count: events.length,
+            data: {
+                events
+            }
+        });
+    } catch (error) {
+        console.error('Get events by category error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error while fetching events',
+            error: error.message
+        });
+    }
+};
