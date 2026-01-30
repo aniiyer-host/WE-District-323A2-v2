@@ -14,6 +14,7 @@ import ClubDashboard from './components/ClubDashboard.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import ClubEditForm from './components/ClubEditForm.jsx'
 import ClubCreateForm from './components/ClubCreateForm.jsx'
+import MembershipFormPage from './components/MembershipFormPage.jsx'
 
 // Import all club pages
 import AnushaktiRoyals from './components/clubs/AnushaktiRoyals.jsx'
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/projects/:projectId" element={<ProjectDetail />} />
             <Route path="/clubs" element={<ClubsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/membership" element={<MembershipFormPage />} />
             <Route path="/login" element={<LoginPage />} />
 
             {/* Protected Dashboard Routes */}

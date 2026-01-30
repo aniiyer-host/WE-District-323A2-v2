@@ -113,7 +113,7 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* Contact Form & Map Section */}
+      {/* Contact Form*/}
       <section className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
@@ -287,7 +287,7 @@ const ContactPage = () => {
                   </a>
                   <a href="mailto:info@weclubsindia.org" className="flex items-center gap-3 bg-white/20 backdrop-blur-sm p-4 rounded-xl hover:bg-white/30 transition-colors">
                     <Mail className="w-5 h-5" />
-                    <span className="font-semibold">info@weclubsindia.org</span>
+                    <span className="font-semibold">wedistrictclubsa21725@gmail.com</span>
                   </a>
                 </div>
               </div>
@@ -332,27 +332,6 @@ const ContactPage = () => {
                 <p className="text-gray-600">{faq.answer}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 rounded-3xl p-12 md:p-16 text-center overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 bg-black/10"></div>
-            <div className="relative z-10">
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-6 playfair">
-                Ready to Make a Difference?
-              </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Join us in our mission to empower women and transform communities. We're always looking for passionate individuals to join our movement.
-              </p>
-              <button className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2 mx-auto">
-                Join Our Movement
-                <ArrowRight size={20} />
-              </button>
-            </div>
           </div>
         </div>
       </section>

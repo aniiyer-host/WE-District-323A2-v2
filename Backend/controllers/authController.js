@@ -110,6 +110,19 @@ export const login = async (req, res) => {
         // Remove password from response
         const userResponse = user.toJSON();
 
+        // If user is a club, fetch club details
+        if (user.role === 'club' && user.clubId) {
+            try {
+                const Club = (await import('../models/Club.js')).default;
+                const club = await Club.findOne({ clubId: user.clubId });
+                if (club) {
+                    userResponse.club_name = club.name;
+                }
+            } catch (error) {
+                console.error('Error fetching club details:', error);
+            }
+        }
+
         res.status(200).json({
             success: true,
             message: 'Login successful',
@@ -143,10 +156,25 @@ export const getCurrentUser = async (req, res) => {
             });
         }
 
+        const userResponse = user.toJSON();
+
+        // If user is a club, fetch club details
+        if (user.role === 'club' && user.clubId) {
+            try {
+                const Club = (await import('../models/Club.js')).default;
+                const club = await Club.findOne({ clubId: user.clubId });
+                if (club) {
+                    userResponse.club_name = club.name;
+                }
+            } catch (error) {
+                console.error('Error fetching club details:', error);
+            }
+        }
+
         res.status(200).json({
             success: true,
             data: {
-                user
+                user: userResponse
             }
         });
     } catch (error) {
