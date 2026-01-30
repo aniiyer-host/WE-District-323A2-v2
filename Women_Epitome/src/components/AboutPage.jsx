@@ -53,7 +53,7 @@ const AboutPage = () => {
     {
       name: "WE Varsha Vora",
       role: "District President",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80"
+      image: "../images/index-page-imgs/pfp.jpg"
     },
     {
       name: "Leadership Team",
@@ -238,27 +238,6 @@ const AboutPage = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-3xl p-12 md:p-16 text-center overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 bg-black/10"></div>
-            <div className="relative z-10">
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-6 playfair">
-                Join Our Mission
-              </h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Be part of a movement that's transforming lives and empowering communities
-              </p>
-              <button className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 flex items-center gap-2 mx-auto">
-                Become a Member
-                <ArrowRight size={20} />
-              </button>
-            </div>
           </div>
         </div>
       </section>

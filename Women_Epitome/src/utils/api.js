@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with base URL
 const api = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: 'https://we-district-323a2-v2.onrender.com/api',
     headers: {
         'Content-Type': 'application/json'
     }
@@ -67,16 +67,16 @@ export async function uploadImageToImageKit(file, folder = '/clubs/events') {
     }
     const json = await resp.json();
     console.log('ImageKit upload response:', json);
-    
+
     // ImageKit returns the URL directly as 'url' property
     if (json.url) {
         return json.url;
     }
-    
+
     // Fallback: construct URL from filePath
     if (json.filePath) {
         return `${urlEndpoint}${json.filePath}`;
     }
-    
+
     throw new Error('No URL returned from ImageKit upload');
 }

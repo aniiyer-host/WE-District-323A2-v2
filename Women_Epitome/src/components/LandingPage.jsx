@@ -381,12 +381,12 @@ const LandingPage = () => {
                 Join thousands of empowered women creating positive change in communities across India
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <button className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <Link to="/membership" className="bg-white text-purple-700 px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
                   Become a Member
-                </button>
-                <button className="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-purple-700 transition-all duration-300">
+                </Link>
+                <Link to="/projects" className="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-purple-700 transition-all duration-300">
                   View All Projects
-                </button>
+                </Link>
               </div>
             </div>
           </div>
