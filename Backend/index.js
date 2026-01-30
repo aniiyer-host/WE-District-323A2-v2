@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.get("/api/health", (req, res) => {
+app.get("/", (req, res) => {
     res.send("API is running....");
 });
 
