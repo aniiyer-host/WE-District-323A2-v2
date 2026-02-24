@@ -4,9 +4,10 @@ import { Heart, BookOpen, Stethoscope, GraduationCap, Home, Users, ArrowRight, C
 import api from '../utils/api';
 
 const ProjectsPage = () => {
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  // Start with all categories showing 'loading' individually
   const [eventsByCategory, setEventsByCategory] = useState({});
+  const [loadingCategories, setLoadingCategories] = useState(new Set());
 
   // Project category definitions with metadata
   const projectCategories = [
@@ -132,43 +133,33 @@ const ProjectsPage = () => {
     }
   ];
 
-  // Fetch events for all categories
+  // Fetch events per-category independently so the page renders immediately
   useEffect(() => {
-    const fetchAllEvents = async () => {
+    // Mark all categories as loading
+    setLoadingCategories(new Set(projectCategories.map(p => p.categoryKey)));
+
+    projectCategories.forEach(async (project) => {
       try {
-        setLoading(true);
-        setError('');
-
-        // Fetch events for each category
-        const eventsData = {};
-        await Promise.all(
-          projectCategories.map(async (project) => {
-            try {
-              const response = await api.get(`/clubs/events/${project.categoryKey}`);
-              eventsData[project.categoryKey] = response.data.data.events || [];
-            } catch (err) {
-              console.error(`Error fetching events for ${project.categoryKey}:`, err);
-              eventsData[project.categoryKey] = [];
-            }
-          })
-        );
-
-        setEventsByCategory(eventsData);
+        const response = await api.get(`/clubs/events/${project.categoryKey}`);
+        const events = response.data.data.events || [];
+        setEventsByCategory(prev => ({ ...prev, [project.categoryKey]: events }));
       } catch (err) {
-        console.error('Error fetching events:', err);
-        setError('Failed to load events. Please try again later.');
+        setEventsByCategory(prev => ({ ...prev, [project.categoryKey]: [] }));
       } finally {
-        setLoading(false);
+        setLoadingCategories(prev => {
+          const next = new Set(prev);
+          next.delete(project.categoryKey);
+          return next;
+        });
       }
-    };
-
-    fetchAllEvents();
-  }, []);
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Create projects array with event counts and actual data
   const projects = projectCategories.map(project => {
     const events = eventsByCategory[project.categoryKey] || [];
     const eventCount = events.length;
+    const isCatLoading = loadingCategories.has(project.categoryKey);
 
     // Get the first event's image or use default
     const image = events.length > 0 && events[0].coverImage
@@ -179,10 +170,11 @@ const ProjectsPage = () => {
       ...project,
       image,
       events,
+      isCatLoading,
       stats: {
-        beneficiaries: eventCount > 0 ? `${eventCount} Event${eventCount !== 1 ? 's' : ''}` : 'No Events',
+        beneficiaries: isCatLoading ? '…' : eventCount > 0 ? `${eventCount} Event${eventCount !== 1 ? 's' : ''}` : 'No Events',
         duration: "Ongoing",
-        locations: events.length > 0 ? `${events.length} Club${events.length !== 1 ? 's' : ''}` : 'N/A'
+        locations: isCatLoading ? '…' : events.length > 0 ? `${events.length} Club${events.length !== 1 ? 's' : ''}` : 'N/A'
       }
     };
   });
@@ -197,17 +189,23 @@ const ProjectsPage = () => {
     { name: "Animal Care", count: 1, color: "green" }
   ];
 
-  // Loading state
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-xl text-gray-700 font-semibold">Loading events...</p>
+  // Skeleton card for a category still loading
+  const SkeletonCard = () => (
+    <div className="bg-white rounded-2xl shadow-xl overflow-hidden animate-pulse">
+      <div className="h-56 bg-purple-100" />
+      <div className="p-6 space-y-3">
+        <div className="h-5 bg-purple-100 rounded w-3/4" />
+        <div className="h-4 bg-gray-100 rounded w-full" />
+        <div className="h-4 bg-gray-100 rounded w-5/6" />
+        <div className="grid grid-cols-3 gap-2 pt-2">
+          <div className="h-10 bg-purple-50 rounded-lg" />
+          <div className="h-10 bg-pink-50 rounded-lg" />
+          <div className="h-10 bg-purple-50 rounded-lg" />
         </div>
+        <div className="h-10 bg-purple-100 rounded-xl" />
       </div>
-    );
-  }
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100">
@@ -315,53 +313,58 @@ const ProjectsPage = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <div key={project.id} className="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <span className="text-purple-700 font-bold text-xs">{project.category}</span>
+            {projects.map((project) =>
+              project.isCatLoading ? (
+                <SkeletonCard key={project.id} />
+              ) : (
+                <div key={project.id} className="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full">
+                      <span className="text-purple-700 font-bold text-xs">{project.category}</span>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-600/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <project.icon className="w-12 h-12 text-white" />
+                    </div>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-600/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <project.icon className="w-12 h-12 text-white" />
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <project.icon className="w-6 h-6 text-purple-600" />
+                      <h3 className="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors playfair">
+                        {project.title}
+                      </h3>
+                    </div>
+                    <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+
+                    <div className="grid grid-cols-3 gap-2 mb-4 text-xs">
+                      <div className="bg-purple-50 p-2 rounded-lg text-center">
+                        <p className="font-bold text-purple-700">{project.stats.beneficiaries}</p>
+                        <p className="text-gray-600">Beneficiaries</p>
+                      </div>
+                      <div className="bg-pink-50 p-2 rounded-lg text-center">
+                        <p className="font-bold text-pink-700">{project.stats.duration}</p>
+                        <p className="text-gray-600">Duration</p>
+                      </div>
+                      <div className="bg-purple-50 p-2 rounded-lg text-center">
+                        <p className="font-bold text-purple-700">{project.stats.locations}</p>
+                        <p className="text-gray-600">Locations</p>
+                      </div>
+                    </div>
+
+                    <a href={project.link} className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                      Learn More
+                      <ArrowRight size={16} />
+                    </a>
                   </div>
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <project.icon className="w-6 h-6 text-purple-600" />
-                    <h3 className="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors playfair">
-                      {project.title}
-                    </h3>
-                  </div>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-
-                  <div className="grid grid-cols-3 gap-2 mb-4 text-xs">
-                    <div className="bg-purple-50 p-2 rounded-lg text-center">
-                      <p className="font-bold text-purple-700">{project.stats.beneficiaries}</p>
-                      <p className="text-gray-600">Beneficiaries</p>
-                    </div>
-                    <div className="bg-pink-50 p-2 rounded-lg text-center">
-                      <p className="font-bold text-pink-700">{project.stats.duration}</p>
-                      <p className="text-gray-600">Duration</p>
-                    </div>
-                    <div className="bg-purple-50 p-2 rounded-lg text-center">
-                      <p className="font-bold text-purple-700">{project.stats.locations}</p>
-                      <p className="text-gray-600">Locations</p>
-                    </div>
-                  </div>
-
-                  <a href={project.link} className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
-                    Learn More
-                    <ArrowRight size={16} />
-                  </a>
-                </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
       </section>

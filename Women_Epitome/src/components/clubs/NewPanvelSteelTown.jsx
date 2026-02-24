@@ -230,7 +230,19 @@ const NewPanvelSteelTown = () => {
                     </div>
 
                     {eventsLoading ? (
-                        <div className="text-center text-gray-600">Loading events...</div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {[1,2].map((i) => (
+                                    <div key={i} className="bg-white/90 rounded-2xl shadow-xl overflow-hidden border border-purple-100 animate-pulse">
+                                        <div className="h-56 bg-purple-100" />
+                                        <div className="p-5 space-y-3">
+                                            <div className="h-5 bg-purple-100 rounded w-3/4" />
+                                            <div className="h-4 bg-gray-100 rounded w-1/3" />
+                                            <div className="h-4 bg-gray-100 rounded w-full" />
+                                            <div className="h-4 bg-gray-100 rounded w-5/6" />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                     ) : events.length === 0 ? (
                         <div className="text-center text-gray-500">Events will appear here soon.</div>
                     ) : (
@@ -245,7 +257,7 @@ const NewPanvelSteelTown = () => {
                                             <img
                                                 src={event.coverImage || event.images[0]}
                                                 alt={event.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 onError={(e) => { e.target.style.display = 'none'; }}
                                             />
                                             <div className="absolute inset-0 bg-linear-to-t from-purple-900/40 to-transparent" />
@@ -316,7 +328,7 @@ const NewPanvelSteelTown = () => {
                                 <img
                                     src={img}
                                     alt={`Event ${index + 1}`}
-                                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                                    loading="lazy" className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-linear-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>

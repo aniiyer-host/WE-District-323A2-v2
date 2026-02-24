@@ -273,10 +273,10 @@ const ClubsPage = () => {
           </span>
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
             <span className="bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent playfair">
-              Our Clubs
+              The Clubs
             </span>
             <br />
-            <span className="text-gray-800 playfair">District 323 A2</span>
+            <span className="text-gray-800 playfair">of District 323 A2</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto font-light">
             A network of empowered women making a difference across communities
