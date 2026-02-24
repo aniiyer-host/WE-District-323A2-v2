@@ -75,9 +75,9 @@ const LandingPage = () => {
   };
 
   const stats = [
-    { icon: Users, value: "500+", label: "Active Members" },
-    { icon: Heart, value: "50+", label: "Projects Completed" },
-    { icon: Award, value: "25+", label: "Years of Service" },
+    { icon: Users, value: "400+", label: "Active Members" },
+    { icon: Heart, value: "4000+", label: "Projects Completed" },
+    { icon: Award, value: "8", label: "Years of Service" },
     { icon: Sparkles, value: "100K+", label: "Lives Impacted" }
   ];
 
