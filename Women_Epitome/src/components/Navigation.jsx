@@ -8,8 +8,10 @@ const Navigation = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const desktopDropdownRef = useRef(null);
+  const mobileDropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
 
   const navItems = [
@@ -30,10 +32,17 @@ const Navigation = () => {
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
       }
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
+      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target)) {
+        setIsMobileDropdownOpen(false);
+      }
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target) &&
+        !mobileDropdownRef.current?.contains(event.target)
+      ) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -45,11 +54,13 @@ const Navigation = () => {
   // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsMobileDropdownOpen(false);
   }, [location.pathname]);
 
   const handleLogout = () => {
     logout();
     setIsDropdownOpen(false);
+    setIsMobileDropdownOpen(false);
     setIsMobileMenuOpen(false);
     navigate('/');
   };
@@ -76,8 +87,8 @@ const Navigation = () => {
               <NavLink
                 to={item.path}
                 className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 ${isActive(item.path)
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                    : 'text-gray-700 hover:bg-purple-50'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                  : 'text-gray-700 hover:bg-purple-50'
                   }`}
               >
                 {item.name}
@@ -106,35 +117,37 @@ const Navigation = () => {
           <div className="flex items-center gap-3">
             {/* Profile / Login button (compact) */}
             {isAuthenticated && user?.role === 'club' ? (
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative" ref={mobileDropdownRef}>
                 <button
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                  onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
+                  className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110 active:scale-95"
                   aria-label="Profile Menu"
                 >
                   <span className="text-xs font-bold">{getInitials(user?.club_name)}</span>
                 </button>
 
-                {isDropdownOpen && (
-                  <div className="absolute top-12 right-0 w-56 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-purple-100 overflow-hidden">
-                    <div className="px-5 py-3 bg-gradient-to-r from-purple-600 to-pink-600">
+                {isMobileDropdownOpen && (
+                  <div className="absolute top-12 right-0 w-56 bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-purple-100 overflow-hidden z-[60]">
+                    {/* User info header */}
+                    <div className="px-5 py-4 bg-gradient-to-r from-purple-600 to-pink-600">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center">
+                        <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
                           <User size={18} className="text-white" />
                         </div>
-                        <div>
-                          <p className="text-white font-semibold text-sm">{user?.club_name || 'Club User'}</p>
+                        <div className="min-w-0">
+                          <p className="text-white font-semibold text-sm truncate">{user?.club_name || 'Club User'}</p>
                           <p className="text-white/80 text-xs">Club Account</p>
                         </div>
                       </div>
                     </div>
+                    {/* Logout button */}
                     <div className="p-2">
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-purple-50 transition-all duration-300 group"
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-red-50 active:bg-red-100 transition-all duration-200 group"
                       >
-                        <LogOut size={16} className="text-purple-600 group-hover:scale-110 transition-transform" />
-                        <span className="font-medium text-sm">Logout</span>
+                        <LogOut size={16} className="text-red-500 group-hover:scale-110 transition-transform flex-shrink-0" />
+                        <span className="font-semibold text-sm text-red-600">Logout</span>
                       </button>
                     </div>
                   </div>
@@ -169,20 +182,31 @@ const Navigation = () => {
                 key={item.name}
                 to={item.path}
                 className={`px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${isActive(item.path)
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md'
-                    : 'text-gray-700 hover:bg-purple-50'
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md'
+                  : 'text-gray-700 hover:bg-purple-50'
                   }`}
               >
                 {item.name}
               </NavLink>
             ))}
+
+            {/* Logout shortcut inside hamburger menu when logged in */}
+            {isAuthenticated && user?.role === 'club' && (
+              <button
+                onClick={handleLogout}
+                className="mt-1 flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-red-600 hover:bg-red-50 active:bg-red-100 transition-all duration-200 border-t border-purple-100 pt-3"
+              >
+                <LogOut size={16} className="flex-shrink-0" />
+                Logout
+              </button>
+            )}
           </div>
         )}
       </div>
 
       {/* ── DESKTOP PROFILE BUTTON (only shown in desktop/landscape view) ── */}
       {isAuthenticated && user?.role === 'club' ? (
-        <div className="we-nav-desktop fixed top-4 right-8 z-50" ref={dropdownRef}>
+        <div className="we-nav-desktop fixed top-4 right-8 z-50" ref={desktopDropdownRef}>
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-2xl flex items-center justify-center text-white transition-all duration-300 hover:shadow-xl hover:scale-110"
@@ -207,10 +231,10 @@ const Navigation = () => {
               <div className="p-2">
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-purple-50 transition-all duration-300 group"
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-red-50 transition-all duration-300 group"
                 >
-                  <LogOut size={18} className="text-purple-600 group-hover:scale-110 transition-transform" />
-                  <span className="font-medium text-sm">Logout</span>
+                  <LogOut size={18} className="text-red-500 group-hover:scale-110 transition-transform" />
+                  <span className="font-semibold text-sm text-red-600">Logout</span>
                 </button>
               </div>
             </div>
