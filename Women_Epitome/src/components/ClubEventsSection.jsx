@@ -4,22 +4,32 @@ import { MapPin, Calendar, Star, X, ChevronLeft, ChevronRight, Images } from 'lu
 import api from '../utils/api';
 
 // ── Lightbox ──────────────────────────────────────────────────────────────────
+import { useGallery } from '../context/GalleryContext.jsx';
+
 const Lightbox = ({ images, startIndex, onClose }) => {
     const [idx, setIdx] = useState(startIndex);
+    const { setGalleryOpen } = useGallery();
 
     const prev = useCallback(() => setIdx(i => (i - 1 + images.length) % images.length), [images.length]);
     const next = useCallback(() => setIdx(i => (i + 1) % images.length), [images.length]);
 
-    // Keyboard navigation
+    // Keyboard navigation + body lock
     useEffect(() => {
+        setGalleryOpen(true);
+        document.body.style.overflow = 'hidden';
+
         const handler = (e) => {
             if (e.key === 'ArrowLeft') prev();
             else if (e.key === 'ArrowRight') next();
             else if (e.key === 'Escape') onClose();
         };
         window.addEventListener('keydown', handler);
-        return () => window.removeEventListener('keydown', handler);
-    }, [prev, next, onClose]);
+        return () => {
+            window.removeEventListener('keydown', handler);
+            setGalleryOpen(false);
+            document.body.style.overflow = '';
+        };
+    }, [prev, next, onClose, setGalleryOpen]);
 
     return (
         <div

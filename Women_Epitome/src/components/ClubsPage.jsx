@@ -15,6 +15,21 @@ const ClubsPage = () => {
   // Lightbox
   const [lightbox, setLightbox] = useState(null); // { images, index }
 
+  // Lightbox keyboard navigation (must run on every render before any return)
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+  const lightboxPrev = useCallback(
+    () => setLightbox(l =>
+      l ? { ...l, index: (l.index - 1 + l.images.length) % l.images.length } : null
+    ),
+    []
+  );
+  const lightboxNext = useCallback(
+    () => setLightbox(l =>
+      l ? { ...l, index: (l.index + 1) % l.images.length } : null
+    ),
+    []
+  );
+
   // Fetch clubs from API
   useEffect(() => {
     const fetchClubs = async () => {
@@ -261,11 +276,6 @@ const ClubsPage = () => {
       </div>
     );
   }
-
-  // Lightbox keyboard navigation
-  const closeLightbox = useCallback(() => setLightbox(null), []);
-  const lightboxPrev = useCallback(() => setLightbox(l => l ? { ...l, index: (l.index - 1 + l.images.length) % l.images.length } : null), []);
-  const lightboxNext = useCallback(() => setLightbox(l => l ? { ...l, index: (l.index + 1) % l.images.length } : null), []);
 
   const toggleEvent = (key) => setExpandedEvent(prev => prev === key ? null : key);
 

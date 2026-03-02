@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext.jsx'
+import { GalleryProvider } from './context/GalleryContext.jsx'
 import Navigation from './components/Navigation.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
@@ -51,8 +52,9 @@ const PageLoader = () => (
 const App = () => {
   return (
     <AuthProvider>
-      <Router>
-        <div>
+      <GalleryProvider>
+        <Router>
+          <div>
           <ScrollToTop />
           <Navigation />
           <Suspense fallback={<PageLoader />}>
@@ -105,7 +107,8 @@ const App = () => {
             </Routes>
           </Suspense>
         </div>
-      </Router>
+        </Router>
+      </GalleryProvider>
     </AuthProvider>
   )
 }

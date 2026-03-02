@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { User, LogOut, Menu, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useGallery } from '../context/GalleryContext.jsx';
 
 const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
+  const { isGalleryOpen } = useGallery();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -116,51 +118,53 @@ const Navigation = () => {
 
           <div className="flex items-center gap-3">
             {/* Profile / Login button (compact) */}
-            {isAuthenticated && user?.role === 'club' ? (
-              <div className="relative" ref={mobileDropdownRef}>
-                <button
-                  onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
-                  className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110 active:scale-95"
-                  aria-label="Profile Menu"
-                >
-                  <span className="text-xs font-bold">{getInitials(user?.club_name)}</span>
-                </button>
+            {!isGalleryOpen && (
+              isAuthenticated && user?.role === 'club' ? (
+                <div className="relative" ref={mobileDropdownRef}>
+                  <button
+                    onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
+                    className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110 active:scale-95"
+                    aria-label="Profile Menu"
+                  >
+                    <span className="text-xs font-bold">{getInitials(user?.club_name)}</span>
+                  </button>
 
-                {isMobileDropdownOpen && (
-                  <div className="absolute top-12 right-0 w-56 bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-purple-100 overflow-hidden z-[60]">
-                    {/* User info header */}
-                    <div className="px-5 py-4 bg-gradient-to-r from-purple-600 to-pink-600">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                          <User size={18} className="text-white" />
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-white font-semibold text-sm truncate">{user?.club_name || 'Club User'}</p>
-                          <p className="text-white/80 text-xs">Club Account</p>
+                  {isMobileDropdownOpen && (
+                    <div className="absolute top-12 right-0 w-56 bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-purple-100 overflow-hidden z-[60]">
+                      {/* User info header */}
+                      <div className="px-5 py-4 bg-gradient-to-r from-purple-600 to-pink-600">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <User size={18} className="text-white" />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-white font-semibold text-sm truncate">{user?.club_name || 'Club User'}</p>
+                            <p className="text-white/80 text-xs">Club Account</p>
+                          </div>
                         </div>
                       </div>
+                      {/* Logout button */}
+                      <div className="p-2">
+                        <button
+                          onClick={handleLogout}
+                          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-red-50 active:bg-red-100 transition-all duration-200 group"
+                        >
+                          <LogOut size={16} className="text-red-500 group-hover:scale-110 transition-transform flex-shrink-0" />
+                          <span className="font-semibold text-sm text-red-600">Logout</span>
+                        </button>
+                      </div>
                     </div>
-                    {/* Logout button */}
-                    <div className="p-2">
-                      <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-red-50 active:bg-red-100 transition-all duration-200 group"
-                      >
-                        <LogOut size={16} className="text-red-500 group-hover:scale-110 transition-transform flex-shrink-0" />
-                        <span className="font-semibold text-sm text-red-600">Logout</span>
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <button
-                onClick={() => navigate('/login')}
-                className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
-                aria-label="Login"
-              >
-                <User size={18} />
-              </button>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => navigate('/login')}
+                  className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                  aria-label="Login"
+                >
+                  <User size={18} />
+                </button>
+              )
             )}
 
             {/* Hamburger toggle */}
@@ -205,7 +209,7 @@ const Navigation = () => {
       </div>
 
       {/* ── DESKTOP PROFILE BUTTON (only shown in desktop/landscape view) ── */}
-      {isAuthenticated && user?.role === 'club' ? (
+      {!isGalleryOpen && isAuthenticated && user?.role === 'club' ? (
         <div className="we-nav-desktop fixed top-4 right-8 z-50" ref={desktopDropdownRef}>
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -240,7 +244,7 @@ const Navigation = () => {
             </div>
           )}
         </div>
-      ) : (
+      ) : !isGalleryOpen ? (
         <button
           onClick={() => navigate('/login')}
           className="we-nav-desktop fixed top-4 right-8 z-50 w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-2xl flex items-center justify-center text-white transition-all duration-300 hover:shadow-xl hover:scale-110"
@@ -248,7 +252,7 @@ const Navigation = () => {
         >
           <User size={24} />
         </button>
-      )}
+      ) : null}
 
       <style>{`
         /* Show pill nav on desktop / landscape; hide mobile bar */
