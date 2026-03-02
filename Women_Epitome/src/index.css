@@ -15,4 +15,7 @@
   .animate-fadeIn {
     animation: fadeIn 0.2s ease-out;
   }
+
+  /* When the gallery lightbox is open, hide club page gallery sections */
+  body.gallery-open .club-gallery { display: none !important; }
 }

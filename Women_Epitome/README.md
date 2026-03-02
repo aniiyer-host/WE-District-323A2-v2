@@ -11,6 +11,35 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Development setup
+
+This repo contains a React frontend (this folder) and a simple Express/Mongo backend under `../Backend`.
+
+1. **Backend configuration**
+   - Copy `Backend/.env.example` to `Backend/.env` and fill in `MONGO_URI`, `JWT_SECRET`, and `CLIENT_URL` (usually `http://localhost:5173`).
+   - Start the backend from workspace root:
+     ```bash
+     cd Backend
+     npm install
+     npm start
+     ```
+   - Ensure the server logs `Server is running on port 5000` and `API is running...` when you hit `http://localhost:5000`.
+
+2. **Frontend configuration**
+   - The API base URL is controlled by `VITE_API_URL`. Create a `.env` file in the `Women_Epitome` folder if you want to override the default (`http://localhost:5000/api`).
+     Example `.env`:
+     ```env
+     VITE_API_URL=http://localhost:5000/api
+     ```
+   - Install deps and start dev server:
+     ```bash
+     cd Women_Epitome
+     npm install
+     npm run dev
+     ```
+
+With both servers running you should be able to log in locally and add events; the app will talk to your local backend instead of the deployed render.com URL.
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

@@ -17,6 +17,7 @@ const Lightbox = ({ images, startIndex, onClose }) => {
     useEffect(() => {
         setGalleryOpen(true);
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('gallery-open');
 
         const handler = (e) => {
             if (e.key === 'ArrowLeft') prev();
@@ -28,6 +29,7 @@ const Lightbox = ({ images, startIndex, onClose }) => {
             window.removeEventListener('keydown', handler);
             setGalleryOpen(false);
             document.body.style.overflow = '';
+            document.body.classList.remove('gallery-open');
         };
     }, [prev, next, onClose, setGalleryOpen]);
 
@@ -246,8 +248,8 @@ const ClubEventsSection = ({ clubId, clubLabel, fallbackEvents = [] }) => {
                     description: ev.description || 'Details coming soon.',
                     date: ev.date || '',
                     location: ev.location || 'Location TBA',
-                    coverImage: ev.coverImage || '',
-                    images: ev.images && ev.images.length ? ev.images.filter(Boolean) : [],
+                    coverImage: typeof ev.coverImage === 'string' ? ev.coverImage : (ev.coverImage && ev.coverImage.url) || '',
+                    images: ev.images && ev.images.length ? ev.images.map(img => typeof img === 'string' ? img : (img && img.url)).filter(Boolean) : [],
                     isFeatured: Boolean(ev.isFeatured)
                 }));
                 setEvents(normalized.length ? normalized : fallbackEvents);

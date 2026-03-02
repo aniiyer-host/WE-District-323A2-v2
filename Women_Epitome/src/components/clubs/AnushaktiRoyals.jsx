@@ -161,7 +161,7 @@ const AnushaktiRoyals = () => {
             />
 
             {/* Gallery Section */}
-            <section className="py-12 px-4 relative z-10">
+            <section className="py-12 px-4 relative z-10 club-gallery">
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
