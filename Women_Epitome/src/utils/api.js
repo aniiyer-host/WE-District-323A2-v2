@@ -1,10 +1,12 @@
 import axios from 'axios';
 
-// Production URL is baked into the env by default but during local development
-// we want to talk to the locally‑running backend. Vite exposes import.meta.env
-// prefixed variables at build time. You can set VITE_API_URL in a .env file
-// or your shell (e.g. VITE_API_URL="http://localhost:5000/api").
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Determine API base URL based on environment.  
+// - During development the backend usually runs locally.  
+// - In production we default to the deployed URL unless VITE_API_URL is set (e.g. to override).  
+// By reading import.meta.env.PROD we can choose an appropriate default.
+const DEFAULT_PROD_URL = 'https://we-district-323a2-v2.onrender.com/api';
+const BASE_URL = import.meta.env.VITE_API_URL
+  || (import.meta.env.PROD ? DEFAULT_PROD_URL : 'http://localhost:5000/api');
 
 // Create axios instance with base URL
 const api = axios.create({

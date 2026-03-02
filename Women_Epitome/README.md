@@ -38,7 +38,9 @@ This repo contains a React frontend (this folder) and a simple Express/Mongo bac
      npm run dev
      ```
 
-With both servers running you should be able to log in locally and add events; the app will talk to your local backend instead of the deployed render.com URL.
+With both servers running you should be able to log in locally and add events; the app will talk to your local backend instead of the deployed render.com URL.  
+
+> **Deployment note:** the production build now defaults to `https://we-district-323a2-v2.onrender.com/api` when no `VITE_API_URL` is supplied. If you deploy somewhere else or need to override, set `VITE_API_URL` in your deployment environment so the frontend uses the correct API endpoint.  
 
 ## Expanding the ESLint configuration
 
