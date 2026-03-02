@@ -1,15 +1,13 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+﻿/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Sparkles, MapPin, Calendar, Star } from 'lucide-react';
-import api from '../../utils/api';
+import { ArrowLeft, Sparkles } from 'lucide-react';
 import Footer from '../Footer';
+import ClubEventsSection from '../ClubEventsSection';
 
 const ChemburGalaxy = () => {
     const navigate = useNavigate();
     const [enlargedImage, setEnlargedImage] = useState(null);
-    const [events, setEvents] = useState([]);
-    const [eventsLoading, setEventsLoading] = useState(true);
 
     const galleryImages = [
         '/images/club-pages-imgs/ChemburGalaxy/1.jpg',
@@ -37,30 +35,6 @@ const ChemburGalaxy = () => {
         return dt.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
     };
 
-    useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const res = await api.get('/clubs/chembur-galaxy');
-                const club = res?.data?.data?.club;
-                const normalized = (club?.events || []).map((event) => ({
-                    title: event.title || 'Untitled Event',
-                    description: event.description || 'Details coming soon.',
-                    date: event.date || '',
-                    location: event.location || 'Location TBA',
-                    coverImage: event.coverImage || '',
-                    images: event.images && event.images.length ? event.images : [],
-                    isFeatured: Boolean(event.isFeatured)
-                }));
-                setEvents(normalized);
-            } catch (err) {
-                setEvents(fallbackEvents);
-            } finally {
-                setEventsLoading(false);
-            }
-        };
-
-        fetchEvents();
-    }, []);
 
     return (
         <div className="min-h-screen bg-linear-to-br from-pink-50 via-purple-50 to-pink-100 relative overflow-hidden">
@@ -169,95 +143,11 @@ const ChemburGalaxy = () => {
                 </div>
             </section>
 
-            {/* Events Section */}
-            <section className="py-12 px-4 relative z-10">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
-                            Events & Highlights
-                        </h2>
-                        <p className="text-purple-600">Latest initiatives from Chembur Galaxy</p>
-                    </div>
-
-                    {eventsLoading ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {[1,2].map((i) => (
-                                    <div key={i} className="bg-white/90 rounded-2xl shadow-xl overflow-hidden border border-purple-100 animate-pulse">
-                                        <div className="h-56 bg-purple-100" />
-                                        <div className="p-5 space-y-3">
-                                            <div className="h-5 bg-purple-100 rounded w-3/4" />
-                                            <div className="h-4 bg-gray-100 rounded w-1/3" />
-                                            <div className="h-4 bg-gray-100 rounded w-full" />
-                                            <div className="h-4 bg-gray-100 rounded w-5/6" />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                    ) : events.length === 0 ? (
-                        <div className="text-center text-gray-500">Events will appear here soon.</div>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {events.map((event, idx) => (
-                                <div
-                                    key={`${event.title}-${idx}`}
-                                    className="group bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-purple-100 hover:shadow-2xl transition-all duration-300"
-                                >
-                                    {event.coverImage || (event.images && event.images[0]) ? (
-                                        <div className="relative h-56 overflow-hidden">
-                                            <img
-                                                src={event.coverImage || event.images[0]}
-                                                alt={event.title}
-                                                loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                                onError={(e) => { e.target.style.display = 'none'; }}
-                                            />
-                                            <div className="absolute inset-0 bg-linear-to-t from-purple-900/40 to-transparent" />
-                                            {event.isFeatured && (
-                                                <span className="absolute top-4 left-4 inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full shadow">
-                                                    <Star size={14} /> Featured
-                                                </span>
-                                            )}
-                                        </div>
-                                    ) : null}
-
-                                    <div className="p-5 space-y-3">
-                                        <div className="flex items-center justify-between gap-3">
-                                            <h3 className="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors">
-                                                {event.title}
-                                            </h3>
-                                            <span className="flex items-center gap-1 text-sm text-gray-600">
-                                                <Calendar size={16} className="text-purple-600" />
-                                                {formatDate(event.date)}
-                                            </span>
-                                        </div>
-
-                                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <MapPin size={16} className="text-pink-600" />
-                                            <span>{event.location}</span>
-                                        </div>
-
-                                        <p className="text-gray-700 text-sm leading-relaxed">
-                                            {event.description}
-                                        </p>
-
-                                        {event.images && event.images.length > 1 && (
-                                            <div className="flex gap-2 pt-2 overflow-x-auto">
-                                                {event.images.slice(1).map((img, imgIdx) => (
-                                                    <img
-                                                        key={imgIdx}
-                                                        src={img}
-                                                        alt={`${event.title} ${imgIdx + 2}`}
-                                                        className="w-20 h-20 object-cover rounded-lg border border-purple-100"
-                                                    />
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </section>
+            <ClubEventsSection
+                clubId="chembur-galaxy"
+                clubLabel="Chembur Galaxy"
+                fallbackEvents={fallbackEvents}
+            />
 
             {/* Gallery Section */}
             <section className="py-12 px-4 relative z-10">

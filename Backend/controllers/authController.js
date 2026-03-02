@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
-import Club from '../models/Club.js';  // pre-import — avoids per-request dynamic import cost
 
 // Generate JWT token
 const generateToken = (userId) => {
@@ -111,10 +110,11 @@ export const login = async (req, res) => {
         // Remove password from response
         const userResponse = user.toJSON();
 
-        // If user is a club, fetch club name (lean = plain object, faster)
+        // If user is a club, fetch club details
         if (user.role === 'club' && user.clubId) {
             try {
-                const club = await Club.findOne({ clubId: user.clubId }, { name: 1 }).lean();
+                const Club = (await import('../models/Club.js')).default;
+                const club = await Club.findOne({ clubId: user.clubId });
                 if (club) {
                     userResponse.club_name = club.name;
                 }
@@ -147,8 +147,7 @@ export const login = async (req, res) => {
 export const getCurrentUser = async (req, res) => {
     try {
         // req.user is set by authenticate middleware
-        // lean() + field projection = plain objects, much faster than full hydration
-        const user = await User.findById(req.user.id).select('-password').lean();
+        const user = await User.findById(req.user.id);
 
         if (!user) {
             return res.status(404).json({
@@ -157,12 +156,13 @@ export const getCurrentUser = async (req, res) => {
             });
         }
 
-        const userResponse = { ...user };
+        const userResponse = user.toJSON();
 
-        // If user is a club, fetch club name
+        // If user is a club, fetch club details
         if (user.role === 'club' && user.clubId) {
             try {
-                const club = await Club.findOne({ clubId: user.clubId }, { name: 1 }).lean();
+                const Club = (await import('../models/Club.js')).default;
+                const club = await Club.findOne({ clubId: user.clubId });
                 if (club) {
                     userResponse.club_name = club.name;
                 }

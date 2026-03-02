@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const BASE_URL = 'https://we-district-323a2-v2.onrender.com/api';
+
 // Create axios instance with base URL
 const api = axios.create({
-    baseURL: 'https://we-district-323a2-v2.onrender.com/api',
+    baseURL: BASE_URL,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -36,47 +38,62 @@ api.interceptors.response.use(
     }
 );
 
-export default api;
+// ── ImageKit helpers ─────────────────────────────────────────────────────────
 
-// ImageKit upload helper: obtains auth and uploads a file, returns URL
-export async function uploadImageToImageKit(file, folder = '/clubs/events') {
-    if (!file) throw new Error('No file provided');
-    // 1) Get auth from backend
-    const authRes = await api.get('/uploads/imagekit/auth');
-    const { signature, token, expire, publicKey, urlEndpoint } = authRes.data.data;
+/**
+ * Upload a File object to ImageKit via server-authenticated direct upload.
+ * Returns an object: { url, fileId }
+ *
+ * @param {File}   file        - The file to upload
+ * @param {string} folder      - ImageKit destination folder, e.g. '/clubs/abc/events'
+ * @returns {Promise<{ url: string, fileId: string }>}
+ */
+export const uploadImageToImageKit = async (file, folder = '/uploads') => {
+    const token = localStorage.getItem('token');
 
-    // 2) Build form data for ImageKit
-    const form = new FormData();
-    form.append('file', file);
-    form.append('fileName', file.name || `upload_${Date.now()}`);
-    form.append('folder', folder);
-    form.append('publicKey', publicKey);
-    form.append('signature', signature);
-    form.append('token', token);
-    form.append('expire', String(expire));
-
-    const uploadEndpoint = 'https://upload.imagekit.io/api/v1/files/upload';
-    const resp = await fetch(uploadEndpoint, {
-        method: 'POST',
-        body: form,
+    // 1. Get auth credentials from our backend
+    const authRes = await axios.get(`${BASE_URL}/uploads/imagekit/auth`, {
+        headers: { Authorization: `Bearer ${token}` }
     });
+    const { signature, token: ikToken, expire, publicKey, urlEndpoint } = authRes.data.data;
 
-    if (!resp.ok) {
-        const txt = await resp.text();
-        throw new Error(`ImageKit upload failed: ${txt}`);
+    // 2. Build multipart form for ImageKit upload endpoint
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', `${Date.now()}_${file.name}`);
+    formData.append('folder', folder);
+    formData.append('publicKey', publicKey);
+    formData.append('signature', signature);
+    formData.append('expire', expire);
+    formData.append('token', ikToken);
+
+    // 3. Upload directly to ImageKit
+    const { data } = await axios.post(
+        `${urlEndpoint.replace(/\/$/, '')}/api/v2/files/upload`.replace('https://ik.imagekit.io', 'https://upload.imagekit.io'),
+        formData,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+    );
+
+    return { url: data.url, fileId: data.fileId };
+};
+
+/**
+ * Delete an image from ImageKit via our backend.
+ * Silently ignores errors so it never blocks the UI flow.
+ *
+ * @param {string} fileId - The ImageKit fileId returned at upload time
+ */
+export const deleteImageFromImageKit = async (fileId) => {
+    if (!fileId) return;
+    try {
+        const token = localStorage.getItem('token');
+        await axios.delete(`${BASE_URL}/uploads/imagekit/${fileId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+    } catch (err) {
+        // Non-critical — log but don't throw
+        console.warn('ImageKit delete skipped:', err?.response?.data?.message || err.message);
     }
-    const json = await resp.json();
-    console.log('ImageKit upload response:', json);
+};
 
-    // ImageKit returns the URL directly as 'url' property
-    if (json.url) {
-        return json.url;
-    }
-
-    // Fallback: construct URL from filePath
-    if (json.filePath) {
-        return `${urlEndpoint}${json.filePath}`;
-    }
-
-    throw new Error('No URL returned from ImageKit upload');
-}
+export default api;
