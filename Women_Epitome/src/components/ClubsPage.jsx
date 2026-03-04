@@ -1,13 +1,34 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, MapPin, Calendar, Award, Mail, Phone, ArrowRight, Star, Heart } from 'lucide-react';
+import { Users, MapPin, Calendar, Award, ArrowRight, Heart, ChevronDown, ChevronUp, X, ImageIcon } from 'lucide-react';
 import api from '../utils/api';
+
+const MAX_EVENT_IMAGES = 3;
 
 const ClubsPage = () => {
   const [clubs, setClubs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  // Track which event card is expanded: `${clubId}-${eventIndex}`
+  const [expandedEvent, setExpandedEvent] = useState(null);
+  // Lightbox
+  const [lightbox, setLightbox] = useState(null); // { images, index }
+
+  // Lightbox keyboard navigation (must run on every render before any return)
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+  const lightboxPrev = useCallback(
+    () => setLightbox(l =>
+      l ? { ...l, index: (l.index - 1 + l.images.length) % l.images.length } : null
+    ),
+    []
+  );
+  const lightboxNext = useCallback(
+    () => setLightbox(l =>
+      l ? { ...l, index: (l.index + 1) % l.images.length } : null
+    ),
+    []
+  );
 
   // Fetch clubs from API
   useEffect(() => {
@@ -21,13 +42,22 @@ const ClubsPage = () => {
           id: club._id,
           name: club.name,
           slug: club.clubId,
-          location: club.description.split('in ').pop() || 'Mumbai Region', // Extract location from description
+          location: club.description.split('in ').pop() || 'Mumbai Region',
           established: club.established ? new Date(club.established).getFullYear().toString() : '2017',
           members: club.members?.length.toString() || '0',
           president: club.president?.name || 'To be updated',
           focus: club.description.split('focused on ')[1]?.split('.')[0] || club.description.split('Focus on ')[1]?.split('.')[0] || 'Community Service',
           image: club.coverImage || club.images?.[0] || `https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80`,
-          achievements: club.description.split(',').slice(0, 3) || ['Community Service']
+          achievements: club.description.split(',').slice(0, 3) || ['Community Service'],
+          // Pass events through so we can show images
+          events: (club.events || []).map(ev => ({
+            title: ev.title || 'Event',
+            date: ev.date ? new Date(ev.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '',
+            location: ev.location || '',
+            coverImage: ev.coverImage || '',
+            // Hard-cap at MAX_EVENT_IMAGES
+            images: (ev.images || []).filter(Boolean).slice(0, MAX_EVENT_IMAGES)
+          })).filter(ev => ev.coverImage || ev.images.length > 0)
         }));
 
         setClubs(clubsData);
@@ -225,7 +255,8 @@ const ClubsPage = () => {
       image: "/images/club-pages-imgs/VileParle/1.jpg",
       achievements: ["500+ students helped", "5+ schools supported", "Education champion"]
     }
-  ];
+    // Fallback clubs don't have events from DB, so empty array
+  ].map(c => ({ ...c, events: [] }));
 
   const districtInfo = {
     name: "District 323 A2",
@@ -245,6 +276,8 @@ const ClubsPage = () => {
       </div>
     );
   }
+
+  const toggleEvent = (key) => setExpandedEvent(prev => prev === key ? null : key);
 
   return (
     <div className="min-h-screen bg-linear-to-br from-pink-50 via-purple-50 to-pink-100">
@@ -273,10 +306,10 @@ const ClubsPage = () => {
           </span>
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
             <span className="bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent playfair">
-              Our Clubs
+              The Clubs
             </span>
             <br />
-            <span className="text-gray-800 playfair">District 323 A2</span>
+            <span className="text-gray-800 playfair">of District 323 A2</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto font-light">
             A network of empowered women making a difference across communities
@@ -340,8 +373,9 @@ const ClubsPage = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {clubs.map((club) => (
-              <div key={club.id} className="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="relative h-56 overflow-hidden">
+              <div key={club.id} className="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col">
+                {/* Cover image */}
+                <div className="relative h-56 overflow-hidden flex-shrink-0">
                   <img
                     src={club.image}
                     alt={club.name}
@@ -352,7 +386,9 @@ const ClubsPage = () => {
                     <span className="text-purple-700 font-bold text-xs">Est. {club.established}</span>
                   </div>
                 </div>
-                <div className="p-6">
+
+                {/* Card body */}
+                <div className="p-6 flex flex-col flex-1">
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <h3 className="text-xl font-bold text-gray-800 mb-1 group-hover:text-purple-600 transition-colors playfair">
@@ -394,6 +430,100 @@ const ClubsPage = () => {
                     </div>
                   </div>
 
+                  {/* ── Events accordion ── */}
+                  {club.events && club.events.length > 0 && (
+                    <div className="mb-4 border border-purple-100 rounded-xl overflow-hidden">
+                      <p className="text-xs font-bold text-purple-700 uppercase tracking-wide px-3 pt-3 pb-2 bg-purple-50">
+                        Recent Events ({club.events.length})
+                      </p>
+                      <div className="divide-y divide-purple-50">
+                        {club.events.map((ev, evIdx) => {
+                          const key = `${club.id}-${evIdx}`;
+                          const isOpen = expandedEvent === key;
+                          const allImages = [
+                            ev.coverImage,
+                            ...ev.images.filter(img => img !== ev.coverImage)
+                          ].filter(Boolean).slice(0, MAX_EVENT_IMAGES);
+
+                          return (
+                            <div key={evIdx} className="bg-white">
+                              {/* Event row — click to expand */}
+                              <button
+                                type="button"
+                                onClick={() => toggleEvent(key)}
+                                className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-purple-50 transition-colors"
+                              >
+                                {/* Thumbnail */}
+                                {ev.coverImage ? (
+                                  <img
+                                    src={ev.coverImage}
+                                    alt={ev.title}
+                                    className="w-10 h-10 rounded-lg object-cover flex-shrink-0 border border-purple-100"
+                                  />
+                                ) : (
+                                  <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
+                                    <ImageIcon size={16} className="text-purple-400" />
+                                  </div>
+                                )}
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-semibold text-gray-800 truncate">{ev.title}</p>
+                                  {ev.date && <p className="text-xs text-gray-500">{ev.date}</p>}
+                                </div>
+                                <div className="flex items-center gap-1.5 flex-shrink-0">
+                                  {allImages.length > 0 && (
+                                    <span className="text-xs text-purple-500 font-medium">{allImages.length} 📷</span>
+                                  )}
+                                  {isOpen
+                                    ? <ChevronUp size={14} className="text-purple-500" />
+                                    : <ChevronDown size={14} className="text-gray-400" />}
+                                </div>
+                              </button>
+
+                              {/* Expanded image grid */}
+                              {isOpen && (
+                                <div className="px-3 pb-3">
+                                  {ev.location && (
+                                    <p className="text-xs text-gray-500 mb-2 flex items-center gap-1">
+                                      <MapPin size={11} /> {ev.location}
+                                    </p>
+                                  )}
+                                  {allImages.length > 0 ? (
+                                    <div className={`grid gap-1.5 ${allImages.length === 1 ? 'grid-cols-1' :
+                                        allImages.length === 2 ? 'grid-cols-2' : 'grid-cols-3'
+                                      }`}>
+                                      {allImages.map((img, imgIdx) => (
+                                        <button
+                                          key={imgIdx}
+                                          type="button"
+                                          onClick={() => setLightbox({ images: allImages, index: imgIdx })}
+                                          className="relative aspect-square rounded-lg overflow-hidden border border-purple-100 hover:border-purple-400 hover:shadow-md transition-all group/img"
+                                        >
+                                          <img
+                                            src={img}
+                                            alt={`${ev.title} image ${imgIdx + 1}`}
+                                            className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-300"
+                                          />
+                                          <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-colors duration-200 flex items-center justify-center">
+                                            <span className="opacity-0 group-hover/img:opacity-100 text-white text-xs font-bold transition-opacity">View</span>
+                                          </div>
+                                        </button>
+                                      ))}
+                                    </div>
+                                  ) : (
+                                    <p className="text-xs text-gray-400 italic">No images for this event yet.</p>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Spacer to push button to bottom */}
+                  <div className="flex-1" />
+
                   <Link
                     to={`/clubs/${club.slug}`}
                     className="w-full bg-linear-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
@@ -405,6 +535,71 @@ const ClubsPage = () => {
               </div>
             ))}
           </div>
+
+          {/* ── Lightbox ── */}
+          {lightbox && (
+            <div
+              className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+              onClick={closeLightbox}
+            >
+              {/* Close */}
+              <button
+                onClick={closeLightbox}
+                className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+              >
+                <X size={20} />
+              </button>
+
+              {/* Image */}
+              <div className="relative max-w-4xl max-h-[80vh] w-full" onClick={e => e.stopPropagation()}>
+                <img
+                  src={lightbox.images[lightbox.index]}
+                  alt={`Image ${lightbox.index + 1}`}
+                  className="w-full h-full object-contain rounded-2xl"
+                  style={{ maxHeight: '80vh' }}
+                />
+
+                {/* Counter */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/50 text-white text-xs px-3 py-1 rounded-full">
+                  {lightbox.index + 1} / {lightbox.images.length}
+                </div>
+
+                {/* Prev / Next arrows (only if more than 1 image) */}
+                {lightbox.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={lightboxPrev}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-colors text-lg font-bold"
+                    >
+                      ‹
+                    </button>
+                    <button
+                      onClick={lightboxNext}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 bg-black/50 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-colors text-lg font-bold"
+                    >
+                      ›
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Thumbnails strip */}
+              {lightbox.images.length > 1 && (
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2" onClick={e => e.stopPropagation()}>
+                  {lightbox.images.map((img, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setLightbox(l => ({ ...l, index: i }))}
+                      className={`w-12 h-12 rounded-lg overflow-hidden border-2 transition-all ${i === lightbox.index ? 'border-white scale-110' : 'border-white/30 opacity-60 hover:opacity-100'
+                        }`}
+                    >
+                      <img src={img} alt={`thumb ${i + 1}`} className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 

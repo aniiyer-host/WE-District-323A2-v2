@@ -1,13 +1,17 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config(); // loads .env file
 
 const connectDB = async () => {
   try {
-    // remove obsolete options
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 5000,
+    });
+
     console.log("✅ MongoDB Connected...");
+
+    mongoose.connection.on("error", (err) => {
+      console.error("MongoDB runtime error:", err);
+    });
+
   } catch (err) {
     console.error("❌ MongoDB Connection Error:", err.message);
     process.exit(1);
