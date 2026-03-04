@@ -434,89 +434,92 @@ const ClubsPage = () => {
                   {club.events && club.events.length > 0 && (
                     <div className="mb-4 border border-purple-100 rounded-xl overflow-hidden">
                       <p className="text-xs font-bold text-purple-700 uppercase tracking-wide px-3 pt-3 pb-2 bg-purple-50">
-                        Recent Events ({club.events.length})
+                        Latest Event
                       </p>
                       <div className="divide-y divide-purple-50">
-                        {club.events.map((ev, evIdx) => {
-                          const key = `${club.id}-${evIdx}`;
-                          const isOpen = expandedEvent === key;
-                          const allImages = [
-                            ev.coverImage,
-                            ...ev.images.filter(img => img !== ev.coverImage)
-                          ].filter(Boolean).slice(0, MAX_EVENT_IMAGES);
+                        {[...club.events]
+                          .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+                          .slice(0, 1)
+                          .map((ev, evIdx) => {
+                            const key = `${club.id}-${evIdx}`;
+                            const isOpen = expandedEvent === key;
+                            const allImages = [
+                              ev.coverImage,
+                              ...(ev.images || []).filter(img => img !== ev.coverImage)
+                            ].filter(Boolean).slice(0, MAX_EVENT_IMAGES);
 
-                          return (
-                            <div key={evIdx} className="bg-white">
-                              {/* Event row — click to expand */}
-                              <button
-                                type="button"
-                                onClick={() => toggleEvent(key)}
-                                className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-purple-50 transition-colors"
-                              >
-                                {/* Thumbnail */}
-                                {ev.coverImage ? (
-                                  <img
-                                    src={ev.coverImage}
-                                    alt={ev.title}
-                                    className="w-10 h-10 rounded-lg object-cover flex-shrink-0 border border-purple-100"
-                                  />
-                                ) : (
-                                  <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
-                                    <ImageIcon size={16} className="text-purple-400" />
+                            return (
+                              <div key={evIdx} className="bg-white">
+                                {/* Event row — click to expand */}
+                                <button
+                                  type="button"
+                                  onClick={() => toggleEvent(key)}
+                                  className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-purple-50 transition-colors"
+                                >
+                                  {/* Thumbnail */}
+                                  {ev.coverImage ? (
+                                    <img
+                                      src={ev.coverImage}
+                                      alt={ev.title}
+                                      className="w-10 h-10 rounded-lg object-cover flex-shrink-0 border border-purple-100"
+                                    />
+                                  ) : (
+                                    <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
+                                      <ImageIcon size={16} className="text-purple-400" />
+                                    </div>
+                                  )}
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-xs font-semibold text-gray-800 truncate">{ev.title}</p>
+                                    {ev.date && <p className="text-xs text-gray-500">{ev.date}</p>}
+                                  </div>
+                                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                                    {allImages.length > 0 && (
+                                      <span className="text-xs text-purple-500 font-medium">{allImages.length} 📷</span>
+                                    )}
+                                    {isOpen
+                                      ? <ChevronUp size={14} className="text-purple-500" />
+                                      : <ChevronDown size={14} className="text-gray-400" />}
+                                  </div>
+                                </button>
+
+                                {/* Expanded image grid */}
+                                {isOpen && (
+                                  <div className="px-3 pb-3">
+                                    {ev.location && (
+                                      <p className="text-xs text-gray-500 mb-2 flex items-center gap-1">
+                                        <MapPin size={11} /> {ev.location}
+                                      </p>
+                                    )}
+                                    {allImages.length > 0 ? (
+                                      <div className={`grid gap-1.5 ${allImages.length === 1 ? 'grid-cols-1' :
+                                        allImages.length === 2 ? 'grid-cols-2' : 'grid-cols-3'
+                                        }`}>
+                                        {allImages.map((img, imgIdx) => (
+                                          <button
+                                            key={imgIdx}
+                                            type="button"
+                                            onClick={() => setLightbox({ images: allImages, index: imgIdx })}
+                                            className="relative aspect-square rounded-lg overflow-hidden border border-purple-100 hover:border-purple-400 hover:shadow-md transition-all group/img"
+                                          >
+                                            <img
+                                              src={img}
+                                              alt={`${ev.title} image ${imgIdx + 1}`}
+                                              className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-300"
+                                            />
+                                            <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-colors duration-200 flex items-center justify-center">
+                                              <span className="opacity-0 group-hover/img:opacity-100 text-white text-xs font-bold transition-opacity">View</span>
+                                            </div>
+                                          </button>
+                                        ))}
+                                      </div>
+                                    ) : (
+                                      <p className="text-xs text-gray-400 italic">No images for this event yet.</p>
+                                    )}
                                   </div>
                                 )}
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-xs font-semibold text-gray-800 truncate">{ev.title}</p>
-                                  {ev.date && <p className="text-xs text-gray-500">{ev.date}</p>}
-                                </div>
-                                <div className="flex items-center gap-1.5 flex-shrink-0">
-                                  {allImages.length > 0 && (
-                                    <span className="text-xs text-purple-500 font-medium">{allImages.length} 📷</span>
-                                  )}
-                                  {isOpen
-                                    ? <ChevronUp size={14} className="text-purple-500" />
-                                    : <ChevronDown size={14} className="text-gray-400" />}
-                                </div>
-                              </button>
-
-                              {/* Expanded image grid */}
-                              {isOpen && (
-                                <div className="px-3 pb-3">
-                                  {ev.location && (
-                                    <p className="text-xs text-gray-500 mb-2 flex items-center gap-1">
-                                      <MapPin size={11} /> {ev.location}
-                                    </p>
-                                  )}
-                                  {allImages.length > 0 ? (
-                                    <div className={`grid gap-1.5 ${allImages.length === 1 ? 'grid-cols-1' :
-                                        allImages.length === 2 ? 'grid-cols-2' : 'grid-cols-3'
-                                      }`}>
-                                      {allImages.map((img, imgIdx) => (
-                                        <button
-                                          key={imgIdx}
-                                          type="button"
-                                          onClick={() => setLightbox({ images: allImages, index: imgIdx })}
-                                          className="relative aspect-square rounded-lg overflow-hidden border border-purple-100 hover:border-purple-400 hover:shadow-md transition-all group/img"
-                                        >
-                                          <img
-                                            src={img}
-                                            alt={`${ev.title} image ${imgIdx + 1}`}
-                                            className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-300"
-                                          />
-                                          <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-colors duration-200 flex items-center justify-center">
-                                            <span className="opacity-0 group-hover/img:opacity-100 text-white text-xs font-bold transition-opacity">View</span>
-                                          </div>
-                                        </button>
-                                      ))}
-                                    </div>
-                                  ) : (
-                                    <p className="text-xs text-gray-400 italic">No images for this event yet.</p>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          );
-                        })}
+                              </div>
+                            );
+                          })}
                       </div>
                     </div>
                   )}

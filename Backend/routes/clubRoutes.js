@@ -6,7 +6,8 @@ import {
     updateClub,
     deleteClub,
     permanentDeleteClub,
-    getEventsByCategory
+    getEventsByCategory,
+    cleanupPastEvents
 } from '../controllers/clubController.js';
 import { authenticate, requireAdmin, requireClubAccess } from '../middlewares/authMiddleware.js';
 
@@ -23,6 +24,9 @@ router.post('/', authenticate, requireAdmin, createClub);
 
 // Update club - admin or club owner
 router.put('/:clubId', authenticate, requireClubAccess, updateClub);
+
+// Clean up past events - admin or club owner
+router.delete('/:clubId/cleanup-past-events', authenticate, requireClubAccess, cleanupPastEvents);
 
 // Soft delete club - admin only
 router.delete('/:clubId', authenticate, requireAdmin, deleteClub);

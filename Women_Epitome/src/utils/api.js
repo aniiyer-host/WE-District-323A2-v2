@@ -6,7 +6,7 @@ import axios from 'axios';
 // By reading import.meta.env.PROD we can choose an appropriate default.
 const DEFAULT_PROD_URL = 'https://we-district-323a2-v2.onrender.com/api';
 const BASE_URL = import.meta.env.VITE_API_URL
-  || (import.meta.env.PROD ? DEFAULT_PROD_URL : 'http://localhost:5000/api');
+    || (import.meta.env.PROD ? DEFAULT_PROD_URL : 'http://localhost:5000/api');
 
 // Create axios instance with base URL
 const api = axios.create({
@@ -73,14 +73,16 @@ export const uploadImageToImageKit = async (file, folder = '/uploads') => {
     formData.append('expire', expire);
     formData.append('token', ikToken);
 
-    // 3. Upload directly to ImageKit
+    // 3. Upload directly to ImageKit (v1 client-side upload endpoint)
     const { data } = await axios.post(
-        `${urlEndpoint.replace(/\/$/, '')}/api/v2/files/upload`.replace('https://ik.imagekit.io', 'https://upload.imagekit.io'),
+        'https://upload.imagekit.io/api/v1/files/upload',
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
     );
 
-    return { url: data.url, fileId: data.fileId };
+    // Build url from urlEndpoint + filePath if direct url field is missing
+    const url = data.url || (data.filePath ? `${urlEndpoint.replace(/\/$/, '')}${data.filePath}` : '');
+    return { url, fileId: data.fileId || '' };
 };
 
 /**

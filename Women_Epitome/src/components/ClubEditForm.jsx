@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
-import { Save, Plus, Trash2, ArrowLeft, CheckCircle } from 'lucide-react';
+import { Save, Plus, Trash2, ArrowLeft, CheckCircle, CalendarX2 } from 'lucide-react';
 import { uploadImageToImageKit, deleteImageFromImageKit } from '../utils/api';
 
 // Reusable save button shown at the bottom of each section
@@ -53,6 +53,10 @@ const ClubEditForm = () => {
     const [eventsSaved, setEventsSaved] = useState(false);
     const [presidentSaved, setPresidentSaved] = useState(false);
     const [membersSaved, setMembersSaved] = useState(false);
+
+    // Cleanup state
+    const [cleaningUp, setCleaningUp] = useState(false);
+    const [cleanupMessage, setCleanupMessage] = useState('');
 
     // Tracks per-field upload progress
     const [uploading, setUploading] = useState({});
@@ -125,20 +129,28 @@ const ClubEditForm = () => {
         setSaved(false);
         setGlobalError('');
         try {
-            // When saving events, serialize images to plain URL strings for the DB
-            const patchToSend = patch.events
-                ? {
-                    ...patch,
-                    events: patch.events.map(ev => ({
-                        ...ev,
-                        images: (ev.images || []).map(img =>
-                            typeof img === 'string' ? img : img.url
-                        ).filter(Boolean)
-                    }))
-                }
-                : patch;
+            // Always serialize event images to plain URL strings for the DB,
+            // because the full formData (which includes events) is sent with every save.
+            const serializeEvents = (events) =>
+                events.map(ev => ({
+                    ...ev,
+                    images: (ev.images || []).map(img =>
+                        typeof img === 'string' ? img : img.url
+                    ).filter(Boolean)
+                }));
 
-            await api.put(`/clubs/${clubId}`, { ...formData, ...patchToSend });
+            const fullPayload = {
+                ...formData,
+                events: serializeEvents(formData.events),
+                ...patch,
+            };
+
+            // If the patch itself contains events, serialize those too
+            if (patch.events) {
+                fullPayload.events = serializeEvents(patch.events);
+            }
+
+            await api.put(`/clubs/${clubId}`, fullPayload);
             setSaved(true);
             setTimeout(() => setSaved(false), 3000);
         } catch (err) {
@@ -203,18 +215,17 @@ const ClubEditForm = () => {
     const handleEventImageChange = (eventIndex, imageIndex, urlOrObj) =>
         setFormData(prev => ({
             ...prev,
-            events: prev.events.map((ev, i) =>
-                i === eventIndex
-                    ? {
-                        ...ev,
-                        images: (ev.images || []).map((img, idx) =>
-                            idx === imageIndex
-                                ? (typeof urlOrObj === 'object' ? urlOrObj : { url: urlOrObj, fileId: '' })
-                                : img
-                        )
-                    }
-                    : ev
-            )
+            events: prev.events.map((ev, i) => {
+                if (i !== eventIndex) return ev;
+                const imgs = [...(ev.images || [])];
+                const entry = typeof urlOrObj === 'object' ? urlOrObj : { url: urlOrObj, fileId: '' };
+                if (imageIndex >= imgs.length) {
+                    imgs.push(entry);  // append if index doesn't exist yet
+                } else {
+                    imgs[imageIndex] = entry;
+                }
+                return { ...ev, images: imgs };
+            })
         }));
 
     const handleRemoveEventImage = (eventIndex, imageIndex) => {
@@ -253,6 +264,28 @@ const ClubEditForm = () => {
     const saveEvents = () => saveSection({ events: formData.events }, setEventsSaving, setEventsSaved);
     const savePresident = () => saveSection({ president: formData.president }, setPresidentSaving, setPresidentSaved);
     const saveMembers = () => saveSection({ members: formData.members }, setMembersSaving, setMembersSaved);
+
+    // ─── Clean up past events ─────────────────────────────────────────────
+    const handleCleanupPastEvents = async () => {
+        if (!confirm('Remove all events whose date has already passed? This cannot be undone.')) return;
+        setCleaningUp(true);
+        setCleanupMessage('');
+        setGlobalError('');
+        try {
+            const res = await api.delete(`/clubs/${clubId}/cleanup-past-events`);
+            const { removed } = res.data.data;
+            setCleanupMessage(
+                removed > 0 ? `Removed ${removed} past event(s).` : 'No past events found.'
+            );
+            if (removed > 0) fetchClubData(); // refresh form
+            setTimeout(() => setCleanupMessage(''), 4000);
+        } catch (err) {
+            console.error('Cleanup error:', err);
+            setGlobalError(err.response?.data?.message || 'Failed to clean up past events.');
+        } finally {
+            setCleaningUp(false);
+        }
+    };
 
     // ────────────────────────────────────────────────────────────────────────
     if (loading) {
@@ -322,16 +355,42 @@ const ClubEditForm = () => {
 
                 {/* ── Events ── */}
                 <div className="bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6">
-                    <div className="flex items-center justify-between mb-4 sm:mb-5 gap-2">
+                    <div className="flex items-center justify-between mb-4 sm:mb-5 gap-2 flex-wrap">
                         <h2 className="text-lg sm:text-2xl font-bold text-gray-800">Events</h2>
-                        <button
-                            type="button"
-                            onClick={handleAddEvent}
-                            className="flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-xs sm:text-sm font-medium flex-shrink-0"
-                        >
-                            <Plus size={16} />
-                            Add Event
-                        </button>
+                        <div className="flex items-center gap-2 flex-wrap">
+                            {cleanupMessage && (
+                                <span className="flex items-center gap-1.5 text-green-600 text-xs sm:text-sm font-medium">
+                                    <CheckCircle size={14} />
+                                    {cleanupMessage}
+                                </span>
+                            )}
+                            <button
+                                type="button"
+                                onClick={handleCleanupPastEvents}
+                                disabled={cleaningUp}
+                                className="flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors text-xs sm:text-sm font-medium flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {cleaningUp ? (
+                                    <>
+                                        <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                        Cleaning…
+                                    </>
+                                ) : (
+                                    <>
+                                        <CalendarX2 size={16} />
+                                        Clean Up Past Events
+                                    </>
+                                )}
+                            </button>
+                            <button
+                                type="button"
+                                onClick={handleAddEvent}
+                                className="flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-xs sm:text-sm font-medium flex-shrink-0"
+                            >
+                                <Plus size={16} />
+                                Add Event
+                            </button>
+                        </div>
                     </div>
 
                     <div className="space-y-4">
@@ -473,7 +532,7 @@ const ClubEditForm = () => {
                                             </button>
                                         </div>
 
-                                        {(event.images && event.images.length ? event.images : [{ url: '', fileId: '' }]).map((image, imageIndex) => {
+                                        {(event.images || []).map((image, imageIndex) => {
                                             const imgUrl = typeof image === 'object' ? image.url : image;
                                             const uploadKey = `img-${index}-${imageIndex}`;
                                             return (

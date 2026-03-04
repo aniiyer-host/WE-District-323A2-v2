@@ -248,3 +248,60 @@ export const getEventsByCategory = async (req, res) => {
         });
     }
 };
+
+// @desc    Clean up past events for a specific club
+// @route   DELETE /api/clubs/:clubId/cleanup-past-events
+// @access  Private (admin or club owner)
+export const cleanupPastEvents = async (req, res) => {
+    try {
+        const { clubId } = req.params;
+        const club = await Club.findOne({ clubId });
+
+        if (!club) {
+            return res.status(404).json({
+                success: false,
+                message: 'Club not found'
+            });
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const pastEvents = club.events.filter(
+            (ev) => ev.date && new Date(ev.date) < today
+        );
+
+        if (pastEvents.length === 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'No past events to clean up',
+                data: { removed: 0 }
+            });
+        }
+
+        // Best-effort ImageKit cleanup for cover images of past events
+        const { deleteFromImageKit } = await import('../utils/eventCleanup.js');
+        for (const ev of pastEvents) {
+            if (ev.coverImageFileId) deleteFromImageKit(ev.coverImageFileId);
+        }
+
+        // Keep only future/current events
+        club.events = club.events.filter(
+            (ev) => !(ev.date && new Date(ev.date) < today)
+        );
+        await club.save();
+
+        res.status(200).json({
+            success: true,
+            message: `Removed ${pastEvents.length} past event(s)`,
+            data: { removed: pastEvents.length }
+        });
+    } catch (error) {
+        console.error('Cleanup past events error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Server error while cleaning up events',
+            error: error.message
+        });
+    }
+};

@@ -47,6 +47,10 @@ const eventSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    coverImageFileId: {
+        type: String,
+        default: ''
+    },
     images: [{
         type: String
     }],
