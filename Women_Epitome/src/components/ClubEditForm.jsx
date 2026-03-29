@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 import { Save, Plus, Trash2, ArrowLeft, CheckCircle, CalendarX2 } from 'lucide-react';
 import { uploadImageToImageKit, deleteImageFromImageKit } from '../utils/api';
+import { useToast } from './Toast';
 
 // Reusable save button shown at the bottom of each section
 const SectionSaveButton = ({ onClick, saving, saved }) => (
@@ -39,9 +40,9 @@ const ClubEditForm = () => {
     const { clubId } = useParams();
     const { user } = useAuth();
     const navigate = useNavigate();
+    const toast = useToast();
 
     const [loading, setLoading] = useState(true);
-    const [globalError, setGlobalError] = useState('');
 
     // Per-section saving & saved states
     const [basicSaving, setBasicSaving] = useState(false);
@@ -54,26 +55,23 @@ const ClubEditForm = () => {
     const [presidentSaved, setPresidentSaved] = useState(false);
     const [membersSaved, setMembersSaved] = useState(false);
 
-    // Cleanup state
-    const [cleaningUp, setCleaningUp] = useState(false);
-    const [cleanupMessage, setCleanupMessage] = useState('');
-
     // Tracks per-field upload progress
     const [uploading, setUploading] = useState({});
+    const [cleaningUp, setCleaningUp] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
         description: '',
-        president: { name: '', photo: '', photoFileId: '', bio: '', email: '', phone: '' },
+        president: { name: '', photo: '', photo_file_id: '', bio: '', email: '', phone: '' },
         members: [],
         events: [],
         images: [],
-        coverImage: '',
+        cover_image: '',
         logo: '',
         established: ''
     });
 
-    const canEdit = user?.role === 'admin' || user?.clubId === clubId;
+    const canEdit = user?.role === 'admin' || user?.club_id === clubId;
 
     useEffect(() => {
         if (!canEdit) { navigate('/club-dashboard'); return; }
@@ -90,7 +88,7 @@ const ClubEditForm = () => {
                 president: {
                     name: club.president?.name || '',
                     photo: club.president?.photo || '',
-                    photoFileId: club.president?.photoFileId || '',
+                    photo_file_id: club.president?.photo_file_id || '',
                     bio: club.president?.bio || '',
                     email: club.president?.email || '',
                     phone: club.president?.phone || ''
@@ -102,8 +100,8 @@ const ClubEditForm = () => {
                     date: event.date ? event.date.split('T')[0] : '',
                     location: event.location || '',
                     category: event.category || '',
-                    coverImage: event.coverImage || '',
-                    coverImageFileId: event.coverImageFileId || '',
+                    cover_image: event.cover_image || '',
+                    cover_image_file_id: event.cover_image_file_id || '',
                     // images stored as [{url, fileId}] objects or plain strings from DB
                     images: (event.images || []).map(img =>
                         typeof img === 'string' ? { url: img, fileId: '' } : img
@@ -111,26 +109,22 @@ const ClubEditForm = () => {
                     isFeatured: true
                 })),
                 images: club.images || [],
-                coverImage: club.coverImage || '',
+                cover_image: club.cover_image || '',
                 logo: club.logo || '',
                 established: club.established ? club.established.split('T')[0] : ''
             });
         } catch (err) {
             console.error('Error fetching club:', err);
-            setGlobalError('Failed to load club data');
+            toast.error('Failed to load club data. Please refresh.');
         } finally {
             setLoading(false);
         }
     };
 
-    // ─── Generic save helper ────────────────────────────────────────────────
     const saveSection = useCallback(async (patch, setSaving, setSaved) => {
         setSaving(true);
         setSaved(false);
-        setGlobalError('');
         try {
-            // Always serialize event images to plain URL strings for the DB,
-            // because the full formData (which includes events) is sent with every save.
             const serializeEvents = (events) =>
                 events.map(ev => ({
                     ...ev,
@@ -145,21 +139,21 @@ const ClubEditForm = () => {
                 ...patch,
             };
 
-            // If the patch itself contains events, serialize those too
             if (patch.events) {
                 fullPayload.events = serializeEvents(patch.events);
             }
 
             await api.put(`/clubs/${clubId}`, fullPayload);
             setSaved(true);
+            toast.success('Changes saved!');
             setTimeout(() => setSaved(false), 3000);
         } catch (err) {
             console.error('Save error:', err);
-            setGlobalError(err.response?.data?.message || 'Failed to save. Please try again.');
+            toast.error(err.response?.data?.message || 'Failed to save. Please try again.');
         } finally {
             setSaving(false);
         }
-    }, [clubId, formData]);
+    }, [clubId, formData, toast]);
 
     // ─── Input handlers ─────────────────────────────────────────────────────
     const handleInputChange = (e) => {
@@ -173,7 +167,7 @@ const ClubEditForm = () => {
     };
 
     const handleAddMember = () =>
-        setFormData(prev => ({ ...prev, members: [...prev.members, { name: '', designation: 'Member', photo: '', bio: '' }] }));
+        setFormData(prev => ({ ...prev, members: [...prev.members, { name: `Member${prev.members.length + 1}`, designation: 'member', photo: '', bio: '' }] }));
 
     const handleMemberChange = (index, field, value) =>
         setFormData(prev => ({ ...prev, members: prev.members.map((m, i) => i === index ? { ...m, [field]: value } : m) }));
@@ -182,7 +176,7 @@ const ClubEditForm = () => {
         setFormData(prev => ({ ...prev, members: prev.members.filter((_, i) => i !== index) }));
 
     const handleAddEvent = () =>
-        setFormData(prev => ({ ...prev, events: [...prev.events, { title: '', description: '', date: '', location: '', category: '', coverImage: '', coverImageFileId: '', images: [], isFeatured: true }] }));
+        setFormData(prev => ({ ...prev, events: [...prev.events, { title: '', description: '', date: '', location: '', category: '', cover_image: '', cover_image_file_id: '', images: [], isFeatured: true }] }));
 
     const handleEventChange = (index, field, value) =>
         setFormData(prev => ({ ...prev, events: prev.events.map((ev, i) => i === index ? { ...ev, [field]: value } : ev) }));
@@ -193,7 +187,7 @@ const ClubEditForm = () => {
 
         // Collect all fileIds to delete (non-blocking)
         const fileIds = [
-            event.coverImageFileId,
+            event.cover_image_file_id,
             ...(event.images || []).map(img => (typeof img === 'object' ? img.fileId : ''))
         ].filter(Boolean);
 
@@ -244,16 +238,15 @@ const ClubEditForm = () => {
         if (fileId) deleteImageFromImageKit(fileId);
     };
 
-    // ─── Upload helper ───────────────────────────────────────────────────────
     const handleUpload = async (file, folder, onSuccess, uploadKey) => {
         if (!file) return;
         setUploading(prev => ({ ...prev, [uploadKey]: true }));
-        setGlobalError('');
         try {
             const result = await uploadImageToImageKit(file, folder);
-            onSuccess(result); // { url, fileId }
+            onSuccess(result);
+            toast.success('Image uploaded!');
         } catch (err) {
-            setGlobalError(err.message || 'Upload failed');
+            toast.error(err.message || 'Upload failed. Please try again.');
         } finally {
             setUploading(prev => ({ ...prev, [uploadKey]: false }));
         }
@@ -269,19 +262,18 @@ const ClubEditForm = () => {
     const handleCleanupPastEvents = async () => {
         if (!confirm('Remove all events whose date has already passed? This cannot be undone.')) return;
         setCleaningUp(true);
-        setCleanupMessage('');
-        setGlobalError('');
         try {
             const res = await api.delete(`/clubs/${clubId}/cleanup-past-events`);
             const { removed } = res.data.data;
-            setCleanupMessage(
-                removed > 0 ? `Removed ${removed} past event(s).` : 'No past events found.'
-            );
-            if (removed > 0) fetchClubData(); // refresh form
-            setTimeout(() => setCleanupMessage(''), 4000);
+            if (removed > 0) {
+                toast.success(`Removed ${removed} past event(s).`);
+                fetchClubData();
+            } else {
+                toast.info('No past events found.');
+            }
         } catch (err) {
             console.error('Cleanup error:', err);
-            setGlobalError(err.response?.data?.message || 'Failed to clean up past events.');
+            toast.error(err.response?.data?.message || 'Failed to clean up past events.');
         } finally {
             setCleaningUp(false);
         }
@@ -325,11 +317,6 @@ const ClubEditForm = () => {
                 </div>
 
                 {/* Global error */}
-                {globalError && (
-                    <div className="bg-red-50 border border-red-200 rounded-xl p-3 sm:p-4">
-                        <p className="text-red-700 text-sm">{globalError}</p>
-                    </div>
-                )}
 
                 {/* ── Basic Information ── */}
                 <div className="bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6">
@@ -358,12 +345,6 @@ const ClubEditForm = () => {
                     <div className="flex items-center justify-between mb-4 sm:mb-5 gap-2 flex-wrap">
                         <h2 className="text-lg sm:text-2xl font-bold text-gray-800">Events</h2>
                         <div className="flex items-center gap-2 flex-wrap">
-                            {cleanupMessage && (
-                                <span className="flex items-center gap-1.5 text-green-600 text-xs sm:text-sm font-medium">
-                                    <CheckCircle size={14} />
-                                    {cleanupMessage}
-                                </span>
-                            )}
                             <button
                                 type="button"
                                 onClick={handleCleanupPastEvents}
@@ -456,21 +437,21 @@ const ClubEditForm = () => {
                                                         file,
                                                         `/clubs/${clubId}/events`,
                                                         ({ url, fileId }) => {
-                                                            handleEventChange(index, 'coverImage', url);
-                                                            handleEventChange(index, 'coverImageFileId', fileId);
+                                                            handleEventChange(index, 'cover_image', url);
+                                                            handleEventChange(index, 'cover_image_file_id', fileId);
                                                         },
                                                         `cover-${index}`
                                                     );
                                                 }}
                                                 className={fileInputClass}
                                             />
-                                            {event.coverImage && (
+                                            {event.cover_image && (
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        if (event.coverImageFileId) deleteImageFromImageKit(event.coverImageFileId);
-                                                        handleEventChange(index, 'coverImage', '');
-                                                        handleEventChange(index, 'coverImageFileId', '');
+                                                        if (event.cover_image_file_id) deleteImageFromImageKit(event.cover_image_file_id);
+                                                        handleEventChange(index, 'cover_image', '');
+                                                        handleEventChange(index, 'cover_image_file_id', '');
                                                     }}
                                                     className="p-2 text-red-500 hover:text-red-700 flex-shrink-0"
                                                     title="Remove cover image"
@@ -480,10 +461,10 @@ const ClubEditForm = () => {
                                             )}
                                         </div>
                                         {uploading[`cover-${index}`] && <UploadSpinner />}
-                                        {event.coverImage && (
+                                        {event.cover_image && (
                                             <div className="mt-2">
                                                 <img
-                                                    src={event.coverImage}
+                                                    src={event.cover_image}
                                                     alt="Cover"
                                                     className="w-28 h-18 sm:w-32 sm:h-20 object-cover rounded-lg border"
                                                     onError={(e) => { e.target.style.display = 'none'; }}
@@ -625,7 +606,7 @@ const ClubEditForm = () => {
                                             ({ url, fileId }) => {
                                                 setFormData(prev => ({
                                                     ...prev,
-                                                    president: { ...prev.president, photo: url, photoFileId: fileId }
+                                                    president: { ...prev.president, photo: url, photo_file_id: fileId }
                                                 }));
                                             },
                                             'president-photo'
@@ -637,10 +618,10 @@ const ClubEditForm = () => {
                                     <button
                                         type="button"
                                         onClick={() => {
-                                            if (formData.president.photoFileId) deleteImageFromImageKit(formData.president.photoFileId);
+                                            if (formData.president.photo_file_id) deleteImageFromImageKit(formData.president.photo_file_id);
                                             setFormData(prev => ({
                                                 ...prev,
-                                                president: { ...prev.president, photo: '', photoFileId: '' }
+                                                president: { ...prev.president, photo: '', photo_file_id: '' }
                                             }));
                                         }}
                                         className="p-2 text-red-500 hover:text-red-700 flex-shrink-0"
@@ -694,14 +675,14 @@ const ClubEditForm = () => {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                                     <input
                                         type="text"
-                                        placeholder="Name"
+                                        placeholder={`Member${index + 1}`}
                                         value={member.name}
                                         onChange={(e) => handleMemberChange(index, 'name', e.target.value)}
                                         className={smallInputClass}
                                     />
                                     <input
                                         type="text"
-                                        placeholder="Designation"
+                                        placeholder="member"
                                         value={member.designation}
                                         onChange={(e) => handleMemberChange(index, 'designation', e.target.value)}
                                         className={smallInputClass}

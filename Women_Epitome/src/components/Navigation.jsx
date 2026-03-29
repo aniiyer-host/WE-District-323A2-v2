@@ -64,7 +64,7 @@ const Navigation = () => {
     setIsDropdownOpen(false);
     setIsMobileDropdownOpen(false);
     setIsMobileMenuOpen(false);
-    navigate('/');
+    user?.role === 'admin' ? navigate('/admin-dashboard') : navigate('/');
   };
 
   // Extract initials from club name
@@ -119,7 +119,7 @@ const Navigation = () => {
           <div className="flex items-center gap-3">
             {/* Profile / Login button (compact) */}
             {!isGalleryOpen && (
-              isAuthenticated && user?.role === 'club' ? (
+              isAuthenticated && isAuthenticated ? (
                 <div className="relative" ref={mobileDropdownRef}>
                   <button
                     onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
@@ -195,7 +195,7 @@ const Navigation = () => {
             ))}
 
             {/* Logout shortcut inside hamburger menu when logged in */}
-            {isAuthenticated && user?.role === 'club' && (
+            {isAuthenticated && isAuthenticated && (
               <button
                 onClick={handleLogout}
                 className="mt-1 flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm text-red-600 hover:bg-red-50 active:bg-red-100 transition-all duration-200 border-t border-purple-100 pt-3"
@@ -209,7 +209,7 @@ const Navigation = () => {
       </div>
 
       {/* ── DESKTOP PROFILE BUTTON (only shown in desktop/landscape view) ── */}
-      {!isGalleryOpen && isAuthenticated && user?.role === 'club' ? (
+      {!isGalleryOpen && isAuthenticated && isAuthenticated ? (
         <div className="we-nav-desktop fixed top-4 right-8 z-50" ref={desktopDropdownRef}>
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}

@@ -39,25 +39,25 @@ const ClubsPage = () => {
 
         // Map API data to match the format expected by the UI
         const clubsData = response.data.data.clubs.map(club => ({
-          id: club._id,
+          id: club.club_id,
           name: club.name,
-          slug: club.clubId,
+          slug: club.club_id,
           location: club.description.split('in ').pop() || 'Mumbai Region',
           established: club.established ? new Date(club.established).getFullYear().toString() : '2017',
           members: club.members?.length.toString() || '0',
           president: club.president?.name || 'To be updated',
           focus: club.description.split('focused on ')[1]?.split('.')[0] || club.description.split('Focus on ')[1]?.split('.')[0] || 'Community Service',
-          image: club.coverImage || club.images?.[0] || `https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80`,
+          image: club.cover_image || club.images?.[0] || `https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80`,
           achievements: club.description.split(',').slice(0, 3) || ['Community Service'],
           // Pass events through so we can show images
           events: (club.events || []).map(ev => ({
             title: ev.title || 'Event',
             date: ev.date ? new Date(ev.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '',
             location: ev.location || '',
-            coverImage: ev.coverImage || '',
+            coverImage: ev.cover_image || '',
             // Hard-cap at MAX_EVENT_IMAGES
             images: (ev.images || []).filter(Boolean).slice(0, MAX_EVENT_IMAGES)
-          })).filter(ev => ev.coverImage || ev.images.length > 0)
+          })).filter(ev => ev.cover_image || ev.images.length > 0)
         }));
 
         setClubs(clubsData);
@@ -444,8 +444,8 @@ const ClubsPage = () => {
                             const key = `${club.id}-${evIdx}`;
                             const isOpen = expandedEvent === key;
                             const allImages = [
-                              ev.coverImage,
-                              ...(ev.images || []).filter(img => img !== ev.coverImage)
+                              ev.cover_image,
+                              ...(ev.images || []).filter(img => img !== ev.cover_image)
                             ].filter(Boolean).slice(0, MAX_EVENT_IMAGES);
 
                             return (
@@ -457,9 +457,9 @@ const ClubsPage = () => {
                                   className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-purple-50 transition-colors"
                                 >
                                   {/* Thumbnail */}
-                                  {ev.coverImage ? (
+                                  {ev.cover_image ? (
                                     <img
-                                      src={ev.coverImage}
+                                      src={ev.cover_image}
                                       alt={ev.title}
                                       className="w-10 h-10 rounded-lg object-cover flex-shrink-0 border border-purple-100"
                                     />
@@ -627,4 +627,3 @@ const ClubsPage = () => {
 };
 
 export default ClubsPage;
-
