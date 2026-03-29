@@ -1,96 +1,55 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import supabase from '../utils/supabaseClient.js';
 
-// @desc    Verify JWT token and attach user to request
+// @desc    Verify Supabase JWT and attach user to request
 export const authenticate = async (req, res, next) => {
     try {
         let token;
 
-        // Check for token in Authorization header (Bearer token)
-        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        if (req.headers.authorization?.startsWith('Bearer')) {
             token = req.headers.authorization.split(' ')[1];
         }
 
-        // If no token found
         if (!token) {
-            return res.status(401).json({
-                success: false,
-                message: 'Not authorized, no token provided'
-            });
+            return res.status(401).json({ success: false, message: 'Not authorized, no token provided' });
         }
 
-        try {
-            // Verify token
-            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key-change-this');
+        const { data: { user }, error } = await supabase.auth.getUser(token);
 
-            // Get user from token (exclude password)
-            const user = await User.findById(decoded.id).select('-password');
-
-            if (!user) {
-                return res.status(401).json({
-                    success: false,
-                    message: 'Not authorized, user not found'
-                });
-            }
-
-            // Attach user to request object
-            req.user = user;
-            next();
-        } catch (error) {
-            return res.status(401).json({
-                success: false,
-                message: 'Not authorized, token invalid or expired'
-            });
+        if (error || !user) {
+            return res.status(401).json({ success: false, message: 'Not authorized, token invalid or expired' });
         }
+
+        req.user = {
+            id: user.id,
+            email: user.email,
+            username: user.user_metadata.username,
+            role: user.user_metadata.role,
+            club_id: user.user_metadata.club_id ?? null,
+        };
+
+        next();
     } catch (error) {
         console.error('Authentication error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Server error during authentication',
-            error: error.message
-        });
+        res.status(500).json({ success: false, message: 'Server error during authentication', error: error.message });
     }
 };
 
 // @desc    Require admin role
 export const requireAdmin = (req, res, next) => {
-    if (req.user && req.user.role === 'admin') {
-        next();
-    } else {
-        res.status(403).json({
-            success: false,
-            message: 'Access denied. Admin role required.'
-        });
-    }
+    if (req.user?.role === 'admin') return next();
+    res.status(403).json({ success: false, message: 'Access denied. Admin role required.' });
 };
 
-// @desc    Require admin role OR club ownership
-// This middleware checks if the user is either an admin OR owns the specific club
+// @desc    Require admin role OR ownership of the club
 export const requireClubAccess = (req, res, next) => {
-    try {
-        const { clubId } = req.params;
+    const { clubId } = req.params;
 
-        // Admin has access to everything
-        if (req.user.role === 'admin') {
-            return next();
-        }
+    if (req.user.role === 'admin') return next();
 
-        // Club user can only access their own club
-        if (req.user.role === 'club' && req.user.clubId === clubId) {
-            return next();
-        }
+    if (req.user.role === 'club' && req.user.club_id === clubId) return next();
 
-        // No access
-        return res.status(403).json({
-            success: false,
-            message: 'Access denied. You do not have permission to modify this club.'
-        });
-    } catch (error) {
-        console.error('Authorization error:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Server error during authorization',
-            error: error.message
-        });
-    }
+    return res.status(403).json({
+        success: false,
+        message: 'Access denied. You do not have permission to modify this club.'
+    });
 };
