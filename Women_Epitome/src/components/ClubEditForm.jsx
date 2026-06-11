@@ -48,12 +48,10 @@ const ClubEditForm = () => {
     const [basicSaving, setBasicSaving] = useState(false);
     const [eventsSaving, setEventsSaving] = useState(false);
     const [presidentSaving, setPresidentSaving] = useState(false);
-    const [membersSaving, setMembersSaving] = useState(false);
 
     const [basicSaved, setBasicSaved] = useState(false);
     const [eventsSaved, setEventsSaved] = useState(false);
     const [presidentSaved, setPresidentSaved] = useState(false);
-    const [membersSaved, setMembersSaved] = useState(false);
 
     // Tracks per-field upload progress
     const [uploading, setUploading] = useState({});
@@ -63,7 +61,6 @@ const ClubEditForm = () => {
         name: '',
         description: '',
         president: { name: '', photo: '', photo_file_id: '', bio: '', email: '', phone: '' },
-        members: [],
         events: [],
         images: [],
         cover_image: '',
@@ -93,7 +90,7 @@ const ClubEditForm = () => {
                     email: club.president?.email || '',
                     phone: club.president?.phone || ''
                 },
-                members: club.members || [],
+                // members intentionally omitted from client-side form
                 events: (club.events || []).map(event => ({
                     title: event.title || '',
                     description: event.description || '',
@@ -143,6 +140,9 @@ const ClubEditForm = () => {
                 fullPayload.events = serializeEvents(patch.events);
             }
 
+            // Ensure members are not sent from client
+            if (fullPayload.members) delete fullPayload.members;
+
             await api.put(`/clubs/${clubId}`, fullPayload);
             setSaved(true);
             toast.success('Changes saved!');
@@ -166,14 +166,7 @@ const ClubEditForm = () => {
         setFormData(prev => ({ ...prev, president: { ...prev.president, [name]: value } }));
     };
 
-    const handleAddMember = () =>
-        setFormData(prev => ({ ...prev, members: [...prev.members, { name: `Member${prev.members.length + 1}`, designation: 'member', photo: '', bio: '' }] }));
-
-    const handleMemberChange = (index, field, value) =>
-        setFormData(prev => ({ ...prev, members: prev.members.map((m, i) => i === index ? { ...m, [field]: value } : m) }));
-
-    const handleRemoveMember = (index) =>
-        setFormData(prev => ({ ...prev, members: prev.members.filter((_, i) => i !== index) }));
+    // members handlers removed — members are not editable in the UI
 
     const handleAddEvent = () =>
         setFormData(prev => ({ ...prev, events: [...prev.events, { title: '', description: '', date: '', location: '', category: '', cover_image: '', cover_image_file_id: '', images: [], isFeatured: true }] }));
@@ -256,7 +249,7 @@ const ClubEditForm = () => {
     const saveBasic = () => saveSection({ name: formData.name, description: formData.description, established: formData.established }, setBasicSaving, setBasicSaved);
     const saveEvents = () => saveSection({ events: formData.events }, setEventsSaving, setEventsSaved);
     const savePresident = () => saveSection({ president: formData.president }, setPresidentSaving, setPresidentSaved);
-    const saveMembers = () => saveSection({ members: formData.members }, setMembersSaving, setMembersSaved);
+    // saveMembers removed
 
     // ─── Clean up past events ─────────────────────────────────────────────
     const handleCleanupPastEvents = async () => {
@@ -648,56 +641,7 @@ const ClubEditForm = () => {
                     <SectionSaveButton onClick={savePresident} saving={presidentSaving} saved={presidentSaved} />
                 </div>
 
-                {/* ── Members ── */}
-                <div className="bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6">
-                    <div className="flex items-center justify-between mb-4 sm:mb-5 gap-2">
-                        <h2 className="text-lg sm:text-2xl font-bold text-gray-800">Members</h2>
-                        <button
-                            type="button"
-                            onClick={handleAddMember}
-                            className="flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-xs sm:text-sm font-medium flex-shrink-0"
-                        >
-                            <Plus size={16} />
-                            Add Member
-                        </button>
-                    </div>
-
-                    <div className="space-y-3 sm:space-y-4">
-                        {formData.members.map((member, index) => (
-                            <div key={index} className="p-3 sm:p-4 border-2 border-gray-200 rounded-xl">
-                                <div className="flex justify-between items-center mb-3">
-                                    <span className="font-semibold text-gray-700 text-sm sm:text-base">Member {index + 1}</span>
-                                    <button type="button" onClick={() => handleRemoveMember(index)} className="text-red-500 hover:text-red-700 p-1">
-                                        <Trash2 size={18} />
-                                    </button>
-                                </div>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-                                    <input
-                                        type="text"
-                                        placeholder={`Member${index + 1}`}
-                                        value={member.name}
-                                        onChange={(e) => handleMemberChange(index, 'name', e.target.value)}
-                                        className={smallInputClass}
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="member"
-                                        value={member.designation}
-                                        onChange={(e) => handleMemberChange(index, 'designation', e.target.value)}
-                                        className={smallInputClass}
-                                    />
-                                </div>
-                            </div>
-                        ))}
-
-                        {formData.members.length === 0 && (
-                            <p className="text-center text-gray-500 py-4 text-sm">No members added yet. Click &quot;Add Member&quot; to begin.</p>
-                        )}
-                    </div>
-
-                    <SectionSaveButton onClick={saveMembers} saving={membersSaving} saved={membersSaved} />
-                </div>
+                {/* Members section removed from UI */}
 
             </div>
         </div>
