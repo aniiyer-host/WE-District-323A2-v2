@@ -248,7 +248,10 @@ const ClubEventsSection = ({ clubId, clubLabel, fallbackEvents = [] }) => {
                     description: ev.description || 'Details coming soon.',
                     date: ev.date || '',
                     location: ev.location || 'Location TBA',
-                    coverImage: typeof ev.coverImage === 'string' ? ev.coverImage : (ev.coverImage && ev.coverImage.url) || '',
+                    coverImage: (
+                        // accept camelCase `coverImage` (string or {url}) or snake_case `cover_image` (string or {url})
+                        typeof ev.coverImage === 'string' ? ev.coverImage : (ev.coverImage && ev.coverImage.url)
+                    ) || ev.cover_image || (ev.cover_image && ev.cover_image.url) || '',
                     images: ev.images && ev.images.length ? ev.images.map(img => typeof img === 'string' ? img : (img && img.url)).filter(Boolean) : [],
                     isFeatured: Boolean(ev.isFeatured)
                 }));

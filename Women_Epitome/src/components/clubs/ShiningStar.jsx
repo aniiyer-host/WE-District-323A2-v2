@@ -141,7 +141,7 @@ const ShiningStar = () => {
 
             <Footer />
 
-            <style jsx>{`
+            <style>{`
                 @keyframes linear {
                     0%, 100% { background-position: 0% 50%; }
                     50% { background-position: 100% 50%; }

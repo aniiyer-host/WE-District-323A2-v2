@@ -8,7 +8,7 @@ export const getAllClubs = async (req, res) => {
     try {
         const { data: clubs, error } = await supabase
             .from('clubs')
-            .select('*')
+            .select('id, club_id, name, description, president, events, images, cover_image, logo, established, is_active, created_at, updated_at')
             .eq('is_active', true)
             .order('name', { ascending: true });
 
@@ -30,7 +30,7 @@ export const getClubById = async (req, res) => {
 
         const { data: club, error } = await supabase
             .from('clubs')
-            .select('*')
+            .select('id, club_id, name, description, president, events, images, cover_image, logo, established, is_active, created_at, updated_at')
             .eq('club_id', clubId)
             .maybeSingle();
 
@@ -52,6 +52,9 @@ export const getClubById = async (req, res) => {
 export const createClub = async (req, res) => {
     try {
         const clubData = req.body;
+
+        // Remove members field from incoming payload to avoid storing/parsing it for now
+        if (clubData && clubData.members) delete clubData.members;
 
         // Check duplicate
         const { data: existing } = await supabase
@@ -86,7 +89,17 @@ export const updateClub = async (req, res) => {
     try {
         const { clubId } = req.params;
         const updateData = req.body;
-console.log('UPDATE payload members:', updateData.members?.slice(0, 2));
+        // Remove members from update payload to reduce parsing overhead
+        if (updateData && updateData.members) delete updateData.members;
+
+        // Debug: log incoming payload (trimmed to avoid huge logs)
+        try {
+            const safeBody = JSON.stringify(req.body);
+            console.log(`[updateClub] payload for clubId=${clubId}:`, safeBody.length > 2000 ? safeBody.slice(0, 2000) + '...<truncated>' : safeBody);
+        } catch (e) {
+            console.log('[updateClub] failed to stringify req.body for logging', e);
+        }
+        console.log('UPDATE payload: members field removed, events length:', Array.isArray(updateData.events) ? updateData.events.length : 0);
 
         //console.log(`[updateClub] clubId from URL: "${clubId}"`);
         //console.log(`[updateClub] req.user.club_id: "${req.user?.club_id}", role: "${req.user?.role}"`);
@@ -159,6 +172,9 @@ console.log('UPDATE payload members:', updateData.members?.slice(0, 2));
             .update(updateData)
             .eq('club_id', clubId)
             .select();
+
+        // Debug: log Supabase response
+        console.log('[updateClub] supabase update result — error:', error, 'rows:', Array.isArray(clubs) ? clubs.length : clubs);
 
         if (error) throw error;
 

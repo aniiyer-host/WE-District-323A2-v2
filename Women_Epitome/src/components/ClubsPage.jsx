@@ -38,13 +38,13 @@ const ClubsPage = () => {
         const response = await api.get('/clubs');
 
         // Map API data to match the format expected by the UI
-        const clubsData = response.data.data.clubs.map(club => ({
+          const clubsData = response.data.data.clubs.map(club => ({
           id: club.club_id,
           name: club.name,
           slug: club.club_id,
           location: club.description.split('in ').pop() || 'Mumbai Region',
           established: club.established ? new Date(club.established).getFullYear().toString() : '2017',
-          members: club.members?.length.toString() || '0',
+          //members: (Array.isArray(club.members) ? club.members.length : (parseInt(club.members) || 0)).toString(),
           president: club.president?.name || 'To be updated',
           focus: club.description.split('focused on ')[1]?.split('.')[0] || club.description.split('Focus on ')[1]?.split('.')[0] || 'Community Service',
           image: club.cover_image || club.images?.[0] || `https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80`,
@@ -333,7 +333,7 @@ const ClubsPage = () => {
                 <div className="w-16 h-16 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Heart className="w-8 h-8 text-white" />
                 </div>
-                <p className="text-3xl font-bold text-gray-800 mb-1">{districtInfo.totalMembers}+</p>
+                <p className="text-3xl font-bold text-gray-800 mb-1">{/*{districtInfo.totalMembers}*/}397+</p>
                 <p className="text-sm text-gray-600 font-semibold">Total Members</p>
               </div>
               <div className="text-center">
@@ -416,8 +416,8 @@ const ClubsPage = () => {
                   <div className="mb-4">
                     <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
                       <div className="flex items-center gap-1">
-                        <Users size={14} className="text-purple-600" />
-                        <span>{club.members} Members</span>
+                        {/*<Users size={14} className="text-purple-600" />
+                         <span>{club.members} Members</span> */}
                       </div>
                     </div>
                     <div className="space-y-1">
