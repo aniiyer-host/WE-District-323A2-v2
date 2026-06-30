@@ -35,7 +35,6 @@ export const getClubById = async (req, res) => {
             .maybeSingle();
 
         if (error || !club) {
-            const { data: allClubs } = await supabase.from('clubs').select('club_id, name');
             return res.status(404).json({ success: false, message: 'Club not found' });
         }
 
@@ -92,17 +91,7 @@ export const updateClub = async (req, res) => {
         // Remove members from update payload to reduce parsing overhead
         if (updateData && updateData.members) delete updateData.members;
 
-        // Debug: log incoming payload (trimmed to avoid huge logs)
-        try {
-            const safeBody = JSON.stringify(req.body);
-            console.log(`[updateClub] payload for clubId=${clubId}:`, safeBody.length > 2000 ? safeBody.slice(0, 2000) + '...<truncated>' : safeBody);
-        } catch (e) {
-            console.log('[updateClub] failed to stringify req.body for logging', e);
-        }
-        console.log('UPDATE payload: members field removed, events length:', Array.isArray(updateData.events) ? updateData.events.length : 0);
 
-        //console.log(`[updateClub] clubId from URL: "${clubId}"`);
-        //console.log(`[updateClub] req.user.club_id: "${req.user?.club_id}", role: "${req.user?.role}"`);
 
         // Prevent changing club_id
         delete updateData.club_id;
@@ -152,17 +141,12 @@ export const updateClub = async (req, res) => {
             .eq('club_id', clubId)
             .maybeSingle();
 
-        //console.log(`[updateClub] maybeSingle result — existing: ${JSON.stringify(existing)}, findError: ${JSON.stringify(findError)}`);
 
         if (findError) throw findError;
         if (!existing) {
-            // List all clubs to help debug
-            const { data: allClubs } = await supabase.from('clubs').select('club_id, name');
-            //console.log('[updateClub] All club_ids in DB:', allClubs?.map(c => c.club_id));
             return res.status(404).json({
                 success: false,
-                message: `Club '${clubId}' not found. Check that this club_id exists in the database.`,
-                availableIds: allClubs?.map(c => c.club_id)
+                message: `Club '${clubId}' not found.`,
             });
         }
 
@@ -173,8 +157,6 @@ export const updateClub = async (req, res) => {
             .eq('club_id', clubId)
             .select();
 
-        // Debug: log Supabase response
-        console.log('[updateClub] supabase update result — error:', error, 'rows:', Array.isArray(clubs) ? clubs.length : clubs);
 
         if (error) throw error;
 

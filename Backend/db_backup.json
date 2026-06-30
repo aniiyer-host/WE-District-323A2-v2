@@ -1,0 +1,3462 @@
+{
+  "clubs": [
+    {
+      "id": "cb48d4b4-dfdb-45d8-8726-5d12a1f562b3",
+      "club_id": "belapur",
+      "name": "WE Club of Belapur",
+      "description": "Focused on Animal Welfare & Care for Elderly. Active in community outreach, educational support, and health initiatives across Belapur, Navi Mumbai.",
+      "president": {
+        "bio": "Passionate about animal welfare and elderly care",
+        "name": "WE Geeta Singh",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/Belapur/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/Belapur/1.jpg",
+      "logo": null,
+      "established": "2021-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T13:38:59.308Z",
+      "updated_at": "2026-03-05T13:38:59.308Z"
+    },
+    {
+      "id": "753848f8-f797-43bb-830a-9aadbc9e61ab",
+      "club_id": "dronagiri",
+      "name": "WE Club of Dronagiri",
+      "description": "Health & Wellness focused club conducting health camps, community service programs, and women support initiatives in Dronagiri, Navi Mumbai.",
+      "president": {
+        "bio": "Healthcare professional committed to community wellness",
+        "name": "WE Surekha Bhoir",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/Dronagiri/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/Dronagiri/1.jpg",
+      "logo": null,
+      "established": "2022-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T13:40:55.822Z",
+      "updated_at": "2026-03-05T13:40:55.822Z"
+    },
+    {
+      "id": "5c66ff2b-439d-4a78-9dc5-be6bbf3a9bf8",
+      "club_id": "thane-angels",
+      "name": "WE Club of Thane Angels",
+      "description": "Award-winning club with 4000+ lives touched through 30+ projects. Excellence award winner focused on community development in Thane.",
+      "president": {
+        "bio": "Excellence award winner and community development leader",
+        "name": "WE Priyadarshini Sane",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 23",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 24",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 25",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 26",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 27",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 28",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 29",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 30",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 31",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 32",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 33",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 34",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 35",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 36",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 37",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 38",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/Angels/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/Angels/1.jpg",
+      "logo": null,
+      "established": "2019-01-04T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T14:53:23.704Z",
+      "updated_at": "2026-03-05T14:53:23.704Z"
+    },
+    {
+      "id": "7f60e3af-9745-4d5e-81f3-77f725e2f1cc",
+      "club_id": "girls-in-pearls",
+      "name": "WE Club of Girls in Pearls",
+      "description": "Youth Development & Environment focused club running youth programs, leadership training, and community projects across Mumbai Region.",
+      "president": {
+        "bio": "Young leader passionate about youth empowerment and environmental conservation",
+        "name": "WE Neha Shende",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 23",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 24",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 25",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 26",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 27",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 28",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/GirlsinPearls/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/GirlsinPearls/1.jpg",
+      "logo": null,
+      "established": "2021-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T13:34:57.574Z",
+      "updated_at": "2026-03-05T13:34:57.574Z"
+    },
+    {
+      "id": "fe5462f3-a173-4d4f-8d3f-73f8619dd26c",
+      "club_id": "chembur-galaxy",
+      "name": "WE Club of Chembur Galaxy",
+      "description": "Women Empowerment focused club dedicated to skill building and social welfare initiatives in the Chembur region.",
+      "president": {
+        "bio": "Champion of women empowerment and skills development",
+        "name": "WE Kiran Sahetia",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/ChemburGalaxy/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/ChemburGalaxy/1.jpg",
+      "logo": null,
+      "established": "2016-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:00:15.436Z",
+      "updated_at": "2026-03-05T15:00:15.436Z"
+    },
+    {
+      "id": "6dd5842f-00b7-41b4-b069-b34424047156",
+      "club_id": "shining-star",
+      "name": "WE Club of Shining Star",
+      "description": "Newly established club in 2024 focusing on Environment & Care for Elderly with environment programs and community service initiatives in Vashi.",
+      "president": {
+        "bio": "Medical professional dedicated to elderly care and environmental causes",
+        "name": "WE Dr. Vijaya Gosavi",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [],
+      "cover_image": null,
+      "logo": null,
+      "established": "2023-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:01:51.205Z",
+      "updated_at": "2026-03-05T15:01:51.205Z"
+    },
+    {
+      "id": "1b854f76-4448-4b5a-b587-d6640abd06e6",
+      "club_id": "anushakti-royals",
+      "name": "WE Club of Anushakti Royals",
+      "description": "Community Service focused club in Anushaktinagar, dedicated to health check-up camps, cancer care support, and women empowerment initiatives.",
+      "president": {
+        "bio": "Leading the club since establishment with a focus on community health and women empowerment",
+        "name": "WE Devki Goklani",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/AnushaktiRoyals/1.png"
+      ],
+      "cover_image": "/images/club-pages-imgs/AnushaktiRoyals/1.png",
+      "logo": null,
+      "established": "2016-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:04:33.730Z",
+      "updated_at": "2026-03-05T15:04:33.730Z"
+    },
+    {
+      "id": "3927c330-4f38-47d7-8202-206920d7af0b",
+      "club_id": "uran",
+      "name": "WE Club of Uran",
+      "description": "Rural Development & Health focused club dedicated to rural outreach, community service, and women empowerment in Uran, Navi Mumbai.",
+      "president": {
+        "bio": "Rural development expert committed to women empowerment",
+        "name": "WE Shilpa Gade",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/Uran/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/Uran/1.jpg",
+      "logo": null,
+      "established": "2016-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:10:30.588Z",
+      "updated_at": "2026-03-05T15:10:30.588Z"
+    },
+    {
+      "id": "6e733eae-33ae-4473-a4f8-9ec3d360c114",
+      "club_id": "chembur",
+      "name": "WE Club of Chembur",
+      "description": "Education & Child Welfare focused club that has impacted over 5000+ lives through various initiatives including solar power projects and educational programs.",
+      "president": {
+        "bio": "Dedicated to education and sustainable development",
+        "name": "WE Ramolla Karnani",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 23",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 24",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 25",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 26",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 27",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 28",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 29",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [
+        {
+          "date": "2026-01-05T00:00:00.000Z",
+          "title": "Contributed towards school fees of Veera Kaur in Sr. KG for 2025-26",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728057964_Veera_Kaur_2_6X0yV9mnk.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728069626_Veer_kumar3_cV2mxyfSn.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728079968_Veera_Kaur_4_klQZfacWH.jpeg"
+          ],
+          "category": "education",
+          "location": "Air-India Modern School, Kalina, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728045147_Veer_Kumar_fees_VGHbDA7Q2.jpeg",
+          "description": "Beneficiary 1, amount Rs. 10,000/-",
+          "is_featured": true,
+          "cover_image_file_id": "69a9aeed5c7cd75eb8c3ece7"
+        },
+        {
+          "date": "2026-01-01T00:00:00.000Z",
+          "title": "Contributed towards medical expenses of Dhropadi Rajpal",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728113674_Dhropadi_2_BJ6OcHoct.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728129390_Dhropadi_3_Oad0YKd-t.jpeg"
+          ],
+          "category": "health",
+          "location": "Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728099558_Dhropadi_Rajpal_lSlOItFsA.jpeg",
+          "description": "Ms. Dhropadi Rajpal had broken her spinal cord during a fall. Beneficiary 1, amount - Rs. 25000/-",
+          "is_featured": true,
+          "cover_image_file_id": "69a9af245c7cd75eb8c5041d"
+        },
+        {
+          "date": "2026-01-03T00:00:00.000Z",
+          "title": "Sponsored foodgrains at Aai Day care centre",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728164354_aai_2_orZT_QVNu.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728173173_aai_3_arC06Cst6.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728181805_Aai_4_KslSPQw6Q.jpeg"
+          ],
+          "category": "anaajdaan",
+          "location": "Pen, District Raigad, Maharashtra",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728155299_Aai_day_care_oSRwGI7ei.jpeg",
+          "description": "As one of the spot activities undertaken during DP's visit, sponsored foodgrains at Aai Day care centre for special children. Beneficiaries 70, amount Rs. 15,000/-",
+          "is_featured": true,
+          "cover_image_file_id": "69a9af5b5c7cd75eb8c61fa2"
+        },
+        {
+          "date": "2026-01-05T00:00:00.000Z",
+          "title": "Sponsored transportation charges for one month - SEC school Wadala.",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728212337_Tr_2_z0dpkJlmb.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728221160_Tr_3_P-n59xDMh.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728234138_Tr._charges_SEC_school_zDLzkHG72.jpeg"
+          ],
+          "category": "specially-abled",
+          "location": "Wadala, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728199422_Tr_EWX1MTgEI.jpeg",
+          "description": "As one of the spot activities undertaken during District President’s WE Varsha Vora and her team’s visit, sponsored transportation charges for one month for especially abled children of SEC school, Wadala. The transportation charges were sponsored by WE Kawal Rekhi, WE Ramolla Karnani, WE Sunita Shukla, WE Sheeja Anoop and WE Pinky Pardhanani. ",
+          "is_featured": true,
+          "cover_image_file_id": "69a9af875c7cd75eb8c735eb"
+        },
+        {
+          "date": "2026-01-14T00:00:00.000Z",
+          "title": "Celebrated Makkar Sankranti with children of Balwadi",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728271924_MS_2_9l25KSaqf.jpeg"
+          ],
+          "category": "child-welfare",
+          "location": "Chembur",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728255069_makkar_Sankranti_ClM-EgedW.jpeg",
+          "description": "Celebrated Makar Sankranti with children of Balwadi. All the children were given Sankranti sweets by Mona teacher and children enjoyed and danced to the music during celebrations.\n\nAmount Rs. 1300/-\nBeneficiaries - 40\n",
+          "is_featured": true,
+          "cover_image_file_id": "69a9afbf5c7cd75eb8c89d46"
+        },
+        {
+          "date": "2026-01-15T00:00:00.000Z",
+          "title": "Permanent Project – Wall mounted fan at Balwadi. ",
+          "images": [],
+          "category": "permanent-projects",
+          "location": "Chembur",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1772728284939_WF_kBac2SbVu.jpeg",
+          "description": "A wall mounted fan was installed at Balwadi as requested. The cost of the fan, Rs. 2700/- and wiring and fitting charges, Rs. 300/- total Rs. 3000/-, were borne by WE Pinky Pardhanani.\n\nAmount Rs. 3000/- (Cost of the fan Rs. 2700/- + wiring and fitting charges Rs. 300/-)\n\nBeneficiaries - 45\n\nSponsorers:\nWE Pinky Pardhanani.Rs. 3000/-\n",
+          "is_featured": true,
+          "cover_image_file_id": "69a9afdd5c7cd75eb8c968b3"
+        },
+        {
+          "date": "2026-01-02T00:00:00.000Z",
+          "title": "Uplift the under-privileged",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773425186843_Badlapur_tPQ2MDnHY.jpeg"
+          ],
+          "category": "needy",
+          "location": "Badlapur",
+          "cover_image": "",
+          "description": "Based on appeal received from WWH, WE Subha Raghavan along-with a team of volunteers donated and distributed blankets to members of Adivasi Tribal hamlets of Amdeshiv village, Badlapur. ",
+          "is_featured": true,
+          "cover_image_file_id": ""
+        },
+        {
+          "date": "2026-01-18T00:00:00.000Z",
+          "title": "Health Care",
+          "images": [],
+          "category": "health",
+          "location": "Kalina, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773425457313_Kiran_Rathod_18.01.26_lxHKd3qhW.jpeg",
+          "description": "Sponsored towards treatment of husband of needy lady Ms. Kiran from Kalina. Her husband is a taxi driver and currently unwell. There is no other source of income.  Sponsored by: WE Kawal Rekhi. Total Rs. 2000/- Beneficiary 1",
+          "is_featured": true,
+          "cover_image_file_id": "69b453315c7cd75eb8b1676d"
+        },
+        {
+          "date": "2026-01-18T00:00:00.000Z",
+          "title": "Health Care",
+          "images": [],
+          "category": "health",
+          "location": "Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773425545620_Dhropadi_2.1_ITMRt7Kty.jpeg",
+          "description": "Sponsored towards diapers for patient Dhropadi Rajpal who was operated recently in Sushristi Hospital.                       Sponsored by :    WE Neena Jadwani and her two friends Rs. 600/- each. Total Rs.1800/-. Beneficiary 1",
+          "is_featured": true,
+          "cover_image_file_id": "69b4538a5c7cd75eb8b5ae81"
+        },
+        {
+          "date": "2026-01-02T00:00:00.000Z",
+          "title": "Help the needy",
+          "images": [],
+          "category": "needy",
+          "location": "Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773425779913_Bed_bKUh4azb9.jpeg",
+          "description": "WE Kawal Rekhi donated a double bed with mattress to housekeeping staff. Amount spent is not considered as items donated were used but in excellent condition. Sponsored by WE Kawal Rekhi. Beneficiary 5",
+          "is_featured": true,
+          "cover_image_file_id": "69b454745c7cd75eb8bd13ee"
+        },
+        {
+          "date": "2026-01-02T00:00:00.000Z",
+          "title": "Anaajdaan",
+          "images": [],
+          "category": "anaajdaan",
+          "location": "",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773426137734_TB_patients_3480n1vFe.jpeg",
+          "description": "Sponsored foodgrains required for TB patients as per Doctors advice at the centre on Sahar Road, Anderi (East) for the month of September' 2025. Sponsored by : WE Kawal Rekhi Rs.   600\nWE Saroja Mekal Rs. 1200\nWE Pinky   Rs 600\nWE Neena Jadwani Rs.  600\nWE Arti Bhatia  Rs. 600",
+          "is_featured": true,
+          "cover_image_file_id": "69b455da5c7cd75eb8c5974c"
+        },
+        {
+          "date": "2026-01-03T00:00:00.000Z",
+          "title": "Kindness ",
+          "images": [],
+          "category": "specially-abled",
+          "location": "Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773506112950_SEC_Agripada_jVomfXDQw.jpeg",
+          "description": "WE Kawal Rekhi and her friend sponsored milk for especially abled needy children at SEC School, Agripada. Amount: Rs. 4000/-\n\nBeneficiary - 72",
+          "is_featured": true,
+          "cover_image_file_id": "69b58e425c7cd75eb8411a56"
+        },
+        {
+          "date": "2026-01-21T00:00:00.000Z",
+          "title": "Kindness ",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773506280705_Sports_2_i1WxBPdJC.jpeg"
+          ],
+          "category": "specially-abled",
+          "location": "",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773506258036_Sports1_eOQUTVV00.jpeg",
+          "description": "WE Ramolla Karnani sponsored snacks / eatables and water for the Sports Day event of children at SEC School, Agripada. \n\nAmount: Rs. 10000/-\n\nBeneficiary - 72",
+          "is_featured": true,
+          "cover_image_file_id": "69b58ed35c7cd75eb843d243"
+        },
+        {
+          "date": "2026-01-11T00:00:00.000Z",
+          "title": "Education",
+          "images": [],
+          "category": "education",
+          "location": "Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773506580601_Likeminded_g1Fipi_2p.jpeg",
+          "description": "WE Kawal Rekhiji contributed an amount of Rs. 50,000/- towards the education of underprivileged children to Likeminded Education and welfare society.  \n\nAmount Rs. 50,000/-\n\nSponsored by:                                   \nWE Kawal Rekhi    - Rs. 50,000\n\nBeneficiary - 5",
+          "is_featured": true,
+          "cover_image_file_id": "69b590165c7cd75eb84957e7"
+        },
+        {
+          "date": "2026-01-19T00:00:00.000Z",
+          "title": "Educate Punjab Project",
+          "images": [],
+          "category": "education",
+          "location": "Ludhiana",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773506693838_Educate_Punjab_NXpgOq090.jpeg",
+          "description": "WE Harpreet Kaur contributed an amount of Rs. 16,621/- towards the education of a child for one year to an orphanage “Educate Punjab Project”, Ludhiana.  \n",
+          "is_featured": true,
+          "cover_image_file_id": "69b590875c7cd75eb84b8ae6"
+        },
+        {
+          "date": "2026-01-02T00:00:00.000Z",
+          "title": "Women empowerment",
+          "images": [],
+          "category": "women-welfare",
+          "location": "Mumbai",
+          "cover_image": "",
+          "description": "Paid salary to Balwadi teacher and support staff",
+          "is_featured": true,
+          "cover_image_file_id": ""
+        },
+        {
+          "date": "2026-02-01T00:00:00.000Z",
+          "title": "School fee payment",
+          "images": [],
+          "category": "education",
+          "location": "",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773507342151_Rohan_Gaikwad_M4k9Mld6E.jpeg",
+          "description": "Paid the School Fees of VII Std. student for balance six months in the year 2025 - 26 for Rohan Gaikwad at St. Sebastian High School.\n\nAmount: Rs. 17,500/- \n\nBeneficiary: 1 \n\nSponsored by WE Roopa Sharma, ",
+          "is_featured": true,
+          "cover_image_file_id": "69b593105c7cd75eb8589657"
+        },
+        {
+          "date": "2026-02-02T00:00:00.000Z",
+          "title": "Anaajdaan",
+          "images": [],
+          "category": "anaajdaan",
+          "location": "Andheri, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773507523389_TB_patients_rwurANdE5.jpeg",
+          "description": "Sponsored the food grains required by TB patients as per the Doctors advice at the centre on Sahar Road, Andheri East for 6 patients for the month of February 2026. \n\nAmount Rs. 3600/-\n\nBeneficiary - 6\n\nSponsor: Relative of WE Sunita Shukla",
+          "is_featured": true,
+          "cover_image_file_id": "69b593c55c7cd75eb85c7d5f"
+        },
+        {
+          "date": "2026-02-01T00:00:00.000Z",
+          "title": "Anaajdaan",
+          "images": [],
+          "category": "anaajdaan",
+          "location": "Kalina, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773507616988_Kiran_rathod_vggVFSOoO.jpeg",
+          "description": "Sponsored ration for the family in need of Mrs. Kiran Rathod, Kalina for February’26. \n\nAmount Rs. 1000/-\n\nBeneficiary - 5\n\nSponsor: WE Kawal Rekhi",
+          "is_featured": true,
+          "cover_image_file_id": "69b594225c7cd75eb85e2378"
+        },
+        {
+          "date": "2026-02-02T00:00:00.000Z",
+          "title": "PROJECT: ENABLE THE SPECIALLY-ABLED",
+          "images": [],
+          "category": "specially-abled",
+          "location": "Wadala, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773507743529_SEc_Tr._mDXtwqdgU.jpeg",
+          "description": "Sponsored transportation charges for one month for especially abled children of SEC school, Wadala. The transportation charges were sponsored by WE Kawal Rekhi, WE Ramolla Karnani, WE Sheeja Anoop, WE Saroja Mekal, WE Neena Jadwani and WE Pinky Pardhanani. \n\nAmount: Rs. 50,000/-\n\nBeneficiaries – 23\n\nSponsor: \nWE Kawal Rekhi  - Rs 5,000/-\nWE Ramolla Karnani – Rs.16,000/-\nWE Neena Jadwani  – Rs. 4,000/-\nWE Sheeja Anoop – Rs. 5,000/- and \nWE Pinky Pardhanani – Rs. 10,000/-\nWE Saroja Mekal - Rs. 10,000/-",
+          "is_featured": true,
+          "cover_image_file_id": "69b594a15c7cd75eb8628429"
+        },
+        {
+          "date": "2026-02-09T00:00:00.000Z",
+          "title": "Heal the ailed",
+          "images": [],
+          "category": "health",
+          "location": "Kalina, Mumbai",
+          "cover_image": "",
+          "description": "Sponsored towards treatment of patient Punit Rathod after he met with an accident. WE Kawal Rekhi contributed for the same.\n \n\nAmount Rs. 2000/-\n\nBeneficiary - 1",
+          "is_featured": true,
+          "cover_image_file_id": ""
+        },
+        {
+          "date": "2026-02-16T00:00:00.000Z",
+          "title": "HEAL THE CANCER PATIENTS - CANCER CARE ",
+          "images": [],
+          "category": "health",
+          "location": "Chembur, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773508073359_Shradha_Cancer_Centre_nDlBLVO-O.jpeg",
+          "description": "Sponsored towards New Clothes and old Clothes, 2 Kg tea, 5 Kg sugar, 60 packets of biscuits and 5 dozen bananas to the patients at Shraadha Cancer Foundation, Chembur.  WE Meena Jhumani and WE Arti Bhatia contributed for the same.\n\nAmount Rs. 3770/-\nCost of new clothes: Rs. 1550/-\nFood items as above: Rs. 1200/- \n\nBeneficiaries - 60\n\nSponsored by: WE Meena Jhumani and WE Arti Bhatia",
+          "is_featured": true,
+          "cover_image_file_id": "69b595eb5c7cd75eb86a1bc5"
+        },
+        {
+          "date": "2026-02-14T00:00:00.000Z",
+          "title": "HEAL THE CANCER PATIENTS - CANCER CARE ",
+          "images": [],
+          "category": "health",
+          "location": "Chembur, MUMBAI",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773508163436_Cancer_care_2_kgNVsLtJE.jpeg",
+          "description": "Distributed buckets, mugs, chaas (butter milk), curds, dry bhel and fresh fruits to cancer children at Access Life, near Diamond Garden, Chembur. WE Prakash Khanna, WE Neena Jadwani and her three friends contributed for the same.\n\nAmount Rs. 3700/-\nWe Prakash Khanna and WE Neena Jdawani: Rs. 1600/- (Rs. 800/- each).\nThree friends: Rs. 2100/- \n\nBeneficiaries - 12\n",
+          "is_featured": true,
+          "cover_image_file_id": "69b596455c7cd75eb86e1399"
+        },
+        {
+          "date": "2026-02-17T00:00:00.000Z",
+          "title": "HEAL THE AILED -HEALTH CARE ",
+          "images": [],
+          "category": "health",
+          "location": "MUMBAI",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773508288747_mUKADAM_f0GV3zGwk.jpeg",
+          "description": "Based on appeal received from Mrs. Mukadam, the swimming instructor, towards help for treatment of her daughter whose is in ICU, sponsored Rs. 20,000/- towards her treatment. WE Ramolla Karnani, WE Sheeja Anoop, WE Kawal Rekhi, WE Pinky Pardanani, WE Neena Jadhwani, WE Saroja Mekal and WE Roopa Sharma contributed for the same.\n \nAmount Rs. 20000/-\n\nBeneficiary - 1\n\nSponsored by: WE Ramolla Karnani: Rs. 2000/-, \n   WE Sheeja Anoop: Rs. 5000/-,\n   WE Kawal Rekhi: Rs. 2000/-,\n   WE Pinky Pardanani: Rs.5000/-, \n   WE Neena Jadhwani: Rs. 2000/-,\n   WE Saroja Mekal: Rs.2000/- and \n   WE Roopa Sharma: Rs. 2000/-  ",
+          "is_featured": true,
+          "cover_image_file_id": "69b596c35c7cd75eb8746b63"
+        },
+        {
+          "date": "2026-02-20T00:00:00.000Z",
+          "title": "Anaaj daan",
+          "images": [],
+          "category": "anaajdaan",
+          "location": "kalina, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773508401242_Kiran_rathod_2_XCwhzlYqr.jpeg",
+          "description": "Sponsored Rs. 1000/- towards payment of foodgrains and groceries to needy person, Ms. Kiran Rathod, Kalina.\n \n\nAmount Rs. 1000/-\n\nBeneficiary - 5\n",
+          "is_featured": true,
+          "cover_image_file_id": "69b597335c7cd75eb8793600"
+        },
+        {
+          "date": "2026-02-25T00:00:00.000Z",
+          "title": "Enable the specially abled",
+          "images": [],
+          "category": "specially-abled",
+          "location": "Agripada, Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773508495450_SEC_UUd_Oomla.jpeg",
+          "description": "WE Kawal Rekhi and her friend sponsored milk for especially abled needy children at SEC School, Agripada. We appreciate their kind and generous gesture.\n\n\nAmount: Rs. 4000/-\n\nBeneficiary - 72\n\nSponsor: WE Kawal Rekhi and her friend.",
+          "is_featured": true,
+          "cover_image_file_id": "69b597915c7cd75eb87ae70f"
+        },
+        {
+          "date": "2026-02-02T00:00:00.000Z",
+          "title": "Women empowerment",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773508795756_Balwadi_2_53wLWsHpz3.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773508801643_Balwadi_3_bk2FRUpFe.jpeg"
+          ],
+          "category": "women-welfare",
+          "location": "Mumbai",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/chembur/events/1773508788908_Balwadi_1_lfJ2T5Nak.jpeg",
+          "description": "Paid salary to Balwadi teacher and support staff",
+          "is_featured": true,
+          "cover_image_file_id": "69b598b65c7cd75eb8816f23"
+        }
+      ],
+      "images": [
+        "/images/club-pages-imgs/Chembur/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/Chembur/1.jpg",
+      "logo": null,
+      "established": "2016-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:12:51.337Z",
+      "updated_at": "2026-03-05T15:12:51.337Z"
+    },
+    {
+      "id": "ce5a8670-05bc-4438-9c71-58051714f3c2",
+      "club_id": "vasant-vihar",
+      "name": "WE Club of Vasant Vihar",
+      "description": "One of the largest clubs with 64 members focused on Education & Child Welfare. Has touched 1000+ lives through educative initiatives.",
+      "president": {
+        "bio": "Education champion with extensive experience in child welfare programs",
+        "name": "WE Hiral Sanghvi",
+        "email": "sanghvihiral@hotmail.com",
+        "phone": "9821876232",
+        "photo": "",
+        "photo_file_id": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 23",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 24",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 25",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 26",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 27",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 28",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 29",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 30",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 31",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 32",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 33",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 34",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 35",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 36",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 37",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 38",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 39",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 40",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 41",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 42",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 43",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 44",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 45",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 46",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 47",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 48",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 49",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 50",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 51",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 52",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 53",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 54",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 55",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 56",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 57",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 58",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 59",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [
+        {
+          "date": "2026-06-01",
+          "title": "test",
+          "images": [],
+          "category": "image-building",
+          "location": "chembur",
+          "isFeatured": true,
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/vasant-vihar/events/1781183114087_Architecture_w-uatv_qM.jpeg",
+          "description": "test",
+          "cover_image_file_id": "6a2ab28a5c7cd75eb8350251"
+        }
+      ],
+      "images": [
+        "/images/club-pages-imgs/VasantVihar/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/VasantVihar/1.jpg",
+      "logo": "",
+      "established": "2016-12-31T00:00:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:06:41.590Z",
+      "updated_at": "2026-03-05T15:06:41.590Z"
+    },
+    {
+      "id": "fd82de1f-222c-4ce0-835e-de5d153cb77f",
+      "club_id": "vile-parle",
+      "name": "WE Club of Vile Parle",
+      "description": "Education & Literacy champion club that has helped 500+ students and supported 5+ schools through various educational initiatives.",
+      "president": {
+        "bio": "Education champion dedicated to supporting schools and students",
+        "name": "WE Neena Pethe",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 23",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 24",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 25",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 26",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 27",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 28",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 29",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 30",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 31",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 32",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/VileParle/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/VileParle/1.jpg",
+      "logo": null,
+      "established": "2017-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:17:56.426Z",
+      "updated_at": "2026-03-05T15:17:56.426Z"
+    },
+    {
+      "id": "e30a4b9e-899f-4390-a42c-de4ef0a67991",
+      "club_id": "new-panvel-steel-town",
+      "name": "WE Club of New Panvel Steel Town",
+      "description": "Community Development focused club with 38 active members working on social initiatives, community welfare, and educational support programs.",
+      "president": {
+        "bio": "Community development expert with a passion for sustainable growth",
+        "name": "WE Megha Jain",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 23",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 24",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 25",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 26",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 27",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 28",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 29",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 30",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 31",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 32",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 33",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 34",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 35",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 36",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 37",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 38",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [
+        "/images/club-pages-imgs/NPST/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/NPST/1.jpg",
+      "logo": null,
+      "established": "2016-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:20:16.258Z",
+      "updated_at": "2026-03-05T15:20:16.258Z"
+    },
+    {
+      "id": "72db79ec-60a4-4cb1-b61c-ae3204137c78",
+      "club_id": "thane-stars-city",
+      "name": "WE Club of Thane Stars City",
+      "description": "Newly established in 2024, focused on Education & Literacy with programs for literacy support, education initiatives, and community projects.",
+      "president": {
+        "bio": "Education advocate passionate about literacy programs",
+        "name": "WE Rohini Thakur",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [],
+      "images": [],
+      "cover_image": null,
+      "logo": null,
+      "established": "2023-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:21:38.571Z",
+      "updated_at": "2026-03-05T15:21:38.571Z"
+    },
+    {
+      "id": "3c86cc4c-d0d0-485b-87dc-28970f9e96f6",
+      "club_id": "vashi-navi-mumbai",
+      "name": "WE Club of Vashi Navi Mumbai",
+      "description": "Community Welfare focused club working on rural development , Health and Education in Vashi, Navi Mumbai.",
+      "president": {
+        "bio": "Community welfare specialist with focus on Education.",
+        "name": "WE Namita Sinha",
+        "email": "namitasinha25@yahoo.com",
+        "phone": "9328755962",
+        "photo": "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/president/1772645592644_IMG_7227_72LmjKmr0.jpeg"
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 23",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 24",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 25",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 26",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 27",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 28",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 29",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 30",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 31",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 32",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 33",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 34",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 35",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [
+        {
+          "date": "2026-02-23T00:00:00.000Z",
+          "title": "CHILD WELFARE",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1772645557942_IMG_7223_nm5-4TJD8.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1772645571783_IMG_7224_T4GteNxgX.jpeg"
+          ],
+          "category": "permanent-projects",
+          "location": "Pivali Village  Thane",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1772645525277_E6BECF76-46B7-41B2-B116-4BA5011983EC_wLERGy_6W.png",
+          "description": "Our Club has donated floor tiles for Adivasi girls hostel. This is our Permanent project.Sponsored by WE Sunita Tandon. \nTotal Amount spent- 63000/- Beneficiaries many.",
+          "is_featured": true,
+          "cover_image_file_id": "69a86c965c7cd75eb8ca543d"
+        },
+        {
+          "date": "2026-01-07T00:00:00.000Z",
+          "title": "DISTRICT BOREWELL PROJECT",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1772645813643_IMG_7222_MsRwv1YpJ.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1772645826055_IMG_7221_gXv4igOOo.jpeg"
+          ],
+          "category": "permanent-projects",
+          "location": "Vanvasi Kalyan Ashram Panvel",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1772649113714_C77C55F4-0A1B-4DE1-9FBB-77BC9495FA1F_RXH83158x.png",
+          "description": "Our Club has participated in District Borewell project at Vanvasi Kalyan Ashram Panvel.  It is twinning project with District. Total Vost -5000/- Beneficiaries many.",
+          "is_featured": true,
+          "cover_image_file_id": "69a87a9a5c7cd75eb8266a43"
+        },
+        {
+          "date": "2026-03-08T00:00:00.000Z",
+          "title": "Women Day Celebration ",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1773480187182_IMG_7364_JVDwBWj0Y.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1773480203977_IMG_7366_aX7UYVnUH.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1773480225583_IMG_7369_eNCd1zOim.jpeg"
+          ],
+          "category": "image-building",
+          "location": "Apollo Hospo, Belapur",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1774293842675_IMG_7313_EAtnmFiA0.webp",
+          "description": "*WE Club of Vashi Navi Mumbai*\nActivity- Image Building \nDate- 8/3/2026\n\nToday on the Occasion of *Women’s Day* our Club members attended the Women’s Day Celebration – *Naari in a Saree* (नारी साड़ी में) 👩🥻, a 5 km Walkathon organised by Apollo Hospital.\nThe event beautifully celebrated the strength, grace, and spirit of women while promoting health and fitness.\nOur enthusiastic participation made this an *Image Building Project of WE Club of Vashi*, reflecting our club’s commitment towards women empowerment and community engagement.\nProud to walk together for a healthy and empowered tomorrow.\n",
+          "is_featured": true,
+          "cover_image_file_id": "69c193535c7cd75eb8b52779"
+        },
+        {
+          "date": "2026-03-13T00:00:00.000Z",
+          "title": "Fashion Show (Women Day)",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1773481397269_IMG_7641_8653NHgAu.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1773481417890_D51628F7-F087-4D91-85E8-FD9902E85E08_YP9nOvPxG.jpeg",
+            "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1773481431815_IMG_7669_OloUNgom3.jpeg"
+          ],
+          "category": "image-building",
+          "location": "Belapur",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/vashi-navi-mumbai/events/1773481458899_DE5D9C4C-C458-4500-B4E0-89FFAF16200B_CFKTfTZvj.png",
+          "description": "The theme of the Fashion Show was *Costumes from Around the World* Participants confidently showcased beautiful costumes representing different countries and cultures.",
+          "is_featured": true,
+          "cover_image_file_id": "69b52df35c7cd75eb852cc70"
+        }
+      ],
+      "images": [
+        "/images/club-pages-imgs/VashiNaviMumbai/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/VashiNaviMumbai/1.jpg",
+      "logo": null,
+      "established": "2016-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T15:15:00.028Z",
+      "updated_at": "2026-03-05T15:15:00.028Z"
+    },
+    {
+      "id": "7a565045-ebb1-48f8-89ef-b08954d2ecf1",
+      "club_id": "thane-lake-city",
+      "name": "WE Club of Thane Lake City",
+      "description": "Health & Education focused club working on rural developments, educational programs, and social welfare initiatives in Thane.",
+      "president": {
+        "bio": "Rural development specialist with focus on health and education",
+        "name": "WE Sarala Bhot",
+        "email": "",
+        "phone": "",
+        "photo": ""
+      },
+      "members": [
+        {
+          "bio": "",
+          "name": "Member 1",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 2",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 3",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 4",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 5",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 6",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 7",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 8",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 9",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 10",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 11",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 12",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 13",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 14",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 15",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 16",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 17",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 18",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 19",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 20",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 21",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 22",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 23",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 24",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 25",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 26",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 27",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 28",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 29",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 30",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 31",
+          "photo": "",
+          "designation": "Member"
+        },
+        {
+          "bio": "",
+          "name": "Member 32",
+          "photo": "",
+          "designation": "Member"
+        }
+      ],
+      "events": [
+        {
+          "date": "2025-07-02T00:00:00.000Z",
+          "title": "Distribution of textbooks",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000628399_KcT3B3iD9.jpg"
+          ],
+          "category": "education",
+          "location": "Badlapur , Maharashtra ",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000628234_s0x7Syq11m.jpg",
+          "description": "The club distributed text books to underprivileged students of 8th and 9th standards, Yogi Shri Arvind Gurukul, Badlapur ",
+          "is_featured": true,
+          "cover_image_file_id": ""
+        },
+        {
+          "date": "2025-12-07T00:00:00.000Z",
+          "title": "Eye checkup camp at school ",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000785716_t-CQfSUkI.jpg"
+          ],
+          "category": "health",
+          "location": "Azad Nagar, Thane",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000785050_QEFjiOpgp.jpg",
+          "description": "A 3 day eye checkup in twinning with WE Club of Thane Stars City was organised at Shrimati Gujana English School where 1600+ students were examined ",
+          "is_featured": true,
+          "cover_image_file_id": ""
+        },
+        {
+          "date": "2025-12-21T00:00:00.000Z",
+          "title": "Blankets Distribution ",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000776096_w08NnVLWK.jpg"
+          ],
+          "category": "needy",
+          "location": "Thane",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000776105__BDARVbMB.jpg",
+          "description": "The club distributed blankets to the underprivileged people ",
+          "is_featured": true,
+          "cover_image_file_id": ""
+        },
+        {
+          "date": "2025-12-24T00:00:00.000Z",
+          "title": "Christmas celebration with playschool children ",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000795035_ZBR1tQhZg.jpg"
+          ],
+          "category": "child-welfare",
+          "location": "Thane",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000795029_-UQ_HV5vY.jpg",
+          "description": "The club celebrated Christmas with playschool children, played games, distributed stationary and drawing kits and snacks to the children ",
+          "is_featured": true,
+          "cover_image_file_id": ""
+        },
+        {
+          "date": "2026-01-24T00:00:00.000Z",
+          "title": "Health checkup camp at Bordi",
+          "images": [
+            "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000820639_9RzA6GtcO.jpg"
+          ],
+          "category": "health",
+          "location": "Bordi, Maharashtra ",
+          "cover_image": "https://ik.imagekit.io/wel6wnxvg/clubs/thane-lake-city/events/1000820695_90T3kLiw9.jpg",
+          "description": "The club organised a health checkup camp for the students of tribal villages in Bordi, and distributed stationary and meals to them. ",
+          "is_featured": true,
+          "cover_image_file_id": ""
+        }
+      ],
+      "images": [
+        "/images/club-pages-imgs/LakeCity/1.jpg"
+      ],
+      "cover_image": "/images/club-pages-imgs/LakeCity/1.jpg",
+      "logo": null,
+      "established": "2016-12-31T18:30:00.000Z",
+      "is_active": true,
+      "created_at": "2026-03-05T14:57:44.075Z",
+      "updated_at": "2026-03-05T14:57:44.075Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "0c46aac6-0f08-4715-8fcd-fe3d72fb6a79",
+      "title": "Anaaj Daan Relieve the Hunger",
+      "description": "Donating food is considered as the highest form of giving.",
+      "link": "/projects/AnaajDaan.html"
+    },
+    {
+      "id": "1340c221-f55f-49d7-9512-88501ef9ecb6",
+      "title": "Child Welfare",
+      "description": "Focuses on providing for children's physical needs, such as food, shelter, and healthcare. Ensuring children have access to opportunities for education, play, and positive social interactions, also includes transforming a girl child for the betterment of society.",
+      "link": "/projects/ChildWelfare.html"
+    },
+    {
+      "id": "927954d1-e567-423f-908d-bb663a8e5da9",
+      "title": "Senior Citizen",
+      "description": "We aim to improve their quality of life and ensure their well-being.",
+      "link": "/projects/SeniorCitizen.html"
+    },
+    {
+      "id": "98e46cd1-3795-4326-bc23-a7bf797b17d8",
+      "title": "Health",
+      "description": "Environment - Heal the Earth, Water Conservation, Solar Energy; Healthcare - Heal the Ailed; Cancer Care - Heal the Cancer patients.",
+      "link": "/projects/Health.html"
+    },
+    {
+      "id": "28cfc698-2d90-4284-acfb-7ce77a14911f",
+      "title": "Women Welfare",
+      "description": "Aimed at improving the health, education, economic status, and promoting empowerment through vocational training and financial assistance, also includes maternal and infant health.",
+      "link": "/projects/WomenWelfare.html"
+    },
+    {
+      "id": "25dce78d-27c3-4f47-9fe4-327b9e13408c",
+      "title": "Help the Needy",
+      "description": "Aims at providing financial aid, food, shelter, medical care, education, or other forms of support to help individuals or groups who are in a state of need or hardship, often due to poverty, lack of resources, or other difficulties.",
+      "link": "/projects/Needy.html"
+    },
+    {
+      "id": "c78a1ca0-31d1-4836-88c1-2b5cc2561182",
+      "title": "Image Building",
+      "description": "Crafting and maintaining a positive public perception of our association.",
+      "link": "/projects/ImageBuilding.html"
+    },
+    {
+      "id": "f4f8b74b-6497-4d05-9309-7a46b35612be",
+      "title": "Education",
+      "description": "It encompasses a broad range of assistance including adult education, awareness programs, skill development, vocational training and youth counseling.",
+      "link": "/projects/Education.html"
+    },
+    {
+      "id": "add9dc49-586a-443c-b079-863eb8bf573a",
+      "title": "Animal Welfare",
+      "description": "It's about the quality of life an animal experiences and includes aspects like nutrition, housing, and freedom from pain, fear, and distress.",
+      "link": "/projects/AnimalWelfare.html"
+    },
+    {
+      "id": "d1f599d9-aeaa-4b55-8f6e-a029fa5a7e17",
+      "title": "Permanent Projects",
+      "description": "Building or repairing infrastructure such as water system, toilet blocks, classrooms and providing necessary soft goods like fans, lights, projector and others.",
+      "link": "/projects/PermanentProjects.html"
+    },
+    {
+      "id": "a3708ff3-be52-41c7-b864-0e9c47fc9c79",
+      "title": "Rural Development",
+      "description": "Aimed at improving the health, education, economic status, and promoting empowerment through vocational training and financial assistance.",
+      "link": "/projects/RuralDevelopment.html"
+    },
+    {
+      "id": "9b31a5bc-3d85-4004-ae5c-a1f1f4ff3855",
+      "title": "Enable the Specially Abled",
+      "description": "Involves taking actions that support and empower individuals with disabilities to participate fully in society.",
+      "link": "/projects/SpeciallyAbled.html"
+    }
+  ],
+  "project_pages": [
+    {
+      "id": "e9698bec-1ea1-493c-972c-042870b9eec0",
+      "page_type": "health",
+      "data": [
+        {
+          "clubLink": "/clubs/Uran.html",
+          "imageUrl": "/images/projects-page-imgs/health/1.jpg",
+          "description": "WE Club of Uran paid the surgery cost of a financially needy woman at Gade Hospital,Uran"
+        },
+        {
+          "clubLink": "/clubs/Uran.html",
+          "imageUrl": "/images/projects-page-imgs/health/2.jpg",
+          "description": "WE club of Uran paid the bill of caesarian delivery at Gade Hospital of a financially needy lady ."
+        }
+      ]
+    },
+    {
+      "id": "18e0c6d3-7581-4844-b28c-0895d9720d9b",
+      "page_type": "anaajdaan",
+      "data": [
+        {
+          "title": "Donated wheat",
+          "clubLink": "/clubs/VileParle.html",
+          "imageUrl": "/images/projects-page-imgs/2.jpg",
+          "description": "feed the hunger"
+        },
+        {
+          "title": "Donated grains",
+          "clubLink": "/clubs/VileParle.html",
+          "imageUrl": "/images/projects-page-imgs/1.jpg",
+          "description": "Feed the hunger"
+        }
+      ]
+    },
+    {
+      "id": "6ee4f67c-06ee-4ef2-8431-d3f3bcbb54e4",
+      "page_type": "women-welfare",
+      "data": []
+    },
+    {
+      "id": "c36262d8-65f3-4c6f-a097-53ac7582b76a",
+      "page_type": "child-welfare",
+      "data": [
+        {
+          "clubLink": "../clubs/Vasant-Vihar.html",
+          "imageUrl": "../images/projects-page-imgs/childwelfare/2.jpg",
+          "description": "WE Club of Vasant Vihar donated 30 water bottles to underprivileged students of Jagruti Vidya Mandir."
+        },
+        {
+          "clubLink": "../clubs/Thane-Angels.html",
+          "imageUrl": "../images/projects-page-imgs/childwelfare/3.jpg",
+          "description": "WE Club of Thane Angels donated raincoats, biscuits & Chocolate to underprivileged children at the learning centre of Jeewanasha foundation."
+        },
+        {
+          "clubLink": "../clubs/Vasant-Vihar.html",
+          "imageUrl": "../images/projects-page-imgs/childwelfare/1.jpg",
+          "description": "WE Club of Vasant Vihar donated 30 umbrellas to underprivileged students of Jagruti Vidya Mandir"
+        },
+        {
+          "clubLink": "../clubs/Vile-Parle.html",
+          "imageUrl": "../images/projects-page-imgs/childwelfare/4.jpg",
+          "description": "WE Club of Vile Parle sponsored baby clothes to new born babies at Marol Navin Municipal Maternity Hospital."
+        }
+      ]
+    },
+    {
+      "id": "199ee9b2-025f-46ef-b925-267e7829d63d",
+      "page_type": "permanent-projects",
+      "data": [
+        {
+          "clubLink": "/clubs/Vasant-Vihar.html",
+          "imageUrl": "/images/projects-page-imgs/permanent-project/1.jpg",
+          "description": "WE Club of Vasant Vihar sponsored 12 plastic chairs and 2 tables for the under privileged children who are given free education and guidance by Angel Express Foundation at their Chembur Branch"
+        }
+      ]
+    },
+    {
+      "id": "41e8eb47-8a31-4c2c-86a3-2d2a95f6c341",
+      "page_type": "specially-abled",
+      "data": [
+        {
+          "clubLink": "/clubs/Uran.html",
+          "imageUrl": "/images/projects-page-imgs/specially-abled/1.jpg",
+          "description": "WE Club of Uran sponsored monthly medicine and health checkup for a specially abled child. This is a continuous project and will be done every month."
+        }
+      ]
+    },
+    {
+      "id": "c4f208dd-8410-4427-a128-fa01a2b057d2",
+      "page_type": "needy",
+      "data": []
+    },
+    {
+      "id": "30d209a3-90ab-4a66-ba78-ccf9ff842a80",
+      "page_type": "image-building",
+      "data": [
+        {
+          "clubLink": "/clubs/Uran.html",
+          "imageUrl": "/images/projects-page-imgs/image-building/1.jpg",
+          "description": "WE club of Uran celebrated Raksha Bhandan with dedicated officers and staff of the Uran Police Station"
+        }
+      ]
+    },
+    {
+      "id": "cbebfc6b-ece9-40ff-b6c0-9fa989acd482",
+      "page_type": "rural-development",
+      "data": []
+    },
+    {
+      "id": "2498bfb6-1d66-499b-bbd5-b21adf2b13af",
+      "page_type": "animal-welfare",
+      "data": []
+    },
+    {
+      "id": "ade7f045-7877-406f-a76f-dab1b5ecd1f2",
+      "page_type": "education",
+      "data": [
+        {
+          "clubLink": "/clubs/Vashi-Navi-Mumbai.html",
+          "imageUrl": "/images/projects-page-imgs/education/5.jpg",
+          "description": "WE Club of Vashi Navi Mumbai donated 1000 note books to Agricultural College, Ware."
+        },
+        {
+          "clubLink": "/clubs/Thane-Angels.html",
+          "imageUrl": "/images/projects-page-imgs/education/8.jpg",
+          "description": "WE Club of Thane Angels  felicitated 5 10th std students - toppers of TMC school, Balkum by giving them notebooks, sweets & dresses."
+        },
+        {
+          "clubLink": "/clubs/Thane-Lake-City.html",
+          "imageUrl": "/images/projects-page-imgs/education/1.jpg",
+          "description": "WE CLUB of Thane Lake City donated 50 sets of text books, notebooks, geometry box and set of pen to Shree Arvind Gurukul School Badlapur."
+        },
+        {
+          "clubLink": "/clubs/New-Panvel-Steel-Town.html",
+          "imageUrl": "/images/projects-page-imgs/education/3.jpg",
+          "description": "WE club of New Panvel Steel Town sponsored 2 courses totally  free to 10 deserving college girls. 1) Tally accounting software 2) Advance GST DURATION : 5 Weeks."
+        },
+        {
+          "clubLink": "../clubs/Vashi-Navi-Mumbai.html",
+          "imageUrl": "../images/projects-page-imgs/education/7.jpg",
+          "description": "WE Club of Vashi Navi Mumbai donated 800 Notebooks to New English School, Khalapur"
+        },
+        {
+          "clubLink": "/clubs/Vile-Parle.html",
+          "imageUrl": "/images/projects-page-imgs/education/10.jpg",
+          "description": "WE Club of Vile Parle sponsored school fees of student studying at Umedbai Patel English School, Sunder Nagar, Malad (West)"
+        },
+        {
+          "clubLink": "/clubs/Chembur.html",
+          "imageUrl": "/images/projects-page-imgs/education/9.jpg",
+          "description": "WE Club of Chembur paid the School Fees of VII Std. student for 2025 - 26 for Rohan Gaikwad at St. Sebastian High School."
+        },
+        {
+          "clubLink": "/clubs/Vasant-Vihar.html",
+          "imageUrl": "/images/projects-page-imgs/education/4.jpg",
+          "description": "WE Club of Vasant Vihar Education donated 50 dozen notebooks at Jagruti Vidya Mandir"
+        },
+        {
+          "clubLink": "/clubs/Thane-Lake-City.html",
+          "imageUrl": "/images/projects-page-imgs/education/2.jpg",
+          "description": "WE Club of Thane Lake City donated  fees of 8th std student of Gunjana High School."
+        },
+        {
+          "clubLink": "/clubs/Vashi-Navi-Mumbai.html",
+          "imageUrl": "/images/projects-page-imgs/education/6.jpg",
+          "description": "WE Club of Vashi Navi Mumbai donated 1,752 notebooks & 22 sets of 8th std textbooks and 100 raincoats, Primary textbooks, tiffin boxes & crayons to 100 primary students at Dahiwali School, Karjat."
+        }
+      ]
+    }
+  ]
+}
