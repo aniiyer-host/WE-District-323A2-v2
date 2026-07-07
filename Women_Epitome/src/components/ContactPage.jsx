@@ -33,32 +33,32 @@ const ContactPage = () => {
     }
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email Us",
-      details: ["wedistrictclubsa21725@gmail.com"],
-      color: "purple"
-    },
-    {
-      icon: Phone,
-      title: "Call Us",
-      details: ["+91 98765 43210", "+91 98765 43211"],
-      color: "pink"
-    },
-    {
-      icon: Clock,
-      title: "Office Hours",
-      details: ["Monday - Friday: 9 AM - 6 PM", "Saturday: 10 AM - 4 PM"],
-      color: "pink"
-    }
-  ];
+  // const contactInfo = [
+  //   {
+  //     icon: Mail,
+  //     title: "Email Us",
+  //     details: ["wedistrictclubsa21725@gmail.com"],
+  //     color: "purple"
+  //   },
+  //   {
+  //     icon: Phone,
+  //     title: "Call Us",
+  //     details: ["+91 98765 43210", "+91 98765 43211"],
+  //     color: "pink"
+  //   },
+  //   {
+  //     icon: Clock,
+  //     title: "Office Hours",
+  //     details: ["Monday - Friday: 9 AM - 6 PM", "Saturday: 10 AM - 4 PM"],
+  //     color: "pink"
+  //   }
+  // ];
 
   const socialLinks = [
-    { name: "Facebook",  icon: Facebook,  url: "#" },
+    { name: "Facebook", icon: Facebook, url: "#" },
     { name: "Instagram", icon: Instagram, url: "#" },
-    { name: "LinkedIn",  icon: Linkedin,  url: "#" },
-    { name: "Twitter",   icon: Twitter,   url: "#" }
+    { name: "LinkedIn", icon: Linkedin, url: "#" },
+    { name: "Twitter", icon: Twitter, url: "#" }
   ];
 
   return (
@@ -90,7 +90,7 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* Contact Info Cards */}
+      {/* Contact Info Cards
       <section className="py-16 px-4 -mt-20 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6">
@@ -109,7 +109,7 @@ const ContactPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Form */}
       <section className="py-24 px-4">

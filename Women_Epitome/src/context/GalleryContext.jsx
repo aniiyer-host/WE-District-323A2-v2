@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-const GalleryContext = createContext();
+const GalleryContext = createContext({ galleryOpen: false, setGalleryOpen: () => {} });
 
 export const useGallery = () => {
   const context = useContext(GalleryContext);

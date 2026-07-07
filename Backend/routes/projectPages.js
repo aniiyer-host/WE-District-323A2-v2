@@ -1,17 +1,15 @@
-import express from "express"
-import supabase from "../utils/supabaseClient.js"
+import express from 'express';
+import { getContent, upsertContent, deleteContent } from '../controllers/contentController.js';
+import { authenticate, requireAdmin } from '../middlewares/authMiddleware.js';
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/", async (req, res) => {
+// ── Public ─────────────────────────────────────────────────────────────────────
+router.get('/',     getContent);
+router.get('/:key', getContent);
 
-    const { data, error } = await supabase
-        .from("project_pages")
-        .select("*")
+// ── Admin only ─────────────────────────────────────────────────────────────────
+router.put('/:key',    authenticate, requireAdmin, upsertContent);
+router.delete('/:key', authenticate, requireAdmin, deleteContent);
 
-    if (error) return res.status(500).json(error)
-
-    res.json(data)
-})
-
-export default router
+export default router;

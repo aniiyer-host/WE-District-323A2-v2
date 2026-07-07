@@ -1,17 +1,28 @@
-import express from "express"
-import supabase from "../utils/supabaseClient.js"
+import express from 'express';
+import {
+    getAllProjects,
+    getProjectBySlug,
+    createProject,
+    updateProject,
+    addProjectItem,
+    updateProjectItem,
+    deleteProjectItem,
+} from '../controllers/projectController.js';
+import { authenticate, requireAdmin } from '../middlewares/authMiddleware.js';
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/", async (req, res) => {
+// ── Public ────────────────────────────────────────────────────────────────────
+router.get('/',           getAllProjects);
+router.get('/:slug',      getProjectBySlug);
 
-    const { data, error } = await supabase
-        .from("projects")
-        .select("*")
+// ── Admin only ────────────────────────────────────────────────────────────────
+router.post('/',                       authenticate, requireAdmin, createProject);
+router.put('/:slug',                   authenticate, requireAdmin, updateProject);
 
-    if (error) return res.status(500).json(error)
+// Project item sub-resource
+router.post('/:slug/items',            authenticate, requireAdmin, addProjectItem);
+router.put('/items/:itemId',           authenticate, requireAdmin, updateProjectItem);
+router.delete('/items/:itemId',        authenticate, requireAdmin, deleteProjectItem);
 
-    res.json(data)
-})
-
-export default router
+export default router;

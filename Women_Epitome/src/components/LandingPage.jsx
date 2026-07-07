@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Heart, Users, Award, ArrowRight, Calendar, MapPin, Zap, Target, LogIn } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
-import { projectsData } from '../data/projectsData';
+import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 
 const LandingPage = () => {
@@ -13,6 +12,8 @@ const LandingPage = () => {
   const [randomProjects, setRandomProjects] = useState([]);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [heroData, setHeroData] = useState(null);
+  const [presidentData, setPresidentData] = useState(null);
 
   const handleDashboardClick = () => {
     if (user?.role === 'admin') {
@@ -22,29 +23,58 @@ const LandingPage = () => {
     }
   };
 
-  // Function to get random projects
-  const getRandomProjects = () => {
-    // Collect all projects with items
-    const allProjects = [];
-    Object.entries(projectsData).forEach(([key, project]) => {
-      if (project.items && project.items.length > 0) {
-        project.items.forEach(item => {
-          allProjects.push({
-            id: `${key}-${item.title || item.description}`,
-            category: project.title,
-            title: item.title || item.description,
-            description: item.description,
-            image: item.imageUrl,
-            clubLink: item.clubLink
-          });
-        });
+  useEffect(() => {
+    const fetchCMS = async () => {
+      try {
+        const resHero = await api.get('/content/landing_hero');
+        if (resHero.data.success) {
+          setHeroData(resHero.data.data.content.value);
+        }
+      } catch (err) {
+        console.warn('Failed to load landing hero from CMS, using fallback');
       }
-    });
 
-    // Shuffle and pick 5 random projects
-    const shuffled = allProjects.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 5);
-  };
+      try {
+        const resPresident = await api.get('/content/landing_president');
+        if (resPresident.data.success) {
+          setPresidentData(resPresident.data.data.content.value);
+        }
+      } catch (err) {
+        console.warn('Failed to load landing president from CMS, using fallback');
+      }
+    };
+
+    const fetchProjects = async () => {
+      try {
+        const res = await api.get('/projects');
+        const dbProjects = res.data.data.projects || [];
+        const allProjects = [];
+        dbProjects.forEach(project => {
+          if (project.items && project.items.length > 0) {
+            project.items.forEach(item => {
+              allProjects.push({
+                id: item.id,
+                category: project.title,
+                title: item.description ? (item.description.length > 40 ? item.description.substring(0, 40) + '...' : item.description) : project.title,
+                description: item.description || '',
+                image: item.imageUrl || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80',
+                clubLink: item.clubId ? `/clubs/${item.clubId}` : '#'
+              });
+            });
+          }
+        });
+        
+        const shuffled = allProjects.sort(() => 0.5 - Math.random());
+        setRandomProjects(shuffled.slice(0, 5));
+      } catch (err) {
+        console.warn('Failed to fetch projects, using fallback empty state');
+        setRandomProjects([]);
+      }
+    };
+
+    fetchCMS();
+    fetchProjects();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -52,12 +82,6 @@ const LandingPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Set random projects on component mount
-  useEffect(() => {
-    setRandomProjects(getRandomProjects());
-  }, []);
-
-  // Auto-rotate carousel
   useEffect(() => {
     if (randomProjects.length === 0 || isHovered) return;
 
@@ -65,7 +89,7 @@ const LandingPage = () => {
       setCurrentProjectIndex((prevIndex) =>
         (prevIndex + 1) % randomProjects.length
       );
-    }, 4000); // Rotate every 4 seconds
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [randomProjects.length, isHovered]);
@@ -74,12 +98,26 @@ const LandingPage = () => {
     setCurrentProjectIndex(index);
   };
 
-  const stats = [
+  const defaultStats = [
     { icon: Users, value: "400+", label: "Active Members" },
     { icon: Heart, value: "4000+", label: "Projects Completed" },
     { icon: Award, value: "8", label: "Years of Service" },
     { icon: Sparkles, value: "100K+", label: "Lives Impacted" }
   ];
+
+  const iconMap = {
+    Users,
+    Heart,
+    Award,
+    Sparkles,
+    Zap,
+    Target,
+  };
+
+  const stats = (heroData?.stats || defaultStats).map(s => ({
+    ...s,
+    icon: typeof s.icon === 'string' ? (iconMap[s.icon] || Heart) : s.icon
+  }));
 
   return (
     <div className="min-h-screen bg-n-to-br from-pink-50 via-purple-50 to-pink-100">
@@ -143,14 +181,14 @@ const LandingPage = () => {
           {/* Main Headline */}
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
             <span className="bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent playfair">
-              Woman
+              {heroData?.title?.split(' - ')[0] || "Woman"}
             </span>
             <br />
-            <span className="text-gray-800 playfair">Epitome of Service</span>
+            <span className="text-gray-800 playfair">{heroData?.title?.split(' - ')[1] || "Epitome of Service"}</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto font-light">
-            Empowering women, transforming communities
+            {heroData?.subtitle || "Empowering women, transforming communities"}
           </p>
 
           <p className="text-2xl text-purple-700 mb-12 font-semibold">
@@ -314,14 +352,14 @@ const LandingPage = () => {
               <div className="relative h-96 md:h-auto bg-linear-to-br from-purple-600 to-pink-600 p-8">
                 <div className="absolute inset-8 bg-white/10 backdrop-blur-sm rounded-2xl border-4 border-white/30"></div>
                 <img
-                  src="images/index-page-imgs/pfp.jpg"
-                  alt="WE Varsha Vora"
+                  src={presidentData?.photo || "images/index-page-imgs/pfp.jpg"}
+                  alt={presidentData?.name || "WE Varsha Vora"}
                   className="relative z-10 w-full h-full object-cover rounded-2xl shadow-2xl"
                 />
                 <div className="absolute bottom-12 left-12 right-12 z-20">
                   <div className="bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-xl">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-1">WE Varsha Vora</h3>
-                    <p className="text-purple-600 font-semibold">District President</p>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-1">{presidentData?.name || "WE Varsha Vora"}</h3>
+                    <p className="text-purple-600 font-semibold">{presidentData?.role || "District President"}</p>
                   </div>
                 </div>
               </div>
@@ -334,34 +372,36 @@ const LandingPage = () => {
                 </div>
 
                 <h3 className="text-3xl font-bold text-gray-800 mb-6 playfair">
-                  Leading with Grace, Empowering with Purpose
+                  {presidentData?.title || "Leading with Grace, Empowering with Purpose"}
                 </h3>
 
                 <div className="space-y-4 text-gray-600 leading-relaxed">
-                  <p>
-                    A fresh term blooms with a soul-stirring pooja at Jain Mandir, Chembur, marking the beginning of an extraordinary journey under the leadership of <span className="text-purple-700 font-semibold">WE Varsha Vora</span>.
-                  </p>
-                  <p>
-                    As District President, she embodies the perfect blend of strength, charm, and diplomacy—qualities that inspire every member of our community to reach new heights.
-                  </p>
-                  <p className="font-semibold text-gray-800">
-                    Fun-loving, fierce, and flawlessly focused on empowering every woman in our district.
-                  </p>
+                  {(presidentData?.bio || [
+                    "A fresh term blooms with a soul-stirring pooja at Jain Mandir, Chembur, marking the beginning of an extraordinary journey under the leadership of WE Varsha Vora.",
+                    "As District President, she embodies the perfect blend of strength, charm, and diplomacy—qualities that inspire every member of our community to reach new heights.",
+                    "Fun-loving, fierce, and flawlessly focused on empowering every woman in our district."
+                  ]).map((para, i) => (
+                    <p key={i} className={i === (presidentData?.bio?.length ?? 3) - 1 ? "font-semibold text-gray-800" : ""}>
+                      {para}
+                    </p>
+                  ))}
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
-                    <Zap size={16} />
-                    Strength
-                  </span>
-                  <span className="bg-pink-100 text-pink-700 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
-                    <Sparkles size={16} />
-                    Grace
-                  </span>
-                  <span className="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
-                    <Target size={16} />
-                    Vision
-                  </span>
+                  {(presidentData?.tags || ["Strength", "Grace", "Vision"]).map((tag, i) => {
+                    const tagColors = [
+                      "bg-purple-100 text-purple-700",
+                      "bg-pink-100 text-pink-700",
+                      "bg-yellow-100 text-yellow-700"
+                    ];
+                    const tagIcons = [<Zap key="z" size={16} />, <Sparkles key="s" size={16} />, <Target key="t" size={16} />];
+                    return (
+                      <span key={i} className={`${tagColors[i % tagColors.length]} px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2`}>
+                        {tagIcons[i % tagIcons.length]}
+                        {tag}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </div>

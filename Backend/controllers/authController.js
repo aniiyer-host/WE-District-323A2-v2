@@ -1,4 +1,5 @@
 import supabase from '../utils/supabaseClient.js';
+import prisma from '../utils/prismaClient.js';
 
 // @desc    Register a new user (public — pending admin approval)
 // @route   POST /api/auth/register
@@ -73,11 +74,10 @@ export const login = async (req, res) => {
         // Attach club name
         let club_name = null;
         if (user_metadata.club_id) {
-            const { data: club } = await supabase
-                .from('clubs')
-                .select('name')
-                .eq('club_id', user_metadata.club_id)
-                .single();
+            const club = await prisma.club.findUnique({
+                where: { clubId: user_metadata.club_id },
+                select: { name: true }
+            });
             if (club) club_name = club.name;
         }
 
@@ -112,11 +112,10 @@ export const getCurrentUser = async (req, res) => {
 
         let club_name = null;
         if (club_id) {
-            const { data: club } = await supabase
-                .from('clubs')
-                .select('name')
-                .eq('club_id', club_id)
-                .single();
+            const club = await prisma.club.findUnique({
+                where: { clubId: club_id },
+                select: { name: true }
+            });
             if (club) club_name = club.name;
         }
 

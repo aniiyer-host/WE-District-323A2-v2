@@ -4,8 +4,11 @@ import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 import {
     LogOut, Shield, Plus, Edit, Trash2, Eye, Search,
-    Users, CheckCircle, XCircle, Clock, ChevronDown, Save, X
+    Users, CheckCircle, XCircle, Clock, ChevronDown, Save, X,
+    LayoutDashboard, FolderKanban, FileEdit
 } from 'lucide-react';
+import CmsEditor from './admin/CmsEditor';
+import ProjectsManager from './admin/ProjectsManager';
 
 // ── Small inline edit modal ───────────────────────────────────────────────────
 const EditUserModal = ({ user, clubs, onSave, onClose }) => {
@@ -203,9 +206,11 @@ const AdminDashboard = () => {
     );
 
     const tabs = [
-        { key: 'clubs', label: 'All Clubs' },
-        { key: 'users', label: 'All Users', count: allUsers.length },
-        { key: 'pending', label: 'Pending', count: pendingUsers.length, alert: pendingUsers.length > 0 },
+        { key: 'clubs',    label: 'All Clubs',      icon: LayoutDashboard },
+        { key: 'users',    label: 'All Users',       icon: Users,           count: allUsers.length },
+        { key: 'pending',  label: 'Pending',         icon: Clock,           count: pendingUsers.length, alert: pendingUsers.length > 0 },
+        { key: 'projects', label: 'Projects',        icon: FolderKanban },
+        { key: 'cms',      label: 'Site Content',    icon: FileEdit },
     ];
 
     if (loading) {
@@ -264,22 +269,28 @@ const AdminDashboard = () => {
 
                 {/* Tabs */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                    {tabs.map(tab => (
-                        <button
-                            key={tab.key}
-                            onClick={() => setActiveTab(tab.key)}
-                            className={`px-5 py-3 rounded-xl font-semibold transition-all flex items-center gap-2 ${activeTab === tab.key ? 'bg-white shadow-lg ' + (tab.alert ? 'text-orange-600' : 'text-purple-700') : 'bg-white/40 text-white hover:bg-white/60'}`}
-                        >
-                            {tab.key === 'users' && <Users size={16} />}
-                            {tab.key === 'pending' && <Clock size={16} />}
-                            {tab.label}
-                            {tab.count !== undefined && tab.count > 0 && (
-                                <span className={`text-xs rounded-full w-5 h-5 flex items-center justify-center text-white ${tab.alert ? 'bg-orange-500' : 'bg-purple-500'}`}>
-                                    {tab.count}
-                                </span>
-                            )}
-                        </button>
-                    ))}
+                    {tabs.map(tab => {
+                        const Icon = tab.icon;
+                        return (
+                            <button
+                                key={tab.key}
+                                onClick={() => setActiveTab(tab.key)}
+                                className={`px-5 py-3 rounded-xl font-semibold transition-all flex items-center gap-2 ${
+                                    activeTab === tab.key
+                                        ? 'bg-white shadow-lg ' + (tab.alert ? 'text-orange-600' : 'text-purple-700')
+                                        : 'bg-white/40 text-white hover:bg-white/60'
+                                }`}
+                            >
+                                {Icon && <Icon size={16} />}
+                                {tab.label}
+                                {tab.count !== undefined && tab.count > 0 && (
+                                    <span className={`text-xs rounded-full w-5 h-5 flex items-center justify-center text-white ${tab.alert ? 'bg-orange-500' : 'bg-purple-500'}`}>
+                                        {tab.count}
+                                    </span>
+                                )}
+                            </button>
+                        );
+                    })}
                 </div>
 
                 {/* ── CLUBS TAB ── */}
@@ -431,6 +442,17 @@ const AdminDashboard = () => {
                         )}
                     </div>
                 )}
+
+                {/* ── PROJECTS TAB ── */}
+                {activeTab === 'projects' && (
+                    <ProjectsManager />
+                )}
+
+                {/* ── CMS EDITOR TAB ── */}
+                {activeTab === 'cms' && (
+                    <CmsEditor />
+                )}
+
             </div>
         </div>
     );

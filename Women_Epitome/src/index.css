@@ -1,19 +1,47 @@
+/* ── Fonts ──────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700;900&display=swap');
 @import "tailwindcss";
 
+/* ── Global ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  font-family: 'Poppins', sans-serif;
+}
+
+.playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+/* ── Shared animations ──────────────────────────────────────────────────────── */
 @layer utilities {
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-  
-  .animate-fadeIn {
-    animation: fadeIn 0.2s ease-out;
+  .animate-fadeIn { animation: fadeIn 0.2s ease-out; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50%       { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: -1000px 0; }
+    100% { background-position:  1000px 0; }
+  }
+
+  @keyframes progress {
+    0%   { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   /* When the gallery lightbox is open, hide club page gallery sections */

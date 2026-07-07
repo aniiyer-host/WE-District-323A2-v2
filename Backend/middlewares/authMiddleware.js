@@ -13,19 +13,26 @@ export const authenticate = async (req, res, next) => {
             return res.status(401).json({ success: false, message: 'Not authorized, no token provided' });
         }
 
-        const { data: { user }, error } = await supabase.auth.getUser(token);
+        try {
+            const result = await supabase.auth.getUser(token);
+            const { data: { user } = {}, error } = result;
 
-        if (error || !user) {
-            return res.status(401).json({ success: false, message: 'Not authorized, token invalid or expired' });
+            if (error || !user) {
+                console.warn('authMiddleware: token invalid or expired', error?.message ?? error);
+                return res.status(401).json({ success: false, message: 'Not authorized, token invalid or expired' });
+            }
+
+            req.user = {
+                id: user.id,
+                email: user.email,
+                username: user.user_metadata?.username ?? null,
+                role: user.user_metadata?.role ?? null,
+                club_id: user.user_metadata?.club_id ?? null,
+            };
+        } catch (innerErr) {
+            console.error('authMiddleware: error while calling supabase.getUser:', innerErr);
+            return res.status(500).json({ success: false, message: 'Server error during authentication', error: innerErr.message });
         }
-
-        req.user = {
-            id: user.id,
-            email: user.email,
-            username: user.user_metadata.username,
-            role: user.user_metadata.role,
-            club_id: user.user_metadata.club_id ?? null,
-        };
 
         next();
     } catch (error) {

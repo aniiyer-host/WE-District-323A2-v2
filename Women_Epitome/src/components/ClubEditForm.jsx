@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 import { Save, Plus, Trash2, ArrowLeft, CheckCircle, CalendarX2 } from 'lucide-react';
-import { uploadImageToImageKit, deleteImageFromImageKit } from '../utils/api';
+import { uploadImageToSupabase, deleteImageFromSupabase } from '../utils/api';
 import { useToast } from './Toast';
 
 // Reusable save button shown at the bottom of each section
@@ -187,8 +187,8 @@ const ClubEditForm = () => {
         // Remove from local state immediately so UI is responsive
         setFormData(prev => ({ ...prev, events: prev.events.filter((_, i) => i !== index) }));
 
-        // Delete images from ImageKit in background (best-effort)
-        fileIds.forEach(fileId => deleteImageFromImageKit(fileId));
+        // Delete images from Supabase in background (best-effort)
+        fileIds.forEach(fileId => deleteImageFromSupabase(fileId));
     };
 
     const handleAddEventImage = (eventIndex) =>
@@ -228,14 +228,14 @@ const ClubEditForm = () => {
             )
         }));
 
-        if (fileId) deleteImageFromImageKit(fileId);
+        if (fileId) deleteImageFromSupabase(fileId);
     };
 
     const handleUpload = async (file, folder, onSuccess, uploadKey) => {
         if (!file) return;
         setUploading(prev => ({ ...prev, [uploadKey]: true }));
         try {
-            const result = await uploadImageToImageKit(file, folder);
+            const result = await uploadImageToSupabase(file, folder);
             onSuccess(result);
             toast.success('Image uploaded!');
         } catch (err) {
@@ -442,7 +442,7 @@ const ClubEditForm = () => {
                                                 <button
                                                     type="button"
                                                     onClick={() => {
-                                                        if (event.cover_image_file_id) deleteImageFromImageKit(event.cover_image_file_id);
+                                                        if (event.cover_image_file_id) deleteImageFromSupabase(event.cover_image_file_id);
                                                         handleEventChange(index, 'cover_image', '');
                                                         handleEventChange(index, 'cover_image_file_id', '');
                                                     }}
@@ -611,7 +611,7 @@ const ClubEditForm = () => {
                                     <button
                                         type="button"
                                         onClick={() => {
-                                            if (formData.president.photo_file_id) deleteImageFromImageKit(formData.president.photo_file_id);
+                                            if (formData.president.photo_file_id) deleteImageFromSupabase(formData.president.photo_file_id);
                                             setFormData(prev => ({
                                                 ...prev,
                                                 president: { ...prev.president, photo: '', photo_file_id: '' }

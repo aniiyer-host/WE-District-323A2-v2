@@ -9,132 +9,44 @@ const ProjectsPage = () => {
   const [eventsByCategory, setEventsByCategory] = useState({});
   const [loadingCategories, setLoadingCategories] = useState(new Set());
 
-  // Project category definitions with metadata
-  const projectCategories = [
-    {
-      id: 1,
-      title: "Anaaj Daan Relieve the Hunger",
-      categoryKey: "anaajdaan",
-      category: "Food & Nutrition",
-      icon: Heart,
-      description: "Donating food is considered as the highest form of giving.",
-      link: "/projects/AnaajDaan",
-      defaultImage: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
-    },
-    {
-      id: 2,
-      title: "Senior Citizen",
-      categoryKey: "senior-citizen",
-      category: "Senior Care",
-      icon: Users,
-      description: "We aim to improve their quality of life and ensure their well-being.",
-      link: "/projects/SeniorCitizen",
-      defaultImage: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80"
-    },
-    {
-      id: 3,
-      title: "Health",
-      categoryKey: "health",
-      category: "Healthcare",
-      icon: Stethoscope,
-      description: "Environment - Heal the Earth, Water Conservation, Solar Energy; Healthcare - Heal the Ailed; Cancer Care - Heal the Cancer patients.",
-      link: "/projects/Health",
-      defaultImage: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80"
-    },
-    {
-      id: 4,
-      title: "Education",
-      categoryKey: "education",
-      category: "Education",
-      icon: GraduationCap,
-      description: "It encompasses a broad range of assistance including adult education, awareness programs, skill development, vocational training and youth counseling.",
-      link: "/projects/Education",
-      defaultImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80"
-    },
-    {
-      id: 5,
-      title: "Permanent Projects",
-      categoryKey: "permanent-projects",
-      category: "Infrastructure",
-      icon: Home,
-      description: "Building or repairing infrastructure such as water system, toilet blocks, classrooms and providing necessary soft goods like fans, lights, projector and others",
-      link: "/projects/PermanentProjects",
-      defaultImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"
-    },
-    {
-      id: 6,
-      title: "Rural Development",
-      categoryKey: "rural-development",
-      category: "Rural Empowerment",
-      icon: Users,
-      description: "Aimed at improving the health, education, economic status, and promoting empowerment through vocational training and financial assistance.",
-      link: "/projects/RuralDevelopment",
-      defaultImage: "https://images.unsplash.com/photo-1516962126636-27ad087061cc?w=800&q=80"
-    },
-    {
-      id: 7,
-      title: "Animal Welfare",
-      categoryKey: "animal-welfare",
-      category: "Animal Care",
-      icon: Heart,
-      description: "It's about the quality of life an animal experiences and includes aspects like nutrition, housing, and freedom from pain, fear, and distress.",
-      link: "/projects/AnimalWelfare",
-      defaultImage: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80"
-    },
-    {
-      id: 8,
-      title: "Enable the Specially Abled",
-      categoryKey: "specially-abled",
-      category: "Empowerment",
-      icon: Users,
-      description: "Involves taking actions that support and empower individuals with disabilities to participate fully in society.",
-      link: "/projects/SpeciallyAbled",
-      defaultImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
-    },
-    {
-      id: 9,
-      title: "Help the Needy",
-      categoryKey: "needy",
-      category: "Community Support",
-      icon: Heart,
-      description: "Aims at providing financial aid, food, shelter, medical care, education, or other forms of support to help individuals or groups who are in a state of need or hardship, often due to poverty, lack of resources, or other difficulties.",
-      link: "/projects/Needy",
-      defaultImage: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80"
-    },
-    {
-      id: 10,
-      title: "Child Welfare",
-      categoryKey: "child-welfare",
-      category: "Child Care",
-      icon: BookOpen,
-      description: "Focuses on providing for children's physical needs, such as food, shelter, and healthcare. Ensuring children have access to opportunities for education, play, and positive social interactions, also includes transforming a girl child for the betterment of society.",
-      link: "/projects/ChildWelfare",
-      defaultImage: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
-    },
-    {
-      id: 11,
-      title: "Women Welfare",
-      categoryKey: "women-welfare",
-      category: "Women Empowerment",
-      icon: Users,
-      description: "Aimed at improving the health, education, economic status, and promoting empowerment through vocational training and financial assistance, also includes maternal and infant health.",
-      link: "/projects/WomenWelfare",
-      defaultImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80"
-    },
-    {
-      id: 12,
-      title: "Image Building",
-      categoryKey: "image-building",
-      category: "Public Relations",
-      icon: Target,
-      description: "Crafting and maintaining a positive public perception of our association.",
-      link: "/projects/ImageBuilding",
-      defaultImage: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80"
-    }
-  ];
+  const [projectCategories, setProjectCategories] = useState([
+    { id: 1, title: "Anaaj Daan Relieve the Hunger", categoryKey: "anaajdaan", category: "Food & Nutrition", icon: Heart, description: "Donating food is considered as the highest form of giving.", link: "/projects/AnaajDaan", defaultImage: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80" },
+    { id: 2, title: "Senior Citizen", categoryKey: "senior-citizen", category: "Senior Care", icon: Users, description: "We aim to improve their quality of life and ensure their well-being.", link: "/projects/SeniorCitizen", defaultImage: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80" },
+    { id: 3, title: "Health", categoryKey: "health", category: "Healthcare", icon: Stethoscope, description: "Environment, Healthcare and Cancer Care combined.", link: "/projects/Health", defaultImage: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80" },
+    { id: 4, title: "Education", categoryKey: "education", category: "Education", icon: GraduationCap, description: "Adult education, awareness programs, skill development, vocational training and youth counseling.", link: "/projects/Education", defaultImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" },
+    { id: 5, title: "Permanent Projects", categoryKey: "permanent-projects", category: "Infrastructure", icon: Home, description: "Building or repairing infrastructure such as water system, toilet blocks, classrooms.", link: "/projects/PermanentProjects", defaultImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80" },
+    { id: 6, title: "Rural Development", categoryKey: "rural-development", category: "Rural Empowerment", icon: Users, description: "Improving health, education, economic status and promoting empowerment.", link: "/projects/RuralDevelopment", defaultImage: "https://images.unsplash.com/photo-1516962126636-27ad087061cc?w=800&q=80" },
+    { id: 7, title: "Animal Welfare", categoryKey: "animal-welfare", category: "Animal Care", icon: Heart, description: "Quality of life an animal experiences — nutrition, housing, and freedom from pain.", link: "/projects/AnimalWelfare", defaultImage: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80" },
+    { id: 8, title: "Enable the Specially Abled", categoryKey: "specially-abled", category: "Empowerment", icon: Users, description: "Supporting and empowering individuals with disabilities.", link: "/projects/SpeciallyAbled", defaultImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" },
+    { id: 9, title: "Help the Needy", categoryKey: "needy", category: "Community Support", icon: Heart, description: "Financial aid, food, shelter, medical care, education and support for those in need.", link: "/projects/Needy", defaultImage: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&q=80" },
+    { id: 10, title: "Child Welfare", categoryKey: "child-welfare", category: "Child Care", icon: BookOpen, description: "Physical needs, education, play, and positive social interactions for children.", link: "/projects/ChildWelfare", defaultImage: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80" },
+    { id: 11, title: "Women Welfare", categoryKey: "women-welfare", category: "Women Empowerment", icon: Users, description: "Improving health, education, economic status and promoting empowerment.", link: "/projects/WomenWelfare", defaultImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" },
+    { id: 12, title: "Image Building", categoryKey: "image-building", category: "Public Relations", icon: Target, description: "Crafting and maintaining a positive public perception of our association.", link: "/projects/ImageBuilding", defaultImage: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80" },
+  ]);
+
+  const iconMap = { Heart, BookOpen, Stethoscope, GraduationCap, Home, Users, ArrowRight, Calendar, MapPin, Target };
+
+  // Fetch project categories dynamically from API
+  useEffect(() => {
+    api.get('/projects').then(res => {
+      const data = res.data?.data?.projects;
+      if (Array.isArray(data) && data.length > 0) {
+        // Merge API categories with icon lookup; fallback icon = Users
+        const merged = data.map(cat => ({
+          ...cat,
+          categoryKey: cat.slug,
+          link: `/projects/${cat.slug.replace(/-([a-z])/g, (_, c) => c.toUpperCase()).replace(/^(.)/, c => c.toUpperCase())}`,
+          icon: iconMap[cat.icon] || Users,
+          defaultImage: cat.defaultImage || "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
+        }));
+        setProjectCategories(merged);
+      }
+    }).catch(() => {/* keep hardcoded fallback */});
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fetch events per-category independently so the page renders immediately
   useEffect(() => {
+    if (!projectCategories.length) return;
     // Mark all categories as loading
     setLoadingCategories(new Set(projectCategories.map(p => p.categoryKey)));
 
@@ -153,7 +65,7 @@ const ProjectsPage = () => {
         });
       }
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [projectCategories]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Create projects array with event counts and actual data
   const projects = projectCategories.map(project => {

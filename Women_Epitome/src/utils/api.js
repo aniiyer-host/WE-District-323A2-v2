@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const DEFAULT_PROD_URL = 'https://we-district-323a2-v2.onrender.com/api';
 const BASE_URL = import.meta.env.VITE_API_URL
-    || (import.meta.env.PROD ? DEFAULT_PROD_URL : 'http://localhost:5000/api');
+    || (import.meta.env.PROD ? DEFAULT_PROD_URL : 'http://localhost:5050/api');
 
 const api = axios.create({
     baseURL: BASE_URL,
@@ -73,6 +73,52 @@ export const deleteImageFromImageKit = async (fileId) => {
         });
     } catch (err) {
         console.warn('ImageKit delete skipped:', err?.response?.data?.message || err.message);
+    }
+};
+
+// ── Supabase Storage helpers ──────────────────────────────────────────────────
+export const uploadImageToSupabase = async (file, folder = 'uploads') => {
+    const token = localStorage.getItem('token');
+    
+    const base64Promise = new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+    const dataUrl = await base64Promise;
+
+    const { data } = await axios.post(`${BASE_URL}/uploads/supabase`, {
+        fileName: file.name,
+        contentType: file.type,
+        folder,
+        dataUrl
+    }, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+
+    return { url: data.data.url, fileId: data.data.path };
+};
+
+export const deleteImageFromSupabase = async (pathOrUrl) => {
+    if (!pathOrUrl) return;
+    try {
+        const token = localStorage.getItem('token');
+        let path = pathOrUrl;
+        if (path.startsWith('http')) {
+            const parts = path.split('/object/public/');
+            if (parts.length > 1) {
+                const pathParts = parts[1].split('/');
+                pathParts.shift(); // remove bucket
+                path = pathParts.join('/');
+            }
+        }
+        await axios.delete(`${BASE_URL}/uploads/supabase`, {
+            data: { path },
+            headers: { Authorization: `Bearer ${token}` }
+        });
+    } catch (err) {
+        console.warn('Supabase delete skipped:', err?.response?.data?.message || err.message);
     }
 };
 

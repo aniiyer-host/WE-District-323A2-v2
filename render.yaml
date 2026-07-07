@@ -7,7 +7,7 @@ services:
     plan: free
     branch: main
     rootDir: Backend
-    buildCommand: npm install
+    buildCommand: npm install && npx prisma generate
     startCommand: npm start
     healthCheckPath: /
     envVars:
@@ -15,14 +15,33 @@ services:
         value: production
       - key: PORT
         value: 5000
-      - key: MONGODB_URI
+      # ── Supabase ──────────────────────────────────────────────
+      - key: SUPABASE_URL
         sync: false
-      - key: JWT_SECRET
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_STORAGE_BUCKET
+        value: club-images
+      # ── Prisma (Supabase connection pooler URL) ───────────────
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_URL
+        sync: false
+      # ── Email ─────────────────────────────────────────────────
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      # ── ImageKit ──────────────────────────────────────────────
+      - key: IMAGEKIT_PRIVATE_KEY
         sync: false
       - key: IMAGEKIT_PUBLIC_KEY
         sync: false
-      - key: IMAGEKIT_PRIVATE_KEY
-        sync: false
       - key: IMAGEKIT_URL_ENDPOINT
+        sync: false
+      # ── App ───────────────────────────────────────────────────
+      - key: CLIENT_URL
         sync: false
     autoDeploy: true
