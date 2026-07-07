@@ -51,6 +51,7 @@ async function restore() {
           name: oldClub.name,
           description: oldClub.description,
           president: oldClub.president || null,
+          legacyEvents: Array.isArray(oldClub.events) ? oldClub.events : [],
           images: Array.isArray(oldClub.images) ? oldClub.images : [],
           coverImage: oldClub.cover_image,
           logo: oldClub.logo,

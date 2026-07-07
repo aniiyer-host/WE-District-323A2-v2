@@ -34,6 +34,13 @@ services:
         sync: false
       - key: ADMIN_EMAIL
         sync: false
+      # ── ImageKit ──────────────────────────────────────────────
+      - key: IMAGEKIT_PRIVATE_KEY
+        sync: false
+      - key: IMAGEKIT_PUBLIC_KEY
+        sync: false
+      - key: IMAGEKIT_URL_ENDPOINT
+        sync: false
       # ── App ───────────────────────────────────────────────────
       - key: CLIENT_URL
         sync: false

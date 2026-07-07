@@ -1,5 +1,95 @@
 import crypto from 'crypto';
 import https from 'https';
+import supabase from '../utils/supabaseClient.js';
+
+const getStorageBucket = () => process.env.SUPABASE_STORAGE_BUCKET || 'club-images';
+
+const sanitizePathPart = (value = '') =>
+  value
+    .toString()
+    .replace(/^\/+|\/+$/g, '')
+    .replace(/[^a-zA-Z0-9/_-]/g, '-')
+    .replace(/-+/g, '-');
+
+const sanitizeFileName = (value = 'upload') =>
+  value
+    .toString()
+    .replace(/[^a-zA-Z0-9._-]/g, '-')
+    .replace(/-+/g, '-');
+
+const getBase64Payload = (base64, dataUrl) => {
+  if (base64) return base64;
+  if (!dataUrl) return '';
+  return dataUrl.includes(',') ? dataUrl.split(',').pop() : dataUrl;
+};
+
+// Supabase Storage upload endpoint
+// Accepts JSON to avoid introducing multipart dependencies during migration.
+export const uploadSupabaseFile = async (req, res) => {
+  try {
+    const { fileName, contentType, folder = 'uploads', base64, dataUrl } = req.body;
+    const payload = getBase64Payload(base64, dataUrl);
+
+    if (!fileName || !payload) {
+      return res.status(400).json({ success: false, message: 'fileName and file data are required' });
+    }
+
+    if (contentType && !contentType.startsWith('image/')) {
+      return res.status(400).json({ success: false, message: 'Only image uploads are supported' });
+    }
+
+    const bucket = getStorageBucket();
+    const safeFolder = sanitizePathPart(folder) || 'uploads';
+    const safeFileName = sanitizeFileName(fileName);
+    const path = `${safeFolder}/${Date.now()}_${safeFileName}`;
+    const buffer = Buffer.from(payload, 'base64');
+
+    const { error } = await supabase.storage
+      .from(bucket)
+      .upload(path, buffer, {
+        contentType: contentType || 'application/octet-stream',
+        upsert: false,
+      });
+
+    if (error) throw error;
+
+    const { data } = supabase.storage.from(bucket).getPublicUrl(path);
+
+    return res.status(201).json({
+      success: true,
+      data: {
+        bucket,
+        path,
+        url: data.publicUrl,
+        fileId: path,
+      },
+    });
+  } catch (err) {
+    console.error('Supabase upload error:', err);
+    return res.status(500).json({ success: false, message: 'Failed to upload image', error: err.message });
+  }
+};
+
+// Supabase Storage delete endpoint
+export const deleteSupabaseFile = async (req, res) => {
+  try {
+    const path = req.body?.path || req.query?.path;
+
+    if (!path) {
+      return res.status(400).json({ success: false, message: 'path is required' });
+    }
+
+    const bucket = getStorageBucket();
+    const { error } = await supabase.storage.from(bucket).remove([path]);
+
+    if (error) throw error;
+
+    return res.status(200).json({ success: true, message: 'Image deleted from Supabase Storage' });
+  } catch (err) {
+    console.error('Supabase delete error:', err);
+    return res.status(500).json({ success: false, message: 'Failed to delete image', error: err.message });
+  }
+};
 
 // ImageKit authentication endpoint
 // Returns signature, token, and expire (timestamp) for client-side uploads

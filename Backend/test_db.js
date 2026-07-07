@@ -19,12 +19,12 @@ async function testConnection() {
     const columns = await client.query(`
       SELECT column_name, data_type 
       FROM information_schema.columns 
-      WHERE table_name = 'project_pages'
+      WHERE table_name = 'site_content'
     `);
-    console.log("project_pages Columns:", columns.rows);
+    console.log("site_content Columns:", columns.rows);
     
-    const rows = await client.query('SELECT * FROM project_pages LIMIT 1');
-    console.log("project_pages Row Sample:", rows.rows);
+    const rows = await client.query('SELECT * FROM site_content LIMIT 1');
+    console.log("site_content Row Sample:", rows.rows);
     await client.end();
   } catch (err) {
     console.error("CONNECTION ERROR:", err);

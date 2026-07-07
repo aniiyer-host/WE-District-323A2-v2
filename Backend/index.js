@@ -40,6 +40,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/clubs', clubsRoute);
 app.use('/api/projects', projectsRoute);
 app.use('/api/project-pages', projectPagesRoute);
+app.use('/api/content', projectPagesRoute);
 app.use('/api/uploads', uploadRoutes);
 app.use('/api/email', emailRoutes);
 
@@ -51,6 +52,5 @@ app.use((err, req, res, next) => {
         message: process.env.NODE_ENV === 'production' ? 'Internal server error' : err.message
     });
 });
-
 
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));

@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Sparkles, Heart, Search } from 'lucide-react';
-import { projectsData } from '../data/projectsData';
 import api from '../utils/api';
 
 const ProjectDetail = () => {
@@ -12,83 +10,75 @@ const ProjectDetail = () => {
     const [enlargedImage, setEnlargedImage] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Helper to normalize and find project key
-    const getProjectData = (id) => {
-        // Handle varying cases or suffixes if necessary
-        // e.g., "AnaajDaan.html" -> "anaajdaan"
-        let key = id.toLowerCase().replace('.html', '');
-
-        // Manual mapping for complex names if simple lowercase doesn't match
+    // Map route param to slug used in DB
+    const resolveSlug = (id) => {
+        const raw = id.toLowerCase().replace('.html', '');
         const mapping = {
-            "anaajdaan": "anaajdaan",
-            "animalwelfare": "animal-welfare",
-            "childwelfare": "child-welfare",
-            "education": "education",
-            "health": "health",
-            "imagebuilding": "image-building",
-            "needy": "needy",
+            "anaajdaan":       "anaajdaan",
+            "animalwelfare":   "animal-welfare",
+            "childwelfare":    "child-welfare",
+            "education":       "education",
+            "health":          "health",
+            "imagebuilding":   "image-building",
+            "needy":           "needy",
             "permanentprojects": "permanent-projects",
-            "ruraldevelopment": "rural-development",
-            "seniorcitizen": "senior-citizen",
-            "speciallyabled": "specially-abled",
-            "womenwelfare": "women-welfare"
+            "ruraldevelopment":  "rural-development",
+            "seniorcitizen":   "senior-citizen",
+            "speciallyabled":  "specially-abled",
+            "womenwelfare":    "women-welfare"
         };
-
-        // Try direct key or mapped key
-        return projectsData[key] || projectsData[mapping[key]] || projectsData[Object.keys(mapping).find(k => k.toLowerCase() === key)];
+        return mapping[raw] || raw;
     };
 
     useEffect(() => {
-        const fetchProjectEvents = async () => {
-            if (!projectId) return;
+        if (!projectId) return;
+        setLoading(true);
+        const slug = resolveSlug(projectId);
 
-            setLoading(true);
-            const staticData = getProjectData(projectId);
-
-            // Normalize projectId to match backend category format
-            let categoryKey = projectId.toLowerCase().replace('.html', '');
-            const mapping = {
-                "animalwelfare": "animal-welfare",
-                "childwelfare": "child-welfare",
-                "imagebuilding": "image-building",
-                "permanentprojects": "permanent-projects",
-                "ruraldevelopment": "rural-development",
-                "seniorcitizen": "senior-citizen",
-                "speciallyabled": "specially-abled",
-                "womenwelfare": "women-welfare"
-            };
-            categoryKey = mapping[categoryKey] || categoryKey;
-
+        const fetchData = async () => {
             try {
-                // Fetch live events from backend
-                const response = await api.get(`/clubs/events/${categoryKey}`);
-                const liveEvents = response.data.data.events || [];
+                // First try to load from the Prisma-backed projects API
+                const [projRes, eventsRes] = await Promise.allSettled([
+                    api.get(`/projects/${slug}`),
+                    api.get(`/clubs/events/${slug}`)
+                ]);
 
-                // Transform API events to match the expected format
-                const transformedEvents = liveEvents.map(event => ({
-                    clubLink: event.clubLink,
-                    description: `${event.clubName}: ${event.description || event.title}`,
-                    imageUrl: event.coverImage || (event.images && event.images[0]) || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80',
-                    title: event.title,
-                    date: event.date
-                }));
+                let title = slug;
+                let subtitle = '';
+                let dbItems = [];
+                let liveEvents = [];
 
-                // Combine static data with live events
-                setProject({
-                    title: staticData?.title || 'Project',
-                    subtitle: staticData?.subtitle || '',
-                    items: [...transformedEvents, ...(staticData?.items || [])]
-                });
+                if (projRes.status === 'fulfilled' && projRes.value.data.success) {
+                    const proj = projRes.value.data.data.project;
+                    title = proj.title;
+                    subtitle = proj.subtitle || '';
+                    dbItems = (proj.items || []).map(item => ({
+                        title: item.description || '',
+                        description: item.description || '',
+                        imageUrl: item.imageUrl || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80',
+                    }));
+                }
+
+                if (eventsRes.status === 'fulfilled' && eventsRes.value.data.data?.events) {
+                    liveEvents = eventsRes.value.data.data.events.map(event => ({
+                        clubLink: event.clubLink,
+                        title: event.title,
+                        description: `${event.clubName}: ${event.description || event.title}`,
+                        imageUrl: event.coverImage || (event.images && event.images[0]) || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80',
+                        date: event.date,
+                    }));
+                }
+
+                setProject({ title, subtitle, items: [...liveEvents, ...dbItems] });
             } catch (error) {
-                console.error('Error fetching events:', error);
-                // Fallback to static data
-                setProject(staticData);
+                console.error('Error fetching project:', error);
+                setProject({ title: projectId, subtitle: '', items: [] });
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchProjectEvents();
+        fetchData();
     }, [projectId]);
 
     if (loading || !project) {
