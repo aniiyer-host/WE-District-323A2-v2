@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Save, RefreshCw, AlertCircle, CheckCircle, ChevronDown, ChevronRight, FileText, Plus, Trash2, Image as ImageIcon } from 'lucide-react';
 import api, { uploadImageToSupabase } from '../../utils/api';
+import { useToast } from '../Toast';
 
 // ── Generic Sub-components ────────────────────────────────────────────────────
 const FormRow = ({ label, children }) => (
@@ -43,7 +44,7 @@ const StringArrayManager = ({ items, onChange, itemName = 'Item' }) => (
   </div>
 );
 
-const ImageUploadInput = ({ value, onChange, folder = 'cms' }) => {
+const ImageUploadInput = ({ value, onChange, folder = 'cms', onUploadSuccess, onUploadError }) => {
   const [uploading, setUploading] = useState(false);
   
   const handleFileChange = async (e) => {
@@ -54,8 +55,11 @@ const ImageUploadInput = ({ value, onChange, folder = 'cms' }) => {
     try {
       const res = await uploadImageToSupabase(file, folder);
       onChange(res.url);
+      onUploadSuccess?.('Image uploaded successfully!');
     } catch (err) {
-      alert('Failed to upload image. Please try again.');
+      onUploadError
+        ? onUploadError('Failed to upload image. Please try again.')
+        : alert('Failed to upload image. Please try again.');
     } finally {
       setUploading(false);
       e.target.value = ''; 
@@ -99,7 +103,7 @@ const ImageUploadInput = ({ value, onChange, folder = 'cms' }) => {
 
 // ── Key-Specific Editors ──────────────────────────────────────────────────────
 
-const LandingHeroEditor = ({ data, onChange }) => (
+const LandingHeroEditor = ({ data, onChange, onUploadSuccess, onUploadError }) => (
   <div className="grid gap-4">
     <FormRow label="Hero Title">
       <TextInput value={data?.title} onChange={v => onChange({ ...data, title: v })} />
@@ -110,7 +114,7 @@ const LandingHeroEditor = ({ data, onChange }) => (
   </div>
 );
 
-const LandingPresidentEditor = ({ data, onChange }) => (
+const LandingPresidentEditor = ({ data, onChange, onUploadSuccess, onUploadError }) => (
   <div className="grid gap-4 md:grid-cols-2">
     <FormRow label="Name">
       <TextInput value={data?.name} onChange={v => onChange({ ...data, name: v })} />
@@ -125,7 +129,7 @@ const LandingPresidentEditor = ({ data, onChange }) => (
     </div>
     <div className="md:col-span-2">
       <FormRow label="Photo">
-        <ImageUploadInput value={data?.photo} onChange={v => onChange({ ...data, photo: v })} />
+        <ImageUploadInput value={data?.photo} onChange={v => onChange({ ...data, photo: v })} onUploadSuccess={onUploadSuccess} onUploadError={onUploadError} />
       </FormRow>
     </div>
     <div className="md:col-span-2">
@@ -147,10 +151,10 @@ const AboutAreasEditor = ({ data, onChange }) => (
   </FormRow>
 );
 
-const AboutEmblemEditor = ({ data, onChange }) => (
+const AboutEmblemEditor = ({ data, onChange, onUploadSuccess, onUploadError }) => (
   <div className="grid gap-4">
     <FormRow label="Emblem Image">
-      <ImageUploadInput value={data?.image} onChange={v => onChange({ ...data, image: v })} />
+      <ImageUploadInput value={data?.image} onChange={v => onChange({ ...data, image: v })} onUploadSuccess={onUploadSuccess} onUploadError={onUploadError} />
     </FormRow>
     <FormRow label="Emblem Highlights">
       <div className="space-y-4">
@@ -177,7 +181,7 @@ const AboutEmblemEditor = ({ data, onChange }) => (
   </div>
 );
 
-const ObjectArrayEditor = ({ data, onChange, fields, itemName }) => {
+const ObjectArrayEditor = ({ data, onChange, fields, itemName, onUploadSuccess, onUploadError }) => {
   const items = Array.isArray(data) ? data : [];
   return (
     <div className="space-y-4">
@@ -202,7 +206,7 @@ const ObjectArrayEditor = ({ data, onChange, fields, itemName }) => {
                 ) : f.type === 'image' ? (
                   <ImageUploadInput value={item[f.key] || ''} onChange={val => {
                     const next = [...items]; next[i] = { ...next[i], [f.key]: val }; onChange(next);
-                  }} />
+                  }} onUploadSuccess={onUploadSuccess} onUploadError={onUploadError} />
                 ) : (
                   <input type="text" value={item[f.key] || ''} placeholder={f.placeholder || ''} onChange={e => {
                     const next = [...items]; next[i] = { ...next[i], [f.key]: e.target.value }; onChange(next);
@@ -248,6 +252,7 @@ const StatusBadge = ({ status }) => {
 };
 
 const CmsKeyRow = ({ entry }) => {
+  const toast = useToast();
   const [expanded, setExpanded] = useState(false);
   const [data, setData]         = useState(null);
   const [original, setOriginal] = useState(null);
@@ -293,11 +298,18 @@ const CmsKeyRow = ({ entry }) => {
       await api.put(`/content/${entry.key}`, { value: data });
       setStatus('saved');
       setOriginal(JSON.stringify(data));
+      toast.success(`"${entry.label}" saved successfully!`);
     } catch {
       setStatus('error');
+      toast.error(`Failed to save "${entry.label}". Please try again.`);
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleDiscard = () => {
+    load();
+    toast.info('Changes discarded.');
   };
 
   const isDirty = original !== null && JSON.stringify(data) !== original;
@@ -331,10 +343,15 @@ const CmsKeyRow = ({ entry }) => {
             </div>
           ) : (
             <div className="animate-fade-in">
-              <EditorComponent data={data || {}} onChange={handleChange} />
+              <EditorComponent
+                data={data || {}}
+                onChange={handleChange}
+                onUploadSuccess={(msg) => toast.success(msg)}
+                onUploadError={(msg) => toast.error(msg)}
+              />
               
               <div className="flex items-center justify-end gap-3 mt-8 pt-4 border-t border-gray-100">
-                <button onClick={load} className="flex items-center gap-2 px-5 py-2.5 text-sm border border-gray-300 rounded-xl text-gray-600 font-semibold hover:bg-gray-50 transition-all">
+                <button onClick={handleDiscard} className="flex items-center gap-2 px-5 py-2.5 text-sm border border-gray-300 rounded-xl text-gray-600 font-semibold hover:bg-gray-50 transition-all">
                   <RefreshCw size={16} /> Discard Changes
                 </button>
                 <button

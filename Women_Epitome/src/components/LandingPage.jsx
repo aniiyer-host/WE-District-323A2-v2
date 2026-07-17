@@ -63,7 +63,7 @@ const LandingPage = () => {
             });
           }
         });
-        
+
         const shuffled = allProjects.sort(() => 0.5 - Math.random());
         setRandomProjects(shuffled.slice(0, 5));
       } catch (err) {
@@ -192,7 +192,7 @@ const LandingPage = () => {
           </p>
 
           <p className="text-2xl text-purple-700 mb-12 font-semibold">
-            एकता में शक्ति • Stronger Together
+            स्नेह से सेवा • Serve with Care
           </p>
 
           {/* CTA Buttons */}
