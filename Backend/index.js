@@ -13,7 +13,7 @@ import uploadRoutes from './routes/uploadRoutes.js';
 import emailRoutes from './routes/emailRoutes.js';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(compression());
 app.use(cors({
@@ -21,9 +21,13 @@ app.use(cors({
         // Allow requests with no origin (mobile apps, curl, Postman)
         if (!origin) return callback(null, true);
 
-        const allowed = (process.env.CLIENT_URL || 'http://localhost:5173')
+        const allowed = (process.env.CLIENT_URL || 'http://localhost:5173,http://localhost:5174')
             .split(',')
             .map(u => u.trim());
+
+        // Debug: log origin and allowed list
+        console.log('CORS origin:', origin);
+        console.log('CORS allowed:', allowed);
 
         if (allowed.includes(origin)) return callback(null, true);
 

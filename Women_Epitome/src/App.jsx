@@ -7,6 +7,7 @@ import ScrollToTop from './components/ScrollToTop.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import LandingPage from './components/LandingPage.jsx'
 import ToastProvider from './components/Toast.jsx'
+import GenericClubPage from './components/GenericClubPage';
 
 const AboutPage = lazy(() => import('./components/AboutPage.jsx'))
 const ProjectsPage = lazy(() => import('./components/ProjectsPage.jsx'))
@@ -101,6 +102,7 @@ const App = () => {
                   <Route path="/clubs/vasant-vihar" element={<VasantVihar />} />
                   <Route path="/clubs/vashi-navi-mumbai" element={<VashiNaviMumbai />} />
                   <Route path="/clubs/vile-parle" element={<VileParle />} />
+                  <Route path="/clubs/:clubSlug" element={<GenericClubPage />} />
                 </Routes>
               </Suspense>
             </div>

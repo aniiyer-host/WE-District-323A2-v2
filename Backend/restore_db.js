@@ -29,6 +29,9 @@ const linkToSlugMap = {
   '/projects/SpeciallyAbled.html': 'specially-abled'
 };
 
+// Path to legacy project images
+const legacyImagesPath = path.join(__dirname, '..', 'Women_Epitome', 'src', 'images', 'projects-page-imgs');
+
 async function restore() {
   try {
     const backup = JSON.parse(fs.readFileSync('db_backup.json', 'utf8'));
@@ -111,11 +114,71 @@ async function restore() {
       if (matchingPage && Array.isArray(matchingPage.data)) {
         let order = 0;
         for (const item of matchingPage.data) {
+          let imageUrl = item.imageUrl || item.image || null;
+
+          // If we have a legacy image path, upload it to Supabase Storage
+          if (imageUrl && imageUrl.startsWith('/images/projects-page-imgs/')) {
+            try {
+              // Extract the relative path from the legacy URL
+              // Example: /images/projects-page-imgs/health/1.jpg -> health/1.jpg
+              const relativePath = imageUrl.substring('/images/projects-page-imgs/'.length);
+
+              // Construct the full file path
+              const filePath = path.join(legacyImagesPath, relativePath);
+
+              // Check if file exists
+              if (fs.existsSync(filePath)) {
+                // Read the file
+                const fileBuffer = fs.readFileSync(filePath);
+
+                // Determine file type
+                const ext = path.extname(filePath).substring(1).toLowerCase();
+                const mimeType = {
+                  'jpg': 'image/jpeg',
+                  'jpeg': 'image/jpeg',
+                  'png': 'image/png',
+                  'gif': 'image/gif',
+                  'webp': 'image/webp'
+                }[ext] || 'application/octet-stream';
+
+                // Create a file-like object for upload
+                const file = new File([fileBuffer], path.basename(filePath), { type: mimeType });
+
+                // Upload to Supabase Storage using the backend's upload endpoint
+                // We'll use the Supabase client directly since we're in a Node.js environment
+                const { data: uploadData, error: uploadError } = await supabase.storage
+                  .from('we-district-storage')
+                  .upload(`projects/${relativePath}`, fileBuffer, {
+                    contentType: mimeType,
+                    upsert: true
+                  });
+
+                if (uploadError) {
+                  console.warn(`Failed to upload ${relativePath} to Supabase: ${uploadError.message}`);
+                  // Fall back to original legacy path if upload fails
+                } else {
+                  // Get the public URL for the uploaded file
+                  const { data: publicUrlData } = supabase.storage
+                    .from('we-district-storage')
+                    .getPublicUrl(`projects/${relativePath}`);
+
+                  imageUrl = publicUrlData.publicUrl;
+                  console.log(`Uploaded ${relativePath} to Supabase: ${imageUrl}`);
+                }
+              } else {
+                console.warn(`Legacy image file not found: ${filePath}`);
+              }
+            } catch (uploadError) {
+              console.warn(`Error uploading legacy image ${imageUrl}:`, uploadError.message);
+              // Keep the original legacy path if upload fails
+            }
+          }
+
           await prisma.projectItem.create({
             data: {
               projectId: createdProj.id,
               description: item.description || null,
-              imageUrl: item.imageUrl || item.image || null,
+              imageUrl: imageUrl,
               clubId: item.clubId || item.club_id || null,
               sortOrder: order++
             }

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const DEFAULT_PROD_URL = 'https://we-district-323a2-v2.onrender.com/api';
 const BASE_URL = import.meta.env.VITE_API_URL
-    || (import.meta.env.PROD ? DEFAULT_PROD_URL : 'http://localhost:5050/api');
+    || (import.meta.env.PROD ? DEFAULT_PROD_URL : 'http://localhost:5000/api');
 
 const api = axios.create({
     baseURL: BASE_URL,

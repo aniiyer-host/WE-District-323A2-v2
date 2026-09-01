@@ -46,7 +46,7 @@ const AboutPage = () => {
   const founders = cms.about_founders || [
     { image: "/images/founders/1.jpg", name: "WE Kawal Rekhi", role: "Chief Founder — The Association of 'WE' Clubs of India", club: "WE Club of Chembur", bio: "Joined Lions in 1964 and has been serving the society since." },
     { image: "/images/founders/2.jpg", name: "WE Saroja Mekal", role: "Founder — Multiple District 323 & District 323A2", club: "WE Club of Chembur", bio: "Joined Lioness Club of Chembur in 1986." },
-    { image: "/images/founders/3.jpg", name: "WE Rajni Shetty", role: "Founder — WE District 323 A2", club: "WE Club of Vasant Vihar", bio: "Charter Member of Lioness Club of Vasant Vihar since 1999." },
+    //{ image: "/images/founders/3.jpg", name: "WE Rajni Shetty", role: "Founder — WE District 323 A2", club: "WE Club of Vasant Vihar", bio: "Charter Member of Lioness Club of Vasant Vihar since 1999." },
     { image: "/images/founders/4.jpg", name: "WE Rachana Bothra", role: "Founder — WE District 323 A2", club: "WE Club of Vasant Vihar", bio: "Joined Lioness Club of Pantnagar in 1988." },
     { image: "/images/founders/5.jpg", name: "WE Jyoti Jagasia", role: "Founder — WE District 323 A2", club: "WE Club of Anushakti Royals", bio: "Charter Member of Lioness Club of Anushakti Royals." },
   ];
@@ -69,7 +69,7 @@ const AboutPage = () => {
   ];
 
   const team = cms.about_team || [
-    { name: "WE Varsha Vora", role: "District President", image: "../images/index-page-imgs/pfp.jpg" },
+    { name: "WE Pramila Gade", role: "District President", image: "../images/index-page-imgs/pfp.jpeg" },
     { name: "Leadership Team", role: "District Board", image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&q=80" },
     { name: "Club Presidents", role: "Local Leaders", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80" }
   ];
