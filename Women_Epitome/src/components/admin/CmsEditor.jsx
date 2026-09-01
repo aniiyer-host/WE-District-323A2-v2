@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Save, RefreshCw, AlertCircle, CheckCircle, ChevronDown, ChevronRight, FileText, Plus, Trash2, Image as ImageIcon } from 'lucide-react';
 import api, { uploadImageToSupabase } from '../../utils/api';
 import { useToast } from '../Toast';
@@ -46,11 +46,22 @@ const StringArrayManager = ({ items, onChange, itemName = 'Item' }) => (
 
 const ImageUploadInput = ({ value, onChange, folder = 'cms', onUploadSuccess, onUploadError }) => {
   const [uploading, setUploading] = useState(false);
-  
-  const handleFileChange = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    
+  const [dragOver, setDragOver] = useState(false);
+  const fileInputRef = useRef(null);
+  const dragCounterRef = useRef(0);
+
+  // Validate and upload file
+  const handleFile = async (file) => {
+    if (!file.type.startsWith('image/')) {
+      onUploadError?.('Please select an image file.');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) { // 5MB limit
+      onUploadError?.('File size must be less than 5MB.');
+      return;
+    }
+
     setUploading(true);
     try {
       const res = await uploadImageToSupabase(file, folder);
@@ -62,12 +73,82 @@ const ImageUploadInput = ({ value, onChange, folder = 'cms', onUploadSuccess, on
         : alert('Failed to upload image. Please try again.');
     } finally {
       setUploading(false);
-      e.target.value = ''; 
+    }
+  };
+
+  // File input change (click to select)
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleFile(file);
+      e.target.value = '';
+    }
+  };
+
+  // Drag and drop handlers
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounterRef.current++;
+    setDragOver(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounterRef.current--;
+    if (dragCounterRef.current === 0) {
+      setDragOver(false);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragOver(false);
+    dragCounterRef.current = 0;
+
+    const files = e.dataTransfer.files;
+    if (files?.length > 0) {
+      handleFile(files[0]);
+    }
+  };
+
+  // Paste from clipboard handler
+  const handlePaste = (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].kind === 'file') {
+        const file = items[i].getAsFile();
+        if (file && file.type.startsWith('image/')) {
+          e.preventDefault();
+          e.stopPropagation();
+          handleFile(file);
+          return;
+        }
+      }
     }
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div 
+      className="flex flex-col gap-3 outline-none focus:ring-2 focus:ring-purple-300 rounded-lg p-2 -m-2"
+      tabIndex="0"
+      role="region"
+      aria-label="Image upload area. Click to select, drag and drop, or paste an image."
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+      onPaste={handlePaste}
+    >
       {value && (
         <div className="relative w-32 h-32 rounded-xl overflow-hidden border-2 border-purple-200 shadow-sm">
           <img src={value} alt="Preview" className="w-full h-full object-cover" />
@@ -75,19 +156,37 @@ const ImageUploadInput = ({ value, onChange, folder = 'cms', onUploadSuccess, on
             onClick={() => onChange('')} 
             className="absolute top-1 right-1 bg-white/90 text-red-500 p-1.5 rounded-lg shadow-sm hover:bg-red-50 transition-colors"
             title="Remove Image"
+            tabIndex={-1}
           >
             <Trash2 size={14} />
           </button>
         </div>
       )}
       <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-3">
-          <label className="flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 rounded-xl cursor-pointer hover:bg-purple-100 transition-colors text-sm font-semibold border border-purple-100 shadow-sm">
+        <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all ${
+          dragOver 
+            ? 'border-purple-500 bg-purple-50' 
+            : 'border-purple-100 bg-white'
+        }`}>
+          <label className="flex items-center gap-2 px-3 py-2 bg-purple-50 text-purple-700 rounded-xl cursor-pointer hover:bg-purple-100 transition-colors text-sm font-semibold border border-purple-100 shadow-sm flex-shrink-0">
             {uploading ? <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" /> : <ImageIcon size={16} />}
             {uploading ? 'Uploading...' : (value ? 'Change Image' : 'Upload Image')}
-            <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" disabled={uploading} />
+            <input 
+              ref={fileInputRef}
+              type="file" 
+              accept="image/*" 
+              onChange={handleFileChange} 
+              className="hidden" 
+              disabled={uploading}
+              tabIndex={-1}
+            />
           </label>
-          <span className="text-xs text-gray-400 font-medium">or paste URL below</span>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs text-gray-600 font-medium">
+              {dragOver ? 'Drop image here' : 'Drag, paste, or click to select'}
+            </p>
+            <p className="text-[11px] text-gray-400 mt-0.5">PNG, JPG, GIF (max 5MB)</p>
+          </div>
         </div>
         <input 
           type="text" 

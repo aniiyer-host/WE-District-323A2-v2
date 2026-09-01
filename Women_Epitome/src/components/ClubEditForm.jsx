@@ -5,6 +5,7 @@ import api from '../utils/api';
 import { Save, Plus, Trash2, ArrowLeft, CheckCircle, CalendarX2 } from 'lucide-react';
 import { uploadImageToSupabase, deleteImageFromSupabase } from '../utils/api';
 import { useToast } from './Toast';
+import { ImageUploadField } from './ImageUploadField';
 
 // Reusable save button shown at the bottom of each section
 const SectionSaveButton = ({ onClick, saving, saved }) => (
@@ -281,7 +282,6 @@ const ClubEditForm = () => {
         );
     }
 
-    const fileInputClass = "flex-1 min-w-0 px-2 sm:px-3 py-2 border-2 border-gray-300 rounded-lg bg-white hover:border-purple-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all cursor-pointer text-xs sm:text-sm file:mr-2 sm:file:mr-4 file:py-1.5 file:px-2 sm:file:px-4 file:rounded-lg file:border-0 file:bg-purple-50 file:text-purple-700 file:font-semibold hover:file:bg-purple-100 file:cursor-pointer";
     const inputClass = "w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-sm sm:text-base";
     const smallInputClass = "w-full px-3 sm:px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none text-sm";
 
@@ -421,22 +421,20 @@ const ClubEditForm = () => {
                                     <div>
                                         <label className="text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 block">Event Cover Image</label>
                                         <div className="flex items-center gap-2">
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                onChange={(e) => {
-                                                    const file = e.target.files?.[0];
-                                                    handleUpload(
-                                                        file,
-                                                        `/clubs/${clubId}/events`,
-                                                        ({ url, fileId }) => {
-                                                            handleEventChange(index, 'cover_image', url);
-                                                            handleEventChange(index, 'cover_image_file_id', fileId);
-                                                        },
-                                                        `cover-${index}`
-                                                    );
-                                                }}
-                                                className={fileInputClass}
+                                            <ImageUploadField
+                                              onFileSelected={(file) => {
+                                                handleUpload(
+                                                  file,
+                                                  `/clubs/${clubId}/events`,
+                                                  ({ url, fileId }) => {
+                                                    handleEventChange(index, 'cover_image', url);
+                                                    handleEventChange(index, 'cover_image_file_id', fileId);
+                                                  },
+                                                  `cover-${index}`
+                                                );
+                                              }}
+                                              uploading={uploading[`cover-${index}`]}
+                                              ariaLabel="Select or drag event cover image"
                                             />
                                             {event.cover_image && (
                                                 <button
@@ -512,19 +510,17 @@ const ClubEditForm = () => {
                                             return (
                                                 <div key={imageIndex} className="space-y-2">
                                                     <div className="flex items-center gap-2">
-                                                        <input
-                                                            type="file"
-                                                            accept="image/*"
-                                                            onChange={(e) => {
-                                                                const file = e.target.files?.[0];
-                                                                handleUpload(
-                                                                    file,
-                                                                    `/clubs/${clubId}/events`,
-                                                                    ({ url, fileId }) => handleEventImageChange(index, imageIndex, { url, fileId }),
-                                                                    uploadKey
-                                                                );
-                                                            }}
-                                                            className={fileInputClass}
+                                                        <ImageUploadField
+                                                          onFileSelected={(file) => {
+                                                            handleUpload(
+                                                              file,
+                                                              `/clubs/${clubId}/events`,
+                                                              ({ url, fileId }) => handleEventImageChange(index, imageIndex, { url, fileId }),
+                                                              uploadKey
+                                                            );
+                                                          }}
+                                                          uploading={uploading[uploadKey]}
+                                                          ariaLabel="Select or drag event gallery image"
                                                         />
                                                         <button
                                                             type="button"
@@ -588,24 +584,22 @@ const ClubEditForm = () => {
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1.5">President Photo</label>
                             <div className="flex items-center gap-2">
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={(e) => {
-                                        const file = e.target.files?.[0];
-                                        handleUpload(
-                                            file,
-                                            `/clubs/${clubId}/president`,
-                                            ({ url, fileId }) => {
-                                                setFormData(prev => ({
-                                                    ...prev,
-                                                    president: { ...prev.president, photo: url, photo_file_id: fileId }
-                                                }));
-                                            },
-                                            'president-photo'
-                                        );
-                                    }}
-                                    className={fileInputClass}
+                                <ImageUploadField
+                                  onFileSelected={(file) => {
+                                    handleUpload(
+                                      file,
+                                      `/clubs/${clubId}/president`,
+                                      ({ url, fileId }) => {
+                                        setFormData(prev => ({
+                                          ...prev,
+                                          president: { ...prev.president, photo: url, photo_file_id: fileId }
+                                        }));
+                                      },
+                                      'president-photo'
+                                    );
+                                  }}
+                                  uploading={uploading['president-photo']}
+                                  ariaLabel="Select or drag president photo"
                                 />
                                 {formData.president.photo && (
                                     <button

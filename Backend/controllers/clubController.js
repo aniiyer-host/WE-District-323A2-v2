@@ -110,7 +110,17 @@ const clubDataFromRequest = (body) => ({
 const replaceClubEvents = async (tx, clubId, events) => {
     await tx.event.deleteMany({ where: { clubId } });
 
+    // Sync events to project items: delete existing project items for this club and recreate from events
+    await tx.projectItem.deleteMany({ where: { clubId } });
+
+    // Fetch all projects to map slugs to IDs for efficient lookup
+    const projects = await tx.project.findMany({
+        select: { id: true, slug: true }
+    });
+    const projectSlugToId = new Map(projects.map(p => [p.slug, p.id]));
+
     for (const event of events.map(normalizeEventInput)) {
+        // Create the event
         await tx.event.create({
             data: {
                 ...(event.id && { id: event.id }),
@@ -125,6 +135,19 @@ const replaceClubEvents = async (tx, clubId, events) => {
                 isFeatured: event.isFeatured,
             },
         });
+
+        // Create corresponding project item if event has a valid category that matches a project
+        if (event.category && projectSlugToId.has(event.category)) {
+            await tx.projectItem.create({
+                data: {
+                    projectId: projectSlugToId.get(event.category),
+                    clubId: event.clubId,
+                    description: event.title || event.description || '',
+                    imageUrl: event.coverImage || null,
+                    sortOrder: 0,
+                }
+            });
+        }
     }
 };
 

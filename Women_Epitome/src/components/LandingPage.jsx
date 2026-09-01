@@ -181,7 +181,7 @@ const LandingPage = () => {
           {/* Main Headline */}
           <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight">
             <span className="bg-linear-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent playfair">
-              {heroData?.title?.split(' - ')[0] || "Woman"}
+              {heroData?.title?.split(' - ')[0] || "Women"}
             </span>
             <br />
             <span className="text-gray-800 playfair">{heroData?.title?.split(' - ')[1] || "Epitome of Service"}</span>
@@ -338,7 +338,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <span className="inline-block bg-purple-100 text-purple-700 px-6 py-2 rounded-full font-bold text-sm mb-4">
-              LEADERSHIP 2025-2026
+              LEADERSHIP 2026-2027
             </span>
             <h2 className="text-5xl md:text-6xl font-black text-gray-800 mb-4 playfair">
               Meet Our District President
@@ -352,13 +352,13 @@ const LandingPage = () => {
               <div className="relative h-96 md:h-auto bg-linear-to-br from-purple-600 to-pink-600 p-8">
                 <div className="absolute inset-8 bg-white/10 backdrop-blur-sm rounded-2xl border-4 border-white/30"></div>
                 <img
-                  src={presidentData?.photo || "images/index-page-imgs/pfp.jpg"}
-                  alt={presidentData?.name || "WE Varsha Vora"}
+                  src={presidentData?.photo || "images/index-page-imgs/pfp.jpeg"}
+                  alt={presidentData?.name || "WE Pramila Gade"}
                   className="relative z-10 w-full h-full object-cover rounded-2xl shadow-2xl"
                 />
                 <div className="absolute bottom-12 left-12 right-12 z-20">
                   <div className="bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-xl">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-1">{presidentData?.name || "WE Varsha Vora"}</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-1">{presidentData?.name || "WE Pramila Gade"}</h3>
                     <p className="text-purple-600 font-semibold">{presidentData?.role || "District President"}</p>
                   </div>
                 </div>
@@ -372,23 +372,22 @@ const LandingPage = () => {
                 </div>
 
                 <h3 className="text-3xl font-bold text-gray-800 mb-6 playfair">
-                  {presidentData?.title || "Leading with Grace, Empowering with Purpose"}
+                  {presidentData?.title || "Service is Our Strength, Unity is Our Foundation, Leadership is Our Path Forward."}
                 </h3>
 
                 <div className="space-y-4 text-gray-600 leading-relaxed">
                   {(presidentData?.bio || [
-                    "A fresh term blooms with a soul-stirring pooja at Jain Mandir, Chembur, marking the beginning of an extraordinary journey under the leadership of WE Varsha Vora.",
-                    "As District President, she embodies the perfect blend of strength, charm, and diplomacy—qualities that inspire every member of our community to reach new heights.",
-                    "Fun-loving, fierce, and flawlessly focused on empowering every woman in our district."
+                    "Pramila Gade is a gracious and humble leader who views leadership as a sacred responsibility—to inspire, empower, and nurture the potential in others.",
+                    "She considers service a privilege and is devoted to fostering a spirit of unity, compassion, and enduring sisterhood within our organization."
                   ]).map((para, i) => (
-                    <p key={i} className={i === (presidentData?.bio?.length ?? 3) - 1 ? "font-semibold text-gray-800" : ""}>
+                    <p key={i} className={i === (presidentData?.bio?.length ?? 2) - 1 ? "font-semibold text-gray-800" : ""}>
                       {para}
                     </p>
                   ))}
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                  {(presidentData?.tags || ["Strength", "Grace", "Vision"]).map((tag, i) => {
+                  {(presidentData?.tags || ["Efficient", "Compassionate", "Down to Earth"]).map((tag, i) => {
                     const tagColors = [
                       "bg-purple-100 text-purple-700",
                       "bg-pink-100 text-pink-700",

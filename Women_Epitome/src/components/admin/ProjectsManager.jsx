@@ -4,12 +4,16 @@ import {
   FolderOpen, Image, AlertCircle, CheckCircle, RefreshCw
 } from 'lucide-react';
 import api from '../../utils/api';
+import { uploadImageToSupabase } from '../../utils/api';
+import { ImageUploadField } from '../../components/ImageUploadField';
 
 // ── Project Item Row ──────────────────────────────────────────────────────────
 const ItemRow = ({ item, projectSlug, onDeleted, onUpdated }) => {
   const [editing, setEditing]   = useState(false);
   const [desc, setDesc]         = useState(item.description || '');
   const [imgUrl, setImgUrl]     = useState(item.imageUrl || '');
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
   const [saving, setSaving]     = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -47,14 +51,39 @@ const ItemRow = ({ item, projectSlug, onDeleted, onUpdated }) => {
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1 flex items-center gap-1"><Image size={12} /> Image URL</label>
-            <input
-              type="text"
-              value={imgUrl}
-              onChange={e => setImgUrl(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
-              placeholder="https://..."
-            />
+            <label className="block text-xs text-gray-500 mb-1 flex items-center gap-1"><Image size={12} /> Image</label>
+            <div className="space-y-2">
+              <ImageUploadField
+                onFileSelected={async (file) => {
+                  setUploading(true);
+                  setUploadError(null);
+                  try {
+                    const result = await uploadImageToSupabase(file, 'projects');
+                    setImgUrl(result.url);
+                  } catch (error) {
+                    setUploadError('Failed to upload image. Please try again.');
+                    console.error('Upload error:', error);
+                  } finally {
+                    setUploading(false);
+                  }
+                }}
+                uploading={uploading}
+                ariaLabel="Project image upload. Click to select, drag and drop, or paste an image."
+              />
+              {uploadError && (
+                <p className="text-xs text-red-500">{uploadError}</p>
+              )}
+              <div className="flex items-center gap-2 text-xs text-gray-500">
+                <p>Or enter URL directly:</p>
+                <input
+                  type="text"
+                  value={imgUrl}
+                  onChange={e => setImgUrl(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  placeholder="https://..."
+                />
+              </div>
+            </div>
           </div>
           <div className="flex gap-2 justify-end">
             <button onClick={() => setEditing(false)} className="px-4 py-2 text-sm border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 transition-all flex items-center gap-1">
@@ -94,6 +123,8 @@ const AddItemForm = ({ projectSlug, onAdded }) => {
   const [open, setOpen]   = useState(false);
   const [desc, setDesc]   = useState('');
   const [img, setImg]     = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
   const [saving, setSaving] = useState(false);
 
   const submit = async (e) => {
@@ -120,8 +151,39 @@ const AddItemForm = ({ projectSlug, onAdded }) => {
         <textarea value={desc} onChange={e => setDesc(e.target.value)} rows={2} required className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" />
       </div>
       <div>
-        <label className="block text-xs text-gray-500 mb-1 flex items-center gap-1"><Image size={12} /> Image URL (optional)</label>
-        <input type="text" value={img} onChange={e => setImg(e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="https://..." />
+        <label className="block text-xs text-gray-500 mb-1 flex items-center gap-1"><Image size={12} /> Image</label>
+        <div className="space-y-2">
+          <ImageUploadField
+            onFileSelected={async (file) => {
+              setUploading(true);
+              setUploadError(null);
+              try {
+                const result = await uploadImageToSupabase(file, 'projects');
+                setImg(result.url);
+              } catch (error) {
+                setUploadError('Failed to upload image. Please try again.');
+                console.error('Upload error:', error);
+              } finally {
+                setUploading(false);
+              }
+            }}
+            uploading={uploading}
+            ariaLabel="Project image upload. Click to select, drag and drop, or paste an image."
+          />
+          {uploadError && (
+            <p className="text-xs text-red-500">{uploadError}</p>
+          )}
+          <div className="flex items-center gap-2 text-xs text-gray-500">
+            <p>Or enter URL directly:</p>
+            <input
+              type="text"
+              value={img}
+              onChange={e => setImg(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+              placeholder="https://..."
+            />
+          </div>
+        </div>
       </div>
       <div className="flex gap-2 justify-end">
         <button type="button" onClick={() => setOpen(false)} className="px-4 py-2 text-sm border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 transition-all">Cancel</button>
